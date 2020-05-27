@@ -337,19 +337,6 @@ def test_math_fuzzy_completion(Script, environment):
         assert c.complete is None
 
 
-def test_file_fuzzy_completion(Script):
-    path = os.path.join(test_dir, 'completion')
-    script = Script('"{}/ep08_i'.format(path))
-    expected = [
-        'pep0484_basic.py"',
-        'pep0484_generic_mismatches.py"',
-        'pep0484_generic_parameters.py"',
-        'pep0484_generic_passthroughs.py"',
-        'pep0484_typing.py"',
-    ]
-    assert expected == [comp.name for comp in script.complete(fuzzy=True)]
-
-
 @pytest.mark.parametrize(
     'code, column', [
         ('"foo"', 0),

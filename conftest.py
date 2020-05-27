@@ -149,8 +149,7 @@ def has_typing(environment):
 
 @pytest.fixture(scope='session')
 def has_django(environment):
-    script = jedi.Script('import django', environment=environment)
-    return bool(script.infer())
+    return False
 
 
 @pytest.fixture(scope='session')
