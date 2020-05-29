@@ -5,9 +5,7 @@ functionality. Other features include refactoring, code search and finding
 references.
 
 Jedi has a simple API to work with. There is a reference implementation as a
-`VIM-Plugin <https://github.com/davidhalter/jedi-vim>`_. Autocompletion in your
-REPL is also possible, IPython uses it natively and for the CPython REPL you
-can install it. Jedi is well tested and bugs should be rare.
+`VIM-Plugin <https://github.com/davidhalter/jedi-vim>`_. 
 
 Here's a simple example of the autocompletion feature:
 
