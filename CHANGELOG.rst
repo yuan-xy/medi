@@ -154,9 +154,9 @@ New APIs:
 0.12.1 (2018-06-30)
 +++++++++++++++++++
 
-- This release forces you to upgrade parso. If you don't, nothing will work
+- This release forces you to upgrade marso. If you don't, nothing will work
   anymore. Otherwise changes should be limited to bug fixes. Unfortunately Jedi
-  still uses a few internals of parso that make it hard to keep compatibility
+  still uses a few internals of marso that make it hard to keep compatibility
   over multiple releases. Parso >=0.3.0 is going to be needed.
 
 0.12.0 (2018-04-15)
@@ -180,7 +180,7 @@ New APIs:
 0.11.0 (2017-09-20)
 +++++++++++++++++++
 
-- Split Jedi's parser into a separate project called ``parso``.
+- Split Jedi's parser into a separate project called ``marso``.
 - Avoiding side effects in REPL completion.
 - Numpy docstring support should be much better.
 - Moved the `settings.*recursion*` away, they are no longer usable.

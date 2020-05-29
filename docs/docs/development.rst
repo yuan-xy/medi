@@ -56,7 +56,7 @@ Parser
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Jedi used to have its internal parser, however this is now a separate project
-and is called `parso <http://parso.readthedocs.io>`_.
+and is called `marso <http://marso.readthedocs.io>`_.
 
 The parser creates a syntax tree that |jedi| analyses and tries to understand.
 The grammar that this parser uses is very similar to the official Python
