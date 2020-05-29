@@ -37,6 +37,8 @@ unspecified = %s
 
 
 def test_completion(case, monkeypatch, environment, has_typing, has_django):
+    if 'MEDI_SKIP_I' in os.environ:
+        pytest.skip()
     skip_reason = case.get_skip_reason(environment)
     if skip_reason is not None:
         pytest.skip(skip_reason)
@@ -55,6 +57,8 @@ def test_completion(case, monkeypatch, environment, has_typing, has_django):
 
 
 def test_static_analysis(static_analysis_case, environment):
+    if 'MEDI_SKIP_I' in os.environ:
+        pytest.skip()
     skip_reason = static_analysis_case.get_skip_reason(environment)
     if skip_reason is not None:
         pytest.skip(skip_reason)
@@ -68,7 +72,7 @@ def test_refactor(refactor_case, skip_pre_python36, environment):
 
     :type refactor_case: :class:`.refactor.RefactoringCase`
     """
-    if sys.version_info < (3, 6):
+    if 'MEDI_SKIP_I' in os.environ:
         pytest.skip()
 
     desired_result = refactor_case.get_desired_result()
