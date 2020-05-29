@@ -15,7 +15,7 @@ import time
 from functools import wraps
 
 from jedi import settings
-from parso.cache import parser_cache
+from marso.cache import parser_cache
 
 _time_caches = {}
 

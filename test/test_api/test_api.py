@@ -8,7 +8,7 @@ from textwrap import dedent
 
 import pytest
 from pytest import raises
-from parso import cache
+from marso import cache
 
 from jedi._compatibility import unicode
 from jedi import preload_module

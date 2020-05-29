@@ -1,6 +1,6 @@
 from abc import abstractmethod
 
-from parso.tree import search_ancestor
+from marso.tree import search_ancestor
 
 from jedi._compatibility import Parameter
 from jedi.parser_utils import find_statement_documentation, clean_scope_docstring

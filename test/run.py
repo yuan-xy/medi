@@ -108,7 +108,7 @@ from ast import literal_eval
 from io import StringIO
 from functools import reduce
 
-import parso
+import marso
 from _pytest.outcomes import Skipped
 import pytest
 
@@ -129,7 +129,7 @@ TEST_GOTO = 2
 TEST_REFERENCES = 3
 
 
-grammar36 = parso.load_grammar(version='3.6')
+grammar37 = marso.load_grammar(version='3.7')
 
 
 class BaseTestCase(object):
@@ -224,7 +224,7 @@ class IntegrationTestCase(BaseTestCase):
             should_be = set()
             for match in re.finditer('(?:[^ ]+)', correct):
                 string = match.group(0)
-                parser = grammar36.parse(string, start_symbol='eval_input', error_recovery=False)
+                parser = grammar37.parse(string, start_symbol='eval_input', error_recovery=False)
                 parser_utils.move(parser.get_root_node(), self.line_nr)
                 node = parser.get_root_node()
                 module_context = script._get_module_context()

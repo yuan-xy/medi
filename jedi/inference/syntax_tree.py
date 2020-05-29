@@ -3,7 +3,7 @@ Functions inferring the syntax tree.
 """
 import copy
 
-from parso.python import tree
+from marso.python import tree
 
 from jedi._compatibility import force_unicode, unicode
 from jedi import debug

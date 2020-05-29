@@ -6,9 +6,9 @@ def _get_paths():
     # Get the path to jedi.
     _d = os.path.dirname
     _jedi_path = _d(_d(_d(_d(_d(__file__)))))
-    _parso_path = sys.argv[1]
-    # The paths are the directory that jedi and parso lie in.
-    return {'jedi': _jedi_path, 'parso': _parso_path}
+    _marso_path = sys.argv[1]
+    # The paths are the directory that jedi and marso lie in.
+    return {'jedi': _jedi_path, 'marso': _marso_path}
 
 
 # Remove the first entry, because it's simply a directory entry that equals
@@ -29,7 +29,7 @@ if sys.version_info > (3, 4):
                 return loader
             return None
 
-    # Try to import jedi/parso.
+    # Try to import jedi/marso.
     sys.meta_path.insert(0, _ExactImporter(_get_paths()))
     from jedi.inference.compiled import subprocess  # NOQA
     sys.meta_path.pop(0)
@@ -41,7 +41,7 @@ else:
         fp, pathname, description = imp.find_module(name, paths)
         return imp.load_module(name, fp, pathname, description)
 
-    load('parso')
+    load('marso')
     load('jedi')
     from jedi.inference.compiled import subprocess  # NOQA
 

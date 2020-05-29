@@ -174,11 +174,11 @@ class CompiledSubprocess(object):
     @memoize_method
     def _get_process(self):
         debug.dbg('Start environment subprocess %s', self._executable)
-        parso_path = sys.modules['parso'].__file__
+        marso_path = sys.modules['marso'].__file__
         args = (
             self._executable,
             _MAIN_PATH,
-            os.path.dirname(os.path.dirname(parso_path)),
+            os.path.dirname(os.path.dirname(marso_path)),
             '.'.join(str(x) for x in sys.version_info[:3]),
         )
         # Use explicit envionment to ensure reliable results (#1540)

@@ -12,8 +12,8 @@ import sys
 import warnings
 from functools import wraps
 
-import parso
-from parso.python import tree
+import marso
+from marso.python import tree
 
 from jedi._compatibility import force_unicode, cast_path, is_py3
 from jedi.parser_utils import get_executable_nodes
@@ -29,7 +29,7 @@ from jedi.api.completion import Completion, search_in_module
 from jedi.api.keywords import KeywordName
 from jedi.api.environment import InterpreterEnvironment
 from jedi.api.project import get_default_project, Project
-from jedi.api.errors import parso_to_jedi_errors
+from jedi.api.errors import marso_to_jedi_errors
 from jedi.api import refactoring
 from jedi.api.refactoring.extract import extract_function, extract_variable
 from jedi.inference import InferenceState
@@ -89,7 +89,7 @@ class Script(object):
     provide only the line, just will complete at the end of that line.
 
     .. warning:: By default :attr:`jedi.settings.fast_parser` is enabled, which means
-        that parso reuses modules (i.e. they are not immutable). With this setting
+        that marso reuses modules (i.e. they are not immutable). With this setting
         Jedi is **not thread safe** and it is also not safe to use multiple
         :class:`.Script` instances and its definitions at the same time.
 
@@ -195,7 +195,7 @@ class Script(object):
             cache_path=settings.cache_directory,
         )
         debug.speed('parsed')
-        self._code_lines = parso.split_lines(code, keepends=True)
+        self._code_lines = marso.split_lines(code, keepends=True)
         self._code = code
         self._pos = line, column
 
@@ -480,7 +480,7 @@ class Script(object):
                     if leaf.parent.type == 'atom':
                         return False
                 grammar = self._inference_state.grammar
-                # This parso stuff is not public, but since I control it, this
+                # This marso stuff is not public, but since I control it, this
                 # is fine :-) ~dave
                 reserved = grammar._pgen_grammar.reserved_syntax_strings.keys()
                 return leaf.value in reserved
@@ -665,7 +665,7 @@ class Script(object):
 
         :rtype: list of :class:`.SyntaxError`
         """
-        return parso_to_jedi_errors(self._inference_state.grammar, self._module_node)
+        return marso_to_jedi_errors(self._inference_state.grammar, self._module_node)
 
     def _names(self, all_scopes=False, definitions=True, references=False):
         # Set line/column to a random position, because they don't matter.

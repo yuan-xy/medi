@@ -1,10 +1,10 @@
 import re
 from textwrap import dedent
 
-from parso.python.token import PythonTokenTypes
-from parso.python import tree
-from parso.tree import search_ancestor, Leaf
-from parso import split_lines
+from marso.python.token import PythonTokenTypes
+from marso.python import tree
+from marso.tree import search_ancestor, Leaf
+from marso import split_lines
 
 from jedi._compatibility import Parameter
 from jedi import debug

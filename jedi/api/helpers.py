@@ -7,8 +7,8 @@ from textwrap import dedent
 from itertools import chain
 from functools import wraps
 
-from parso.python.parser import Parser
-from parso.python import tree
+from marso.python.parser import Parser
+from marso.python import tree
 
 from jedi._compatibility import u, Parameter
 from jedi.inference.base_value import NO_VALUES
@@ -125,7 +125,7 @@ def get_stack_at_position(grammar, code_lines, leaf, pos):
         pass
 
     def tokenize_without_endmarker(code):
-        # TODO This is for now not an official parso API that exists purely
+        # TODO This is for now not an official marso API that exists purely
         #   for Jedi.
         tokens = grammar._tokenize(code)
         for token in tokens:

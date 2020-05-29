@@ -19,7 +19,7 @@ import re
 import warnings
 from textwrap import dedent
 
-from parso import parse, ParserSyntaxError
+from marso import parse, ParserSyntaxError
 
 from jedi._compatibility import u
 from jedi import debug

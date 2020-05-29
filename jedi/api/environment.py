@@ -13,7 +13,7 @@ from jedi.cache import memoize_method, time_cache
 from jedi.inference.compiled.subprocess import CompiledSubprocess, \
     InferenceStateSameProcess, InferenceStateSubprocess
 
-import parso
+import marso
 
 _VersionInfo = namedtuple('VersionInfo', 'major minor micro')
 
@@ -34,7 +34,7 @@ class _BaseEnvironment(object):
     @memoize_method
     def get_grammar(self):
         version_string = '%s.%s' % (self.version_info.major, self.version_info.minor)
-        return parso.load_grammar(version=version_string)
+        return marso.load_grammar(version=version_string)
 
     @property
     def _sha256(self):

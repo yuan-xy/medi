@@ -13,8 +13,8 @@ statements like ``from datetim`` (cursor at the end would return ``datetime``).
 """
 import os
 
-from parso.python import tree
-from parso.tree import search_ancestor
+from marso.python import tree
+from marso.tree import search_ancestor
 
 from jedi._compatibility import ImplicitNSInfo, force_unicode, FileNotFoundError
 from jedi import debug

@@ -1,4 +1,4 @@
-from parso.python.tree import search_ancestor
+from marso.python.tree import search_ancestor
 from jedi._compatibility import FileNotFoundError
 from jedi.inference.cache import inference_state_method_cache
 from jedi.inference.imports import load_module_from_path

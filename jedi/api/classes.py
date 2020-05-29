@@ -17,7 +17,7 @@ import re
 import sys
 import warnings
 
-from parso.python.tree import search_ancestor
+from marso.python.tree import search_ancestor
 
 from jedi import settings
 from jedi import debug
@@ -82,7 +82,7 @@ class BaseName(object):
         self._inference_state = inference_state
         self._name = name
         """
-        An instance of :class:`parso.python.tree.Name` subclass.
+        An instance of :class:`marso.python.tree.Name` subclass.
         """
         self.is_keyword = isinstance(self._name, KeywordName)
 

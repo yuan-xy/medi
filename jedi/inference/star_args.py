@@ -18,7 +18,7 @@ from jedi.inference.helpers import is_big_annoying_library
 
 
 def _iter_nodes_for_param(param_name):
-    from parso.python.tree import search_ancestor
+    from marso.python.tree import search_ancestor
     from jedi.inference.arguments import TreeArguments
 
     execution_context = param_name.parent_context

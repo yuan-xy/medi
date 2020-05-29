@@ -1,6 +1,6 @@
 from abc import abstractproperty
 
-from parso.python.tree import search_ancestor
+from marso.python.tree import search_ancestor
 
 from jedi import debug
 from jedi import settings

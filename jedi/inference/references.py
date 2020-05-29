@@ -1,7 +1,7 @@
 import os
 import re
 
-from parso import python_bytes_to_unicode
+from marso import python_bytes_to_unicode
 
 from jedi._compatibility import FileNotFoundError
 from jedi.debug import dbg

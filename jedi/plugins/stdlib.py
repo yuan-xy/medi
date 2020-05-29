@@ -9,7 +9,7 @@ Note that this module exists only to implement very specific functionality in
 the standard library. The usual way to understand the standard library is the
 compiled module that returns the types for C-builtins.
 """
-import parso
+import marso
 import os
 
 from jedi._compatibility import force_unicode, Parameter
@@ -466,7 +466,7 @@ def collections_namedtuple(value, arguments, callback):
     generated_class = next(module.iter_classdefs())
     parent_context = ModuleValue(
         inference_state, module,
-        code_lines=parso.split_lines(code, keepends=True),
+        code_lines=marso.split_lines(code, keepends=True),
     ).as_context()
 
     return ValueSet([ClassValue(inference_state, parent_context, generated_class)])

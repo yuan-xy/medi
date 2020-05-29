@@ -1,6 +1,6 @@
 from textwrap import dedent
 
-from parso import split_lines
+from marso import split_lines
 
 from jedi import debug
 from jedi.api.exceptions import RefactoringError

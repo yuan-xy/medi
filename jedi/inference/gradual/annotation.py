@@ -7,7 +7,7 @@ as annotations in future python versions.
 
 import re
 
-from parso import ParserSyntaxError, parse
+from marso import ParserSyntaxError, parse
 
 from jedi._compatibility import force_unicode, Parameter
 from jedi.inference.cache import inference_state_method_cache

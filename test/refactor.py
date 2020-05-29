@@ -10,7 +10,7 @@ import platform
 import re
 import sys
 
-from parso import split_lines
+from marso import split_lines
 
 from functools import reduce
 import jedi

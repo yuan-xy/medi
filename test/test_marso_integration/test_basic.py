@@ -1,7 +1,7 @@
 from textwrap import dedent
 
 import pytest
-from parso import parse
+from marso import parse
 
 
 def test_form_feed_characters(Script):

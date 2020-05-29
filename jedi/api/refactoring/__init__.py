@@ -3,7 +3,7 @@ import os
 import re
 import difflib
 
-from parso import split_lines
+from marso import split_lines
 
 from jedi.api.exceptions import RefactoringError
 

@@ -62,7 +62,7 @@ I need to mention now that lazy type inference is really good because it
 only *inferes* what needs to be *inferred*. All the statements and modules
 that are not used are just being ignored.
 """
-import parso
+import marso
 from jedi.file_io import FileIO
 
 from jedi import debug
@@ -90,7 +90,7 @@ class InferenceState(object):
         self.compiled_subprocess = environment.get_inference_state_subprocess(self)
         self.grammar = environment.get_grammar()
 
-        self.latest_grammar = parso.load_grammar(version='3.7')
+        self.latest_grammar = marso.load_grammar(version='3.7')
         self.memoize_cache = {}  # for memoize decorators
         self.module_cache = imports.ModuleCache()  # does the job of `sys.modules`.
         self.stub_module_cache = {}  # Dict[Tuple[str, ...], Optional[ModuleValue]]
@@ -184,8 +184,8 @@ class InferenceState(object):
             if file_io is None:
                 file_io = FileIO(path)
             code = file_io.read()
-        # We cannot just use parso, because it doesn't use errors='replace'.
-        code = parso.python_bytes_to_unicode(code, encoding=encoding, errors='replace')
+        # We cannot just use marso, because it doesn't use errors='replace'.
+        code = marso.python_bytes_to_unicode(code, encoding=encoding, errors='replace')
 
         if len(code) > settings._cropped_file_size:
             code = code[:settings._cropped_file_size]

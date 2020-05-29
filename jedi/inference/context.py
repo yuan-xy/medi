@@ -1,8 +1,8 @@
 from abc import abstractmethod
 from contextlib import contextmanager
 
-from parso.tree import search_ancestor
-from parso.python.tree import Name
+from marso.tree import search_ancestor
+from marso.python.tree import Name
 
 from jedi.inference.filters import ParserTreeFilter, MergedFilter, \
     GlobalNameFilter

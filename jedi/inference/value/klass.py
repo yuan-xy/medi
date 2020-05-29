@@ -1,5 +1,5 @@
 """
-Like described in the :mod:`parso.python.tree` module,
+Like described in the :mod:`marso.python.tree` module,
 there's a need for an ast like module to represent the states of parsed
 modules.
 

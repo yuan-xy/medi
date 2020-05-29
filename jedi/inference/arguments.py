@@ -1,6 +1,6 @@
 import re
 
-from parso.python import tree
+from marso.python import tree
 
 from jedi._compatibility import zip_longest
 from jedi import debug

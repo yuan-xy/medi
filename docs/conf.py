@@ -279,7 +279,7 @@ autodoc_default_flags = []
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/', None),
-    'parso': ('https://parso.readthedocs.io/en/latest/', None),
+    'marso': ('https://marso.readthedocs.io/en/latest/', None),
 }
 
 

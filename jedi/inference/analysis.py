@@ -1,7 +1,7 @@
 """
 Module for statical analysis.
 """
-from parso.python import tree
+from marso.python import tree
 
 from jedi._compatibility import force_unicode
 from jedi import debug
