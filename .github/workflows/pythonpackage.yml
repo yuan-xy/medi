@@ -37,7 +37,6 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest
-        python setup.py install
-        pip install pytest
+        git submodule update --init
         pytest test
         # pytest new_test
