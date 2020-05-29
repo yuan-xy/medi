@@ -59,16 +59,3 @@ def test_hex_values_in_docstring():
         assert doc == '\xff'
     else:
         assert doc == u'�'
-
-
-@pytest.mark.parametrize(
-    'code,signature', [
-        ('def my_function(x, typed: Type, z):\n return', 'my_function(x, typed: Type, z)'),
-        ('def my_function(x, y, z) -> str:\n return', 'my_function(x, y, z) -> str'),
-        ('lambda x, y, z: x + y * z\n', '<lambda>(x, y, z)')
-    ])
-def test_get_signature(code, signature):
-    node = parse(code, version='3.5').children[0]
-    if node.type == 'simple_stmt':
-        node = node.children[0]
-    assert parser_utils.get_signature(node) == signature
