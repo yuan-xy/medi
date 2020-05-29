@@ -25,7 +25,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Set up submodule
       run: |
-        git submodule update --init
+        cd jedi/third_party/ && git clone --depth=1 https://github.com/davidhalter/typeshed.git
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
