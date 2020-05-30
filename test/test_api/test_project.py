@@ -8,20 +8,10 @@ from jedi import Interpreter
 from jedi.api import Project, get_default_project
 
 
-def test_django_default_project(Script):
-    dir = get_example_dir('django')
-
-    script = Script(
-        "from app import models\nmodels.SomeMo",
-        path=os.path.join(dir, 'models/x.py')
-    )
-    c, = script.complete()
-    assert c.name == "SomeModel"
-    assert script._inference_state.project._django is True
 
 
-def test_django_default_project_of_file(Script):
-    project = get_default_project(__file__)
+def test_demo_default_project_of_file(Script):
+    project = get_default_project("demo", __file__)
     d = os.path.dirname
     assert project._path == d(d(d(__file__)))
 
@@ -35,7 +25,7 @@ def test_interpreter_project_path():
 
 
 def test_added_sys_path(inference_state):
-    project = get_default_project()
+    project = get_default_project("python")
     p = '/some_random_path'
     project.added_sys_path = [p]
     assert p in project._get_sys_path(inference_state)

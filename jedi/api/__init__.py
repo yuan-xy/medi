@@ -173,6 +173,7 @@ class Script(object):
         if project is None:
             # Load the Python grammar of the current interpreter.
             project = get_default_project(
+                self.language,
                 os.path.dirname(self.path) if path else None
             )
         # TODO deprecate and remove sys_path from the Script API.

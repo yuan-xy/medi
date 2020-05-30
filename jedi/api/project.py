@@ -105,7 +105,6 @@ class Project(object):
         """
         data = dict(self.__dict__)
         data.pop('_environment', None)
-        data.pop('_django', None)  # TODO make django setting public?
         data = {k.lstrip('_'): v for k, v in data.items()}
 
         # TODO when dropping Python 2 use pathlib.Path.mkdir(parents=True, exist_ok=True)
@@ -135,16 +134,17 @@ class Project(object):
         :param smart_sys_path: If this is enabled (default), adds paths from
             local directories. Otherwise you will have to rely on your packages
             being properly configured on the ``sys.path``.
+        :param language: The programming language of source code.
+        :type language: str
         """
-        def py2_comp(path, environment_path=None, load_unsafe_extensions=False,
+        def py2_comp(path, language="python", environment_path=None, load_unsafe_extensions=False,
                      sys_path=None, added_sys_path=(), smart_sys_path=True):
             self._path = os.path.abspath(path)
-
+            self.language = language
             self._environment_path = environment_path
             self._sys_path = sys_path
             self._smart_sys_path = smart_sys_path
             self._load_unsafe_extensions = load_unsafe_extensions
-            self._django = False
             self.added_sys_path = list(added_sys_path)
             """The sys path that is going to be added at the end of the """
 
@@ -197,9 +197,6 @@ class Project(object):
                     # leads to the conclusion to by default prefer longer paths
                     # rather than shorter ones by default.
                     suffixed += reversed(traversed)
-
-        if self._django:
-            prefixed.append(self._path)
 
         path = prefixed + sys_path + suffixed
         return list(_force_unicode_list(_remove_duplicates_from_path(path)))
@@ -353,16 +350,7 @@ def _is_potential_project(path):
     return False
 
 
-def _is_django_path(directory):
-    """ Detects the path of the very well known Django library (if used) """
-    try:
-        with open(os.path.join(directory, 'manage.py'), 'rb') as f:
-            return b"DJANGO_SETTINGS_MODULE" in f.read()
-    except (FileNotFoundError, IsADirectoryError, PermissionError):
-        return False
-
-
-def get_default_project(path=None):
+def get_default_project(language, path=None):
     """
     If a project is not defined by the user, Jedi tries to define a project by
     itself as well as possible. Jedi traverses folders until it finds one of
@@ -394,23 +382,18 @@ def get_default_project(path=None):
             else:
                 first_no_init_file = dir
 
-        if _is_django_path(dir):
-            project = Project(dir)
-            project._django = True
-            return project
-
         if probable_path is None and _is_potential_project(dir):
             probable_path = dir
 
     if probable_path is not None:
         # TODO search for setup.py etc
-        return Project(probable_path)
+        return Project(probable_path, language=language)
 
     if first_no_init_file is not None:
-        return Project(first_no_init_file)
+        return Project(first_no_init_file, language=language)
 
     curdir = path if os.path.isdir(path) else os.path.dirname(path)
-    return Project(curdir)
+    return Project(curdir, language=language)
 
 
 def _remove_imports(names):
