@@ -120,13 +120,17 @@ class Script(object):
     :param Project project: Provide a :class:`.Project` to make sure finding
         references works well, because the right folder is searched. There are
         also ways to modify the sys path and other things.
+    :param language: The programming language of source code.
+    :type language: str
     """
     def __init__(self, code=None, line=None, column=None, path=None,
                  encoding=None, sys_path=None, environment=None,
-                 project=None, source=None):
+                 project=None, source=None, language="python"):
+
         self._orig_path = path
         # An empty path (also empty string) should always result in no path.
         self.path = os.path.abspath(path) if path else None
+        self.language = language
 
         if encoding is None:
             encoding = 'utf-8'
