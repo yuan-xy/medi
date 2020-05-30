@@ -29,9 +29,6 @@ from jedi.file_io import FolderIO
 from jedi.common import traverse_parents
 
 _CONFIG_FOLDER = '.jedi'
-_CONTAINS_POTENTIAL_PROJECT = \
-    'setup.py', '.git', '.hg', 'requirements.txt', 'MANIFEST.in', 'pyproject.toml'
-
 _SERIALIZER_VERSION = 1
 
 
@@ -343,8 +340,11 @@ class Project(object):
         return '<%s: %s>' % (self.__class__.__name__, self._path)
 
 
-def _is_potential_project(path):
-    for name in _CONTAINS_POTENTIAL_PROJECT:
+def _is_potential_project(path, language):
+    arr = ['.git', '.hg', '.vscode', '.idea']
+    if language == "python":
+        arr.extend(['setup.py', 'requirements.txt', 'MANIFEST.in', 'pyproject.toml'])
+    for name in arr:
         if os.path.exists(os.path.join(path, name)):
             return True
     return False
@@ -357,8 +357,8 @@ def get_default_project(language, path=None):
     the following:
 
     1. A ``.jedi/config.json``
-    2. One of the following files: ``setup.py``, ``.git``, ``.hg``,
-       ``requirements.txt`` and ``MANIFEST.in``.
+    2. One of the following files: ``.git``, ``.hg``, '.vscode', '.idea'.
+    3. For python project: ``setup.py``, ``requirements.txt`` and ``MANIFEST.in``.
     """
     if path is None:
         path = os.getcwd()
@@ -382,7 +382,7 @@ def get_default_project(language, path=None):
             else:
                 first_no_init_file = dir
 
-        if probable_path is None and _is_potential_project(dir):
+        if probable_path is None and _is_potential_project(dir, language):
             probable_path = dir
 
     if probable_path is not None:
