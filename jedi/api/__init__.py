@@ -284,7 +284,7 @@ class Script(object):
         with debug.increase_indent_cm('complete'):
             completion = Completion(
                 self._inference_state, self._get_module_context(), self._code_lines,
-                (line, column), self.get_signatures, fuzzy=fuzzy, language=self.language
+                (line, column), self.get_signatures, fuzzy=fuzzy, grammar=self.grammar
             )
             return completion.complete()
 

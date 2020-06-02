@@ -9,6 +9,7 @@ def test_demo():
 	path = project._path
 	p2 = jedi.api.Project.load(path)
 	assert project.language == p2.language
+	
 	arr = demo.complete()
 	assert len(arr) == 1
 	assert arr[0].type == 'keyword'

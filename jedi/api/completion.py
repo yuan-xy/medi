@@ -125,7 +125,7 @@ def complete_param_names(context, function_name, decorator_nodes):
 
 class Completion:
     def __init__(self, inference_state, module_context, code_lines, position,
-                 signatures_callback, fuzzy=False, language="python"):
+                 signatures_callback, fuzzy=False, grammar=None):
         self._inference_state = inference_state
         self._module_context = module_context
         self._module_node = module_context.tree_node
@@ -139,7 +139,7 @@ class Completion:
         self._signatures_callback = signatures_callback
 
         self._fuzzy = fuzzy
-        self.language = language
+        self.grammar = grammar
 
     def complete(self):
         leaf = self._module_node.get_leaf_for_position(
@@ -170,7 +170,7 @@ class Completion:
                 prefixed_completions = self._complete_in_string(start_leaf, string)
             return prefixed_completions
 
-        if self.language == "demo":
+        if self.grammar.language == "demo":
             cached_name, completion_names = self._complete_demo(leaf)
         else:
             cached_name, completion_names = self._complete_python(leaf)
@@ -190,8 +190,6 @@ class Completion:
 
 
     def _complete_demo(self, leaf):
-        import marso
-        grammar = marso.load_grammar(language=self.language)
         self.stack = stack = None
         self._position = (
             self._original_position[0],
@@ -201,7 +199,7 @@ class Completion:
 
         try:
             self.stack = stack = helpers.get_stack_at_position(
-                grammar, self._code_lines, leaf, self._position
+                self.grammar, self._code_lines, leaf, self._position
             )
         except helpers.OnErrorLeaf as e:
             value = e.error_leaf.value
@@ -524,7 +522,8 @@ class Completion:
             code_lines=code_lines,
             position=module_node.end_pos,
             signatures_callback=lambda *args, **kwargs: [],
-            fuzzy=self._fuzzy
+            fuzzy=self._fuzzy,
+            grammar = self.grammar
         ).complete()
 
 

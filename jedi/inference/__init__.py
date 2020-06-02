@@ -88,7 +88,7 @@ class InferenceState(object):
         self.environment = environment
         self.script_path = script_path
         self.compiled_subprocess = environment.get_inference_state_subprocess(self)
-        self.grammar = environment.get_grammar()
+        self.grammar = environment.get_grammar() # TTODO: this grammar is incorrect.
 
         self.latest_grammar = marso.load_grammar(version='3.7')
         self.memoize_cache = {}  # for memoize decorators
