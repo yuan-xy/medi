@@ -133,7 +133,7 @@ def test_completion_docstring(Script, medi_path):
         assert c.docstring(raw=True, fast=False) == cleandoc(result)
 
     project = medi.Project('.', sys_path=[medi_path])
-    c = Script('import medi\njed', project=project).complete()[0]
+    c = Script('import medi\nmed', project=project).complete()[0]
     assert c.docstring(fast=False) == cleandoc(medi_doc)
 
     docstr('import medi\nmedi.Scr', cleandoc(medi.Script.__doc__))
