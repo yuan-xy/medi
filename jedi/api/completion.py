@@ -125,7 +125,7 @@ def complete_param_names(context, function_name, decorator_nodes):
 
 class Completion:
     def __init__(self, inference_state, module_context, code_lines, position,
-                 signatures_callback, fuzzy=False):
+                 signatures_callback, fuzzy=False, language="python"):
         self._inference_state = inference_state
         self._module_context = module_context
         self._module_node = module_context.tree_node
@@ -139,6 +139,7 @@ class Completion:
         self._signatures_callback = signatures_callback
 
         self._fuzzy = fuzzy
+        self.language = language
 
     def complete(self):
         leaf = self._module_node.get_leaf_for_position(
@@ -169,7 +170,11 @@ class Completion:
                 prefixed_completions = self._complete_in_string(start_leaf, string)
             return prefixed_completions
 
-        cached_name, completion_names = self._complete_python(leaf)
+        if self.language == "demo":
+            cached_name, completion_names = self._complete_demo(leaf)
+        else:
+            cached_name, completion_names = self._complete_python(leaf)
+
 
         completions = list(filter_names(self._inference_state, completion_names,
                                         self.stack, self._like_name,
@@ -182,6 +187,48 @@ class Completion:
                                                  x.name.startswith('_'),
                                                  x.name.lower()))
         )
+
+
+    def _complete_demo(self, leaf):
+        import marso
+        grammar = marso.load_grammar(language=self.language)
+        self.stack = stack = None
+        self._position = (
+            self._original_position[0],
+            self._original_position[1] - len(self._like_name)
+        )
+        cached_name = None
+
+        try:
+            self.stack = stack = helpers.get_stack_at_position(
+                grammar, self._code_lines, leaf, self._position
+            )
+        except helpers.OnErrorLeaf as e:
+            value = e.error_leaf.value
+            if value == '.':
+                # After ErrorLeaf's that are dots, we will not do any
+                # completions since this probably just confuses the user.
+                return cached_name, []
+
+            # If we don't have a value, just use global completion.
+            return cached_name, self._complete_global_scope()
+
+        allowed_transitions = \
+            list(stack._allowed_transition_names_and_token_types())
+
+        completion_names = []
+        current_line = self._code_lines[self._position[0] - 1][:self._position[1]]
+
+        kwargs_only = False
+        if not kwargs_only:
+            completion_names += self._complete_keywords(
+                allowed_transitions,
+                only_values=not (not current_line or current_line[-1] in ' \t.;'
+                                 and current_line[-3:] != '...')
+            )
+
+        return cached_name, completion_names
+
 
     def _complete_python(self, leaf):
         """

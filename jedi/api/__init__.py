@@ -55,7 +55,7 @@ def _no_python2_support(func):
     # TODO remove when removing Python 2/3.5
     @wraps(func)
     def wrapper(self, *args, **kwargs):
-        if self._inference_state.grammar.version_info < (3, 6) or sys.version_info < (3, 6):
+        if self.grammar.version_info < (3, 6) or sys.version_info < (3, 6):
             raise NotImplementedError(
                 "No support for refactorings/search on Python 2/3.5"
             )
@@ -131,6 +131,7 @@ class Script(object):
         # An empty path (also empty string) should always result in no path.
         self.path = os.path.abspath(path) if path else None
         self.language = language
+        self.grammar = marso.load_grammar(language=self.language)
 
         if encoding is None:
             encoding = 'utf-8'
@@ -283,7 +284,7 @@ class Script(object):
         with debug.increase_indent_cm('complete'):
             completion = Completion(
                 self._inference_state, self._get_module_context(), self._code_lines,
-                (line, column), self.get_signatures, fuzzy=fuzzy,
+                (line, column), self.get_signatures, fuzzy=fuzzy, language=self.language
             )
             return completion.complete()
 
@@ -484,7 +485,7 @@ class Script(object):
                         return False
                     if leaf.parent.type == 'atom':
                         return False
-                grammar = self._inference_state.grammar
+                grammar = self.grammar
                 # This marso stuff is not public, but since I control it, this
                 # is fine :-) ~dave
                 reserved = grammar._pgen_grammar.reserved_syntax_strings.keys()
@@ -670,7 +671,7 @@ class Script(object):
 
         :rtype: list of :class:`.SyntaxError`
         """
-        return marso_to_jedi_errors(self._inference_state.grammar, self._module_node)
+        return marso_to_jedi_errors(self.grammar, self._module_node)
 
     def _names(self, all_scopes=False, definitions=True, references=False):
         # Set line/column to a random position, because they don't matter.
