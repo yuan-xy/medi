@@ -39,7 +39,7 @@ medi_cache_directory_temp = None
 
 def pytest_addoption(parser):
     parser.addoption("--medi-debug", "-D", action='store_true',
-                     help="Enables Jedi's debug output.")
+                     help="Enables Medi's debug output.")
 
     parser.addoption("--warning-is-error", action='store_true',
                      help="Warnings are treated as errors.")

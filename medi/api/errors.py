@@ -1,6 +1,6 @@
 """
 This file is about errors in Python files and not about exception handling in
-Jedi.
+Medi.
 """
 
 

@@ -46,7 +46,7 @@ from medi.inference.gradual.conversion import convert_names, convert_values
 from medi.inference.gradual.utils import load_proper_stub_module
 from medi.inference.utils import to_list
 
-# Jedi uses lots and lots of recursion. By setting this a little bit higher, we
+# Medi uses lots and lots of recursion. By setting this a little bit higher, we
 # can remove some "maximum recursion depth" errors.
 sys.setrecursionlimit(3000)
 
@@ -66,7 +66,7 @@ def _no_python2_support(func):
 class Script(object):
     """
     A Script is the base for completions, goto or whatever you want to do with
-    Jedi. The counter part of this class is :class:`Interpreter`, which works
+    Medi. The counter part of this class is :class:`Interpreter`, which works
     with actual dictionaries and can work with a REPL. This class
     should be used when a user edits code in an editor.
 
@@ -79,22 +79,22 @@ class Script(object):
     - If `environment` is provided, its ``sys.path`` will be used
       (see :func:`Environment.get_sys_path <medi.api.environment.Environment.get_sys_path>`);
     - Otherwise ``sys.path`` will match that of the default environment of
-      Jedi, which typically matches the sys path that was used at the time
-      when Jedi was imported.
+      Medi, which typically matches the sys path that was used at the time
+      when Medi was imported.
 
-    Most methods have a ``line`` and a ``column`` parameter. Lines in Jedi are
+    Most methods have a ``line`` and a ``column`` parameter. Lines in Medi are
     always 1-based and columns are always zero based. To avoid repetition they
-    are not always documented. You can omit both line and column. Jedi will
+    are not always documented. You can omit both line and column. Medi will
     then just do whatever action you are calling at the end of the file. If you
     provide only the line, just will complete at the end of that line.
 
     .. warning:: By default :attr:`medi.settings.fast_parser` is enabled, which means
         that marso reuses modules (i.e. they are not immutable). With this setting
-        Jedi is **not thread safe** and it is also not safe to use multiple
+        Medi is **not thread safe** and it is also not safe to use multiple
         :class:`.Script` instances and its definitions at the same time.
 
         If you are a normal plugin developer this should not be an issue. It is
-        an issue for people that do more complex stuff with Jedi.
+        an issue for people that do more complex stuff with Medi.
 
         This is purely a performance optimization and works pretty well for all
         typical usages, however consider to turn the setting off if it causes
@@ -249,7 +249,7 @@ class Script(object):
             is_package=is_package,
         )
         if names[0] not in ('builtins', '__builtin__', 'typing'):
-            # These modules are essential for Jedi, so don't overwrite them.
+            # These modules are essential for Medi, so don't overwrite them.
             self._inference_state.module_cache.add(names, ValueSet([module]))
         return module
 
@@ -300,7 +300,7 @@ class Script(object):
     def infer(self, line=None, column=None, **kwargs):
         """
         Return the definitions of under the cursor. It is basically a wrapper
-        around Jedi's type inference.
+        around Medi's type inference.
 
         This method follows complicated paths and returns the end, not the
         first definition. The big difference between :meth:`goto` and
@@ -508,7 +508,7 @@ class Script(object):
     def get_references(self, line=None, column=None, **kwargs):
         """
         Lists all references of a variable in a project. Since this can be
-        quite hard to do for Jedi, if it is too complicated, Jedi will stop
+        quite hard to do for Medi, if it is too complicated, Medi will stop
         searching.
 
         :param include_builtins: Default True, checks if a reference is a
@@ -723,9 +723,9 @@ class Script(object):
         :param new_name: The expression under the cursor will be renamed to
             this string.
         :param int until_line: The the selection range ends at this line, when
-            omitted, Jedi will be clever and try to define the range itself.
+            omitted, Medi will be clever and try to define the range itself.
         :param int until_column: The the selection range ends at this column, when
-            omitted, Jedi will be clever and try to define the range itself.
+            omitted, Medi will be clever and try to define the range itself.
         :raises: :exc:`.RefactoringError`
         :rtype: :class:`.Refactoring`
         """
@@ -773,9 +773,9 @@ class Script(object):
         :param new_name: The expression under the cursor will be replaced with
             a function with this name.
         :param int until_line: The the selection range ends at this line, when
-            omitted, Jedi will be clever and try to define the range itself.
+            omitted, Medi will be clever and try to define the range itself.
         :param int until_column: The the selection range ends at this column, when
-            omitted, Jedi will be clever and try to define the range itself.
+            omitted, Medi will be clever and try to define the range itself.
         :raises: :exc:`.RefactoringError`
         :rtype: :class:`.Refactoring`
         """
@@ -820,13 +820,13 @@ class Script(object):
 
 class Interpreter(Script):
     """
-    Jedi's API for Python REPLs.
+    Medi's API for Python REPLs.
 
     Implements all of the methods that are present in :class:`.Script` as well.
 
     In addition to completions that normal REPL completion does like
-    ``str.upper``, Jedi also supports code completion based on static code
-    analysis. For example Jedi will complete ``str().upper``.
+    ``str.upper``, Medi also supports code completion based on static code
+    analysis. For example Medi will complete ``str().upper``.
 
     >>> from os.path import join
     >>> namespace = locals()
@@ -892,7 +892,7 @@ def names(source=None, path=None, encoding='utf-8', all_scopes=False,
 
 def preload_module(*modules):
     """
-    Preloading modules tells Jedi to load a module now, instead of lazy parsing
+    Preloading modules tells Medi to load a module now, instead of lazy parsing
     of modules. This can be useful for IDEs, to control which modules to load
     on startup.
 

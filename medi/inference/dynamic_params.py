@@ -12,7 +12,7 @@ that's what a human would expect.
 
 It works as follows:
 
-- |Jedi| sees a param
+- |Medi| sees a param
 - search for function calls named ``foo``
 - execute these calls and check the input.
 """
@@ -129,8 +129,8 @@ def _search_function_arguments(module_context, funcdef, string_name):
         for name, trailer in _get_potential_nodes(for_mod_context, string_name):
             i += 1
 
-            # This is a simple way to stop Jedi's dynamic param recursion
-            # from going wild: The deeper Jedi's in the recursion, the less
+            # This is a simple way to stop Medi's dynamic param recursion
+            # from going wild: The deeper Medi's in the recursion, the less
             # code should be inferred.
             if i * inference_state.dynamic_params_depth > MAX_PARAM_SEARCHES:
                 return

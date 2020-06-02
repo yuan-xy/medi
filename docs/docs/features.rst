@@ -3,7 +3,7 @@
 Features and Limitations
 ========================
 
-Jedi's main API calls and features are:
+Medi's main API calls and features are:
 
 - Autocompletion: :meth:`.Script.complete`; It's also possible to get it
   working in :ref:`your REPL (IPython, etc.) <repl-completion>`
@@ -57,15 +57,15 @@ Supported Python Features
 Limitations
 -----------
 
-In general Jedi's limit are quite high, but for very big projects or very
-complex code, sometimes Jedi intentionally stops type inference, to avoid
+In general Medi's limit are quite high, but for very big projects or very
+complex code, sometimes Medi intentionally stops type inference, to avoid
 hanging for a long time.
 
-Additionally there are some Python patterns Jedi does not support. This is
+Additionally there are some Python patterns Medi does not support. This is
 intentional and below should be a complete list:
 
 - Arbitrary metaclasses: Some metaclasses like enums and dataclasses are
-  reimplemented in Jedi to make them work. Most of the time stubs are good
+  reimplemented in Medi to make them work. Most of the time stubs are good
   enough to get type inference working, even when metaclasses are involved.
 - ``setattr()``, ``__import__()``
 - Writing to some dicts: ``globals()``, ``locals()``, ``object.__dict__``
@@ -81,10 +81,10 @@ libriaries in |medi|, with :func:`.preload_module`. However, once loaded, this
 should not be a problem anymore.  The same is true for huge modules like
 ``PySide``, ``wx``, ``tensorflow``, ``pandas``, etc.
 
-Jedi does not have a very good cache layer. This is probably the biggest and
+Medi does not have a very good cache layer. This is probably the biggest and
 only architectural `issue <https://github.com/davidhalter/medi/issues/1059>`_ in
-Jedi. Unfortunately it is not easy to change that. Dave Halter is thinking
-about rewriting Jedi in Rust, but it has taken Jedi more than 8 years to reach
+Medi. Unfortunately it is not easy to change that. Dave Halter is thinking
+about rewriting Medi in Rust, but it has taken Medi more than 8 years to reach
 version 1.0, a rewrite will probably also take years.
 
 Security
@@ -94,16 +94,16 @@ For :class:`.Script`
 ~~~~~~~~~~~~~~~~~~~~
 
 Security is an important topic for |medi|. By default, no code is executed
-within Jedi. As long as you write pure Python, everything is inferred
+within Medi. As long as you write pure Python, everything is inferred
 statically. If you enable ``load_unsafe_extensions=True`` for your
-:class:`.Project` and you use builtin modules (``c_builtin``) Jedi will execute
+:class:`.Project` and you use builtin modules (``c_builtin``) Medi will execute
 those modules. If you don't trust a code base, please do not enable that
 option. It might lead to arbitrary code execution.
 
 For :class:`.Interpreter`
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want security for :class:`.Interpreter`, ``do not`` use it. Jedi does
+If you want security for :class:`.Interpreter`, ``do not`` use it. Medi does
 execute properties and in general is not very careful to avoid code execution.
 This is intentional: Most people trust the code bases they have imported,
 because at that point a malicious code base would have had code execution

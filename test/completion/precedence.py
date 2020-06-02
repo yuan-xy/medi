@@ -1,5 +1,5 @@
 """
-Test Jedi's operation understanding. Jedi should understand simple additions,
+Test Medi's operation understanding. Medi should understand simple additions,
 multiplications, etc.
 """
 # -----------------

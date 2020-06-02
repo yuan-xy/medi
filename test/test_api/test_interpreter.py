@@ -322,7 +322,7 @@ def test_completion_params():
 
 @pytest.mark.skipif('py_version < 33', reason='inspect.signature was created in 3.3.')
 def test_completion_param_annotations():
-    # Need to define this function not directly in Python. Otherwise Jedi is too
+    # Need to define this function not directly in Python. Otherwise Medi is too
     # clever and uses the Python code instead of the signature object.
     code = 'def foo(a: 1, b: str, c: int = 1.0) -> bytes: pass'
     exec_(code, locals())

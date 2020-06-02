@@ -1,12 +1,12 @@
 """
-To use Jedi completion in Python interpreter, add the following in your shell
+To use Medi completion in Python interpreter, add the following in your shell
 setup (e.g., ``.bashrc``). This works only on Linux/Mac, because readline is
-not available on Windows. If you still want Jedi autocompletion in your REPL,
+not available on Windows. If you still want Medi autocompletion in your REPL,
 just use IPython instead::
 
     export PYTHONSTARTUP="$(python -m medi repl)"
 
-Then you will be able to use Jedi completer in your Python interpreter::
+Then you will be able to use Medi completer in your Python interpreter::
 
     $ python
     Python 2.7.2+ (default, Jul 20 2012, 22:15:08)
@@ -20,7 +20,7 @@ Then you will be able to use Jedi completer in your Python interpreter::
 import medi.utils
 from medi import __version__ as __medi_version__
 
-print('REPL completion using Jedi %s' % __medi_version__)
+print('REPL completion using Medi %s' % __medi_version__)
 medi.utils.setup_readline(fuzzy=False)
 
 del medi

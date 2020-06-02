@@ -36,8 +36,8 @@ def _paths_from_assignment(module_context, expr_stmt):
         sys.path[0:0] = ['module/path', 'another/module/path']
 
     This function is in general pretty tolerant (and therefore 'buggy').
-    However, it's not a big issue usually to add more paths to Jedi's sys_path,
-    because it will only affect Jedi in very random situations and by adding
+    However, it's not a big issue usually to add more paths to Medi's sys_path,
+    because it will only affect Medi in very random situations and by adding
     more paths than necessary, it usually benefits the general user.
     """
     for assignee, operator in zip(expr_stmt.children[::2], expr_stmt.children[1::2]):

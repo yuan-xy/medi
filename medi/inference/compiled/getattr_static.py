@@ -1,7 +1,7 @@
 """
 A static version of getattr.
 This is a backport of the Python 3 code with a little bit of additional
-information returned to enable Jedi to make decisions.
+information returned to enable Medi to make decisions.
 """
 
 import types

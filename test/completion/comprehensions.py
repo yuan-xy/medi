@@ -248,7 +248,7 @@ next(x)
 x[0]
 
 # While it's illegal to have more than one argument, when a generator
-# expression is involved, it's still a valid parse tree and Jedi should still
+# expression is involved, it's still a valid parse tree and Medi should still
 # work (and especially not raise Exceptions). It's debatable wheter inferring
 # values for invalid statements is a good idea, but not failing is a must.
 

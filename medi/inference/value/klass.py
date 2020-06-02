@@ -222,7 +222,7 @@ class ClassMixin(object):
                     yield x
 
     def get_signatures(self):
-        # Since calling staticmethod without a function is illegal, the Jedi
+        # Since calling staticmethod without a function is illegal, the Medi
         # plugin doesn't return anything. Therefore call directly and get what
         # we want: An instance of staticmethod.
         args = ValuesArguments([])

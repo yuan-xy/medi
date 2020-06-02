@@ -126,7 +126,7 @@ class BaseName(object):
 
         Here is an example of the value of this attribute.  Let's consider
         the following source.  As what is in ``variable`` is unambiguous
-        to Jedi, :meth:`medi.Script.infer` should return a list of
+        to Medi, :meth:`medi.Script.infer` should return a list of
         definition for ``sys``, ``f``, ``C`` and ``x``.
 
         >>> from medi._compatibility import no_unicode_pprint

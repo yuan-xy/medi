@@ -227,7 +227,7 @@ class _BaseTreeInstance(AbstractInstanceValue):
 
         # This is a little bit special. `__getattribute__` is in Python
         # executed before `__getattr__`. But: I know no use case, where
-        # this could be practical and where Jedi would return wrong types.
+        # this could be practical and where Medi would return wrong types.
         # If you ever find something, let me know!
         # We are inversing this, because a hand-crafted `__getattribute__`
         # could still call another hand-crafted `__getattr__`, but not the

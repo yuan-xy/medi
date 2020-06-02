@@ -30,7 +30,7 @@ class AbstractNameDefinition(object):
     tree_name = None
     is_value_name = True
     """
-    Used for the Jedi API to know if it's a keyword or an actual name.
+    Used for the Medi API to know if it's a keyword or an actual name.
     """
 
     @abstractmethod
@@ -90,7 +90,7 @@ class AbstractNameDefinition(object):
 class AbstractArbitraryName(AbstractNameDefinition):
     """
     When you e.g. want to complete dicts keys, you probably want to complete
-    string literals, which is not really a name, but for Jedi we use this
+    string literals, which is not really a name, but for Medi we use this
     concept of Name for completions as well.
     """
     is_value_name = False

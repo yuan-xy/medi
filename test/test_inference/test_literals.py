@@ -14,7 +14,7 @@ def _infer_literal(Script, code, is_fstring=False):
 
 def test_f_strings(Script, environment):
     """
-    f literals are not really supported in Jedi. They just get ignored and an
+    f literals are not really supported in Medi. They just get ignored and an
     empty string is returned.
     """
     if environment.version_info < (3, 6):

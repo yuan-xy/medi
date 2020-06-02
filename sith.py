@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 """
-Sith attacks (and helps debugging) Jedi.
+Sith attacks (and helps debugging) Medi.
 
-Randomly search Python files and run Jedi on it.  Exception and used
+Randomly search Python files and run Medi on it.  Exception and used
 arguments are recorded to ``./record.json`` (specified by --record)::
 
     ./sith.py random /path/to/sourcecode
@@ -37,7 +37,7 @@ Options:
   --record=<file>       Exceptions are recorded in here [default: record.json].
   -f, --fs-cache        By default, file system cache is off for reproducibility.
   -n, --maxtries=<nr>   Maximum of random tries [default: 100]
-  -d, --debug           Jedi print debugging when an error is raised.
+  -d, --debug           Medi print debugging when an error is raised.
   -s                    Shows the path/line numbers of every completion before it starts.
   --pdb                 Launch pdb when error is raised.
   --ipdb                Launch ipdb when error is raised.

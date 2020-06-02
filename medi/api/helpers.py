@@ -126,7 +126,7 @@ def get_stack_at_position(grammar, code_lines, leaf, pos):
 
     def tokenize_without_endmarker(code):
         # TODO This is for now not an official marso API that exists purely
-        #   for Jedi.
+        #   for Medi.
         tokens = grammar._tokenize(code)
         for token in tokens:
             if token.string == safeword:
@@ -142,7 +142,7 @@ def get_stack_at_position(grammar, code_lines, leaf, pos):
 
     # The code might be indedented, just remove it.
     code = dedent(_get_code_for_stack(code_lines, leaf, pos))
-    # We use a word to tell Jedi when we have reached the start of the
+    # We use a word to tell Medi when we have reached the start of the
     # completion.
     # Use Z as a prefix because it's not part of a number suffix.
     safeword = 'ZZZ_USER_WANTS_TO_COMPLETE_HERE_WITH_JEDI'
@@ -154,7 +154,7 @@ def get_stack_at_position(grammar, code_lines, leaf, pos):
     except EndMarkerReached:
         return p.stack
     raise SystemError(
-        "This really shouldn't happen. There's a bug in Jedi:\n%s"
+        "This really shouldn't happen. There's a bug in Medi:\n%s"
         % list(tokenize_without_endmarker(code))
     )
 

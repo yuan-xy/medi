@@ -426,7 +426,7 @@ class CompiledValueName(ValueNameMixin, AbstractNameDefinition):
 class EmptyCompiledName(AbstractNameDefinition):
     """
     Accessing some names will raise an exception. To avoid not having any
-    completions, just give Jedi the option to return this object. It infers to
+    completions, just give Medi the option to return this object. It infers to
     nothing.
     """
     def __init__(self, inference_state, name):

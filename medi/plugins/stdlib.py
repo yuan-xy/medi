@@ -1,6 +1,6 @@
 """
 Implementations of standard library functions, because it's not possible to
-understand them with Jedi.
+understand them with Medi.
 
 To add a new implementation, create a function and add it to the
 ``_implemented`` dict at the bottom of this module.
@@ -79,8 +79,8 @@ class {typename}(tuple):
         'Return self as a plain tuple.  Used by copy and pickle.'
         return tuple(self)
 
-    # These methods were added by Jedi.
-    # __new__ doesn't really work with Jedi. So adding this to nametuples seems
+    # These methods were added by Medi.
+    # __new__ doesn't really work with Medi. So adding this to nametuples seems
     # like the easiest way.
     def __init__(self, {arg_list}):
         'A helper function for namedtuple.'
@@ -786,7 +786,7 @@ _implemented = {
         '_alias': lambda value, arguments, callback: NO_VALUES,
     },
     'dataclasses': {
-        # For now this works at least better than Jedi trying to understand it.
+        # For now this works at least better than Medi trying to understand it.
         'dataclass': _dataclass
     },
     'os.path': {

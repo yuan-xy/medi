@@ -109,7 +109,7 @@ def get_executed_param_names_and_issues(function_value, arguments):
         # The value and key can both be null. There, the defaults apply.
         # args / kwargs will just be empty arrays / dicts, respectively.
         # Wrong value count is just ignored. If you try to test cases that are
-        # not allowed in Python, Jedi will maybe not show any completions.
+        # not allowed in Python, Medi will maybe not show any completions.
         is_default = False
         key, argument = next(var_arg_iterator, (None, None))
         while key is not None:
@@ -191,7 +191,7 @@ def get_executed_param_names_and_issues(function_value, arguments):
 
     if keys_only:
         # All arguments should be handed over to the next function. It's not
-        # about the values inside, it's about the names. Jedi needs to now that
+        # about the values inside, it's about the names. Medi needs to now that
         # there's nothing to find for certain names.
         for k in set(param_dict) - set(keys_used):
             param = param_dict[k]

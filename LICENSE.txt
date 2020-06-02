@@ -1,4 +1,4 @@
-All contributions towards Jedi are MIT licensed.
+All contributions towards Medi are MIT licensed.
 
 -------------------------------------------------------------------------------
 The MIT License (MIT)

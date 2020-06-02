@@ -1,10 +1,10 @@
 """
-Jedi is a static analysis tool for Python that is typically used in
-IDEs/editors plugins. Jedi has a focus on autocompletion and goto
+Medi is a static analysis tool for Python that is typically used in
+IDEs/editors plugins. Medi has a focus on autocompletion and goto
 functionality. Other features include refactoring, code search and finding
 references.
 
-Jedi has a simple API to work with. There is a reference implementation as a
+Medi has a simple API to work with. There is a reference implementation as a
 `VIM-Plugin <https://github.com/davidhalter/medi-vim>`_. 
 
 Here's a simple example of the autocompletion feature:

@@ -1,5 +1,5 @@
 ####################################################################################
-Jedi - an awesome autocompletion, static analysis and refactoring library for Python
+Medi - an awesome autocompletion, static analysis and refactoring library for Python
 ####################################################################################
 
 .. image:: http://isitmaintained.com/badge/open/davidhalter/medi.svg
@@ -23,21 +23,21 @@ Jedi - an awesome autocompletion, static analysis and refactoring library for Py
     :alt: Coverage status
 
 
-Jedi is a static analysis tool for Python that is typically used in
-IDEs/editors plugins. Jedi has a focus on autocompletion and goto
+Medi is a static analysis tool for Python that is typically used in
+IDEs/editors plugins. Medi has a focus on autocompletion and goto
 functionality. Other features include refactoring, code search and finding
 references.
 
-Jedi has a simple API to work with. There is a reference implementation as a
+Medi has a simple API to work with. There is a reference implementation as a
 `VIM-Plugin <https://github.com/davidhalter/medi-vim>`_. Autocompletion in your
 REPL is also possible, IPython uses it natively and for the CPython REPL you
-can install it. Jedi is well tested and bugs should be rare.
+can install it. Medi is well tested and bugs should be rare.
 
-Jedi can currently be used with the following editors/projects:
+Medi can currently be used with the following editors/projects:
 
 - Vim (medi-vim_, YouCompleteMe_, deoplete-medi_, completor.vim_)
 - `Visual Studio Code`_ (via `Python Extension <https://marketplace.visualstudio.com/items?itemName=ms-python.python>`_)
-- Emacs (Jedi.el_, company-mode_, elpy_, anaconda-mode_, ycmd_)
+- Emacs (Medi.el_, company-mode_, elpy_, anaconda-mode_, ycmd_)
 - Sublime Text (SublimeJEDI_ [ST2 + ST3], anaconda_ [only ST3])
 - TextMate_ (Not sure if it's actually working)
 - Kate_ version 4.13+ supports it natively, you have to enable it, though.  [`see
@@ -69,7 +69,7 @@ Get the latest version from `github <https://github.com/davidhalter/medi>`_
 
 Docs are available at `https://medi.readthedocs.org/en/latest/
 <https://medi.readthedocs.org/en/latest/>`_. Pull requests with enhancements
-and/or fixes are awesome and most welcome. Jedi uses `semantic versioning
+and/or fixes are awesome and most welcome. Medi uses `semantic versioning
 <https://semver.org/>`_.
 
 If you want to stay up-to-date (News / RFCs), please subscribe to this `github
@@ -91,15 +91,15 @@ Installation
 Features and Limitations
 ========================
 
-Jedi's features are listed here:
+Medi's features are listed here:
 `Features <https://medi.readthedocs.org/en/latest/docs/features.html>`_.
 
-You can run Jedi on CPython 2.7 or 3.5+ but it should also
+You can run Medi on CPython 2.7 or 3.5+ but it should also
 understand code that is older than those versions. Additionally you should be
 able to use `Virtualenvs <https://medi.readthedocs.org/en/latest/docs/api.html#environments>`_
 very well.
 
-Tips on how to use Jedi efficiently can be found `here
+Tips on how to use Medi efficiently can be found `here
 <https://medi.readthedocs.org/en/latest/docs/features.html#recipes>`_.
 
 API
@@ -126,7 +126,7 @@ The returned objects are very powerful and are really all you might need.
 Autocompletion in your REPL (IPython, etc.)
 -------------------------------------------
 
-Jedi is a dependency of IPython. Autocompletion in IPython with Jedi is
+Medi is a dependency of IPython. Autocompletion in IPython with Medi is
 therefore possible without additional configuration.
 
 Here is an `example video <https://vimeo.com/122332037>`_ how REPL completion
@@ -146,7 +146,7 @@ file: ``medi.Script.get_syntax_errors``.
 Refactoring
 -----------
 
-Jedi supports the following refactorings:
+Medi supports the following refactorings:
 
 - ``medi.Script.inline``
 - ``medi.Script.rename``
@@ -194,7 +194,7 @@ Thanks a lot to all the
 .. _youcompleteme: https://github.com/ycm-core/YouCompleteMe
 .. _deoplete-medi: https://github.com/zchee/deoplete-medi
 .. _completor.vim: https://github.com/maralla/completor.vim
-.. _Jedi.el: https://github.com/tkf/emacs-medi
+.. _Medi.el: https://github.com/tkf/emacs-medi
 .. _company-mode: https://github.com/syohex/emacs-company-medi
 .. _elpy: https://github.com/jorgenschaefer/elpy
 .. _anaconda-mode: https://github.com/proofit404/anaconda-mode

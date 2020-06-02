@@ -1,6 +1,6 @@
 .. include:: ../global.rst
 
-Jedi Testing
+Medi Testing
 ============
 
 The test suite depends on ``pytest``::

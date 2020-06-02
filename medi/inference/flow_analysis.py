@@ -74,7 +74,7 @@ def reachability_check(context, value_scope, node, origin_scope=None):
         # potentially unreachable code.
         # e.g. `if 0:` would cause all name lookup within the flow make
         # unaccessible. This is not a "problem" in Python, because the code is
-        # never called. In Jedi though, we still want to infer types.
+        # never called. In Medi though, we still want to infer types.
         while origin_scope is not None:
             if first_flow_scope == origin_scope and branch_matches:
                 return REACHABLE

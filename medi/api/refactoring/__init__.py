@@ -31,7 +31,7 @@ class ChangedFile(object):
         #
         #     \ No newline at end of file
         #
-        # This is not necessary IMO, because Jedi does not really play with
+        # This is not necessary IMO, because Medi does not really play with
         # newlines and the ending newline does not really matter in Python
         # files. ~dave
         if old_lines[-1] != '':
@@ -153,7 +153,7 @@ def rename(inference_state, definitions, new_name):
             file_renames.add(_calculate_rename(d.module_path, new_name))
         else:
             # This private access is ok in a way. It's not public to
-            # protect Jedi users from seeing it.
+            # protect Medi users from seeing it.
             if tree_name is not None:
                 fmap = file_tree_name_map.setdefault(d.module_path, {})
                 fmap[tree_name] = tree_name.prefix + new_name

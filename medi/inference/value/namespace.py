@@ -9,7 +9,7 @@ from medi.inference.context import NamespaceContext
 class ImplicitNSName(ValueNameMixin, AbstractNameDefinition):
     """
     Accessing names for implicit namespace packages should infer to nothing.
-    This object will prevent Jedi from raising exceptions
+    This object will prevent Medi from raising exceptions
     """
     def __init__(self, implicit_ns_value, string_name):
         self._value = implicit_ns_value

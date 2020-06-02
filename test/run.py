@@ -14,7 +14,7 @@ There are different kinds of tests:
 How to run tests?
 +++++++++++++++++
 
-Jedi uses pytest_ to run unit and integration tests.  To run tests,
+Medi uses pytest_ to run unit and integration tests.  To run tests,
 simply run ``pytest``.
 
 .. _pytest: http://pytest.org

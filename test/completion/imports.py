@@ -149,7 +149,7 @@ def test_import_priorities():
     from import_tree import the_pkg, invisible_pkg
     #? int()
     invisible_pkg
-    # In real Python, this would be the module, but it's not, because Jedi
+    # In real Python, this would be the module, but it's not, because Medi
     # doesn't care about most stateful issues such as __dict__, which it would
     # need to, to do this in a correct way.
     #? int()
@@ -281,7 +281,7 @@ recurse_class1.C.a
 recurse_class1.C().a
 
 # -----------------
-# Jedi debugging
+# Medi debugging
 # -----------------
 
 # memoizing issues (check git history for the fix)

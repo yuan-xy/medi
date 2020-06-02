@@ -3,13 +3,13 @@
 Installation and Configuration
 ==============================
 
-.. warning:: Most people will want to install Jedi as a submodule/vendored and
+.. warning:: Most people will want to install Medi as a submodule/vendored and
    not through pip/system wide. The reason for this is that it makes sense that
-   the plugin that uses Jedi has always access to it. Otherwise Jedi will not
+   the plugin that uses Medi has always access to it. Otherwise Medi will not
    work properly when virtualenvs are activated. So please read the
-   documentation of your editor/IDE plugin to install Jedi.
+   documentation of your editor/IDE plugin to install Medi.
 
-   For plugin developers, Jedi works best if it is always available. Vendoring
+   For plugin developers, Medi works best if it is always available. Vendoring
    is a pretty good option for that.
 
 You can either include |medi| as a submodule in your text editor plugin (like
@@ -23,8 +23,8 @@ medi-vim_ does by default), or you can install it systemwide.
 The normal way
 --------------
 
-Most people use Jedi with a :ref:`editor plugins<editor-plugins>`. Typically
-you install Jedi by installing an editor plugin. No necessary steps are needed.
+Most people use Medi with a :ref:`editor plugins<editor-plugins>`. Typically
+you install Medi by installing an editor plugin. No necessary steps are needed.
 Just take a look at the instructions for the plugin.
 
 

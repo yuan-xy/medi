@@ -4,14 +4,14 @@ API Overview
 ============
 
 .. note:: This documentation is mostly for Plugin developers, who want to
-   improve their editors/IDE with Jedi.
+   improve their editors/IDE with Medi.
 
 .. _api:
 
 The API consists of a few different parts:
 
 - The main starting points for complete/goto: :class:`.Script` and
-  :class:`.Interpreter`. If you work with Jedi you want to understand these
+  :class:`.Interpreter`. If you work with Medi you want to understand these
   classes first.
 - :ref:`API Result Classes <api-classes>`
 - :ref:`Python Versions/Virtualenv Support <environments>` with functions like
@@ -19,7 +19,7 @@ The API consists of a few different parts:
 - A way to work with different :ref:`Folders / Projects <projects>`
 - Helpful functions: :func:`.preload_module` and :func:`.set_debug_function`
 
-The methods that you are most likely going to use to work with Jedi are the
+The methods that you are most likely going to use to work with Medi are the
 following ones:
 
 .. currentmodule:: medi

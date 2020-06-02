@@ -6,7 +6,7 @@ History & Acknowledgements
 Acknowledgements
 ----------------
 
-- Dave Halter for creating and maintaining Jedi & Parso.
+- Dave Halter for creating and maintaining Medi & Parso.
 - Takafumi Arakaki (@tkf) for creating a solid test environment and a lot of
   other things.
 - Danilo Bargen (@dbrgn) for general housekeeping and being a good friend :).
@@ -19,14 +19,14 @@ A Little Bit of History
 
 Written by Dave.
 
-The Star Wars Jedi are awesome. My Jedi software tries to imitate a little bit
-of the precognition the Jedi have. There's even an awesome `scene
-<https://youtu.be/yHRJLIf7wMU>`_ of Monty Python Jedis :-).
+The Star Wars Medi are awesome. My Medi software tries to imitate a little bit
+of the precognition the Medi have. There's even an awesome `scene
+<https://youtu.be/yHRJLIf7wMU>`_ of Monty Python Medis :-).
 
 But actually the name has not much to do with Star Wars. It's part of my
-second name Jedidjah.
+second name Medidjah.
 
-I actually started Jedi back in 2012, because there were no good solutions
+I actually started Medi back in 2012, because there were no good solutions
 available for VIM. Most auto-completion solutions just did not work well. The
 only good solution was PyCharm. But I liked my good old VIM very much. There
 was also a solution called Rope that did not work at all for me. So I decided
@@ -41,7 +41,7 @@ know that and tried to write my own poor version of a parser that I ended up
 throwing away two years later.
 
 Because of my lack of knowledge, everything after 2012 and before 2020 was
-basically refactoring. I rewrote the core parts of Jedi probably like 5-10
+basically refactoring. I rewrote the core parts of Medi probably like 5-10
 times. The last big rewrite (that I did twice) was the inclusion of
 gradual typing and stubs.
 

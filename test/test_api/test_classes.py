@@ -126,7 +126,7 @@ def test_position_none_if_builtin(Script):
 
 def test_completion_docstring(Script, medi_path):
     """
-    Jedi should follow imports in certain conditions
+    Medi should follow imports in certain conditions
     """
     def docstr(src, result):
         c = Script(src, project=project).complete()[0]

@@ -138,7 +138,7 @@ class SelfVars():
     def shouldnt_expose_var(not_self):
         """
         Even though in real Python this shouldn't expose the variable, in this
-        case Jedi exposes the variable, because these kind of decorators are
+        case Medi exposes the variable, because these kind of decorators are
         normally descriptors, which SHOULD be exposed (at least 90%).
         """
         not_self.b = 1.0

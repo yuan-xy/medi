@@ -1,5 +1,5 @@
 """
-Jedi issues warnings for possible errors if ``__getattr__``,
+Medi issues warnings for possible errors if ``__getattr__``,
 ``__getattribute__`` or ``setattr`` are used.
 """
 
@@ -34,7 +34,7 @@ Inherited().undefined
 
 class SetattrCls():
     def __init__(self, dct):
-        # Jedi doesn't even try to understand such code
+        # Medi doesn't even try to understand such code
         for k, v in dct.items():
             setattr(self, k, v)
 

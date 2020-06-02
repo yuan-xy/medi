@@ -1,12 +1,12 @@
 .. include:: ../global.rst
 
-Jedi Development
+Medi Development
 ================
 
 .. currentmodule:: medi
 
-.. note:: This documentation is for Jedi developers who want to improve Jedi
-    itself, but have no idea how Jedi works. If you want to use Jedi for 
+.. note:: This documentation is for Medi developers who want to improve Medi
+    itself, but have no idea how Medi works. If you want to use Medi for 
     your IDE, look at the `plugin api <api.html>`_.
     It is also important to note that it's a pretty old version and some things
     might not apply anymore.
@@ -24,7 +24,7 @@ systems.
 
 In six chapters I'm trying to describe the internals of |medi|:
 
-- :ref:`The Jedi Core <core>`
+- :ref:`The Medi Core <core>`
 - :ref:`Core Extensions <core-extensions>`
 - :ref:`Imports & Modules <imports-modules>`
 - :ref:`Stubs & Annotations <stubs>`
@@ -37,10 +37,10 @@ In six chapters I'm trying to describe the internals of |medi|:
 
 .. _core:
 
-The Jedi Core
+The Medi Core
 -------------
 
-The core of Jedi consists of three parts:
+The core of Medi consists of three parts:
 
 - :ref:`Parser <parser>`
 - :ref:`Python type inference <inference>`
@@ -55,7 +55,7 @@ because that's where all the magic happens. I need to introduce the :ref:`parser
 Parser
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Jedi used to have its internal parser, however this is now a separate project
+Medi used to have its internal parser, however this is now a separate project
 and is called `marso <http://marso.readthedocs.io>`_.
 
 The parser creates a syntax tree that |medi| analyses and tries to understand.
@@ -114,8 +114,8 @@ Core Extensions is a summary of the following topics:
 - :ref:`Docstrings <docstrings>`
 - :ref:`Refactoring <refactoring>`
 
-These topics are very important to understand what Jedi additionally does, but
-they could be removed from Jedi and Jedi would still work. But slower and
+These topics are very important to understand what Medi additionally does, but
+they could be removed from Medi and Medi would still work. But slower and
 without some features.
 
 .. _iterables:
@@ -214,6 +214,6 @@ Recursions (recursion.py)
 Helper Modules
 --------------
 
-Most other modules are not really central to how Jedi works. They all contain
+Most other modules are not really central to how Medi works. They all contain
 relevant code, but you if you understand the modules above, you pretty much
-understand Jedi.
+understand Medi.

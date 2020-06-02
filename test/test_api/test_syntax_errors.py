@@ -1,5 +1,5 @@
 """
-These tests test Jedi's Parso usage. Basically there's not a lot of tests here,
+These tests test Medi's Parso usage. Basically there's not a lot of tests here,
 because we're just checking if the API works. Bugfixes should be done in marso,
 mostly.
 """

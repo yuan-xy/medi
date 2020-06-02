@@ -57,8 +57,8 @@ def fooooo2(obj):
         return 1
 
 a
-# In earlier versions of Jedi, this returned both datetime and int, but now
-# Jedi does flow checks and realizes that the top return isn't executed.
+# In earlier versions of Medi, this returned both datetime and int, but now
+# Medi does flow checks and realizes that the top return isn't executed.
 #? int()
 fooooo2('')
 

@@ -8,7 +8,7 @@ Usage:
 
 Options:
   -h --help     Show this screen.
-  -d --debug    Enable Jedi internal debugging.
+  -d --debug    Enable Medi internal debugging.
   -s <sort>     Sort the profile results, e.g. cumtime, name [default: time].
 """
 

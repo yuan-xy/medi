@@ -1,16 +1,16 @@
-# Typeshed in Jedi
+# Typeshed in Medi
 
-Typeshed is used in Jedi to provide completions for all the stdlib modules.
+Typeshed is used in Medi to provide completions for all the stdlib modules.
 
 The relevant files in medi are in `medi/inference/gradual`. `gradual` stands
 for "gradual typing".
 
 ## Updating Typeshed
 
-Currently Jedi has a custom implementation hosted in
+Currently Medi has a custom implementation hosted in
 https://github.com/davidhalter/typeshed.git for two reasons:
 
-- Jedi doesn't understand Tuple.__init__ properly.
+- Medi doesn't understand Tuple.__init__ properly.
 - Typeshed has a bug: https://github.com/python/typeshed/issues/2999
 
 Therefore we need a bit of a complicated process to upgrade typeshed:
@@ -26,5 +26,5 @@ Therefore we need a bit of a complicated process to upgrade typeshed:
     cd ../../..
     git commit medi/third_party/typeshed -m "Upgrade typeshed"
 
-If merge conflicts appear, just make sure that only one commit from Jedi
+If merge conflicts appear, just make sure that only one commit from Medi
 appears.

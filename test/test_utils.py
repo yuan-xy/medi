@@ -100,7 +100,7 @@ class TestSetupReadline(unittest.TestCase):
         Only test it if colorama library is available.
 
         This module is being tested because it uses ``setattr`` at some point,
-        which Jedi doesn't understand, but it should still work in the REPL.
+        which Medi doesn't understand, but it should still work in the REPL.
         """
         try:
             # if colorama is installed

@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 """
-This is a convenience script to test the speed and memory usage of Jedi with
+This is a convenience script to test the speed and memory usage of Medi with
 large libraries.
 
 Each library is preloaded by medi, recording the time and memory consumed by
@@ -24,7 +24,7 @@ def used_memory():
 
 
 def profile_preload(mod):
-    """Preload a module into Jedi, recording time and memory used."""
+    """Preload a module into Medi, recording time and memory used."""
     base = used_memory()
     t0 = time.time()
     medi.preload_module(mod)

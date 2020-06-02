@@ -1,5 +1,5 @@
 """
-Projects are a way to handle Python projects within Jedi. For simpler plugins
+Projects are a way to handle Python projects within Medi. For simpler plugins
 you might not want to deal with projects, but if you want to give the user more
 flexibility to define sys paths and Python interpreters for a project,
 :class:`.Project` is the perfect way to allow for that.
@@ -64,7 +64,7 @@ def _force_unicode_list(lst):
 
 class Project(object):
     """
-    Projects are a simple way to manage Python folders and define how Jedi does
+    Projects are a simple way to manage Python folders and define how Medi does
     import resolution. It is mostly used as a parameter to :class:`.Script`.
     Additionally there are functions to search a whole project.
     """
@@ -93,7 +93,7 @@ class Project(object):
             return cls(**data)
         else:
             raise WrongVersion(
-                "The Jedi version of this project seems newer than what we can handle."
+                "The Medi version of this project seems newer than what we can handle."
             )
 
     def save(self):
@@ -209,7 +209,7 @@ class Project(object):
     def search(self, string, **kwargs):
         """
         Searches a name in the whole project. If the project is very big,
-        at some point Jedi will stop searching. However it's also very much
+        at some point Medi will stop searching. However it's also very much
         recommended to not exhaust the generator. Just display the first ten
         results to the user.
 
@@ -352,8 +352,8 @@ def _is_potential_project(path, language):
 
 def get_default_project(language, path=None):
     """
-    If a project is not defined by the user, Jedi tries to define a project by
-    itself as well as possible. Jedi traverses folders until it finds one of
+    If a project is not defined by the user, Medi tries to define a project by
+    itself as well as possible. Medi traverses folders until it finds one of
     the following:
 
     1. A ``.medi/config.json``

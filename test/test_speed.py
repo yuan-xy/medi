@@ -1,5 +1,5 @@
 """
-Speed tests of Jedi. To prove that certain things don't take longer than they
+Speed tests of Medi. To prove that certain things don't take longer than they
 should.
 """
 
@@ -14,7 +14,7 @@ def _check_speed(time_per_run, number=4, run_warm=True):
     """ Speed checks should typically be very tolerant. Some machines are
     faster than others, but the tests should still pass. These tests are
     here to assure that certain effects that kill medi performance are not
-    reintroduced to Jedi."""
+    reintroduced to Medi."""
     def decorated(func):
         @functools.wraps(func)
         def wrapper(Script, **kwargs):

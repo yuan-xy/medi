@@ -19,7 +19,7 @@ READLINE_DEBUG = False
 
 def setup_readline(namespace_module=__main__, fuzzy=False):
     """
-    This function sets up :mod:`readline` to use Jedi in a Python interactive
+    This function sets up :mod:`readline` to use Medi in a Python interactive
     shell.
 
     If you want to use a custom ``PYTHONSTARTUP`` file (typically
@@ -30,7 +30,7 @@ def setup_readline(namespace_module=__main__, fuzzy=False):
         except ImportError:
             # Fallback to the stdlib readline completer if it is installed.
             # Taken from http://docs.python.org/2/library/rlcompleter.html
-            print("Jedi is not installed, falling back to readline")
+            print("Medi is not installed, falling back to readline")
             try:
                 import readline
                 import rlcompleter
@@ -40,7 +40,7 @@ def setup_readline(namespace_module=__main__, fuzzy=False):
         else:
             setup_readline()
 
-    This will fallback to the readline completer if Jedi is not installed.
+    This will fallback to the readline completer if Medi is not installed.
     The readline completer will only complete names in the global namespace,
     so for example::
 
@@ -48,7 +48,7 @@ def setup_readline(namespace_module=__main__, fuzzy=False):
 
     will complete to ``range``.
 
-    With Jedi the following code::
+    With Medi the following code::
 
         range(10).cou<TAB>
 
@@ -66,7 +66,7 @@ def setup_readline(namespace_module=__main__, fuzzy=False):
             level=logging.DEBUG
         )
 
-    class JediRL(object):
+    class MediRL(object):
         def complete(self, text, state):
             """
             This complete stuff is pretty weird, a generator would make
@@ -109,9 +109,9 @@ def setup_readline(namespace_module=__main__, fuzzy=False):
         import rlcompleter  # noqa: F401
         import readline
     except ImportError:
-        print("Jedi: Module readline not available.")
+        print("Medi: Module readline not available.")
     else:
-        readline.set_completer(JediRL().complete)
+        readline.set_completer(MediRL().complete)
         readline.parse_and_bind("tab: complete")
         # medi itself does the case matching
         readline.parse_and_bind("set completion-ignore-case on")
@@ -120,13 +120,13 @@ def setup_readline(namespace_module=__main__, fuzzy=False):
         readline.parse_and_bind("set show-all-if-ambiguous on")
         # don't repeat all the things written in the readline all the time
         readline.parse_and_bind("set completion-prefix-display-length 2")
-        # No delimiters, Jedi handles that.
+        # No delimiters, Medi handles that.
         readline.set_completer_delims('')
 
 
 def version_info():
     """
-    Returns a namedtuple of Jedi's version, similar to Python's
+    Returns a namedtuple of Medi's version, similar to Python's
     ``sys.version_info``.
     """
     Version = namedtuple('Version', 'major, minor, micro')

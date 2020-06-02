@@ -70,9 +70,9 @@ Adds an opening bracket after a function for completions.
 
 if platform.system().lower() == 'windows':
     _cache_directory = os.path.join(os.getenv('LOCALAPPDATA') or 
-                                    os.path.expanduser('~'), 'Jedi', 'Jedi')
+                                    os.path.expanduser('~'), 'Medi', 'Medi')
 elif platform.system().lower() == 'darwin':
-    _cache_directory = os.path.join('~', 'Library', 'Caches', 'Jedi')
+    _cache_directory = os.path.join('~', 'Library', 'Caches', 'Medi')
 else:
     _cache_directory = os.path.join(os.getenv('XDG_CACHE_HOME') or '~/.cache',
                                     'medi')
@@ -81,7 +81,7 @@ cache_directory = os.path.expanduser(_cache_directory)
 The path where the cache is stored.
 
 On Linux, this defaults to ``~/.cache/medi/``, on OS X to
-``~/Library/Caches/Jedi/`` and on Windows to ``%LOCALAPPDATA%\\Jedi\\Jedi\\``.
+``~/Library/Caches/Medi/`` and on Windows to ``%LOCALAPPDATA%\\Medi\\Medi\\``.
 On Linux, if the environment variable ``$XDG_CACHE_HOME`` is set,
 ``$XDG_CACHE_HOME/medi`` is used instead of the default one.
 """
@@ -100,8 +100,8 @@ tree.
 
 _cropped_file_size = 10e6  # 1 Megabyte
 """
-Jedi gets extremely slow if the file size exceed a few thousand lines.
-To avoid getting stuck completely Jedi crops the file at some point.
+Medi gets extremely slow if the file size exceed a few thousand lines.
+To avoid getting stuck completely Medi crops the file at some point.
 
 One megabyte of typical Python code equals about 20'000 lines of code.
 """

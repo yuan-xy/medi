@@ -21,7 +21,7 @@ _time_caches = {}
 
 
 def clear_time_caches(delete_all=False):
-    """ Jedi caches many things, that should be completed after each completion
+    """ Medi caches many things, that should be completed after each completion
     finishes.
 
     :param delete_all: Deletes also the cache that is normally not deleted,

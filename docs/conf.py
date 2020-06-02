@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Jedi documentation build configuration file, created by
+# Medi documentation build configuration file, created by
 # sphinx-quickstart on Wed Dec 26 00:11:34 2012.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -43,7 +43,7 @@ source_encoding = 'utf-8'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Jedi'
+project = u'Medi'
 copyright = u'medi contributors'
 
 import medi
@@ -184,7 +184,7 @@ html_show_copyright = False
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Jedidoc'
+htmlhelp_basename = 'Medidoc'
 
 #html_style = 'default.css'  # Force usage of default template on RTD
 
@@ -205,8 +205,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ('index', 'Jedi.tex', u'Jedi Documentation',
-     u'Jedi contributors', 'manual'),
+    ('index', 'Medi.tex', u'Medi Documentation',
+     u'Medi contributors', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -235,8 +235,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'medi', u'Jedi Documentation',
-     [u'Jedi contributors'], 1)
+    ('index', 'medi', u'Medi Documentation',
+     [u'Medi contributors'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -249,8 +249,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    ('index', 'Jedi', u'Jedi Documentation',
-     u'Jedi contributors', 'Jedi', 'Awesome Python autocompletion library.',
+    ('index', 'Medi', u'Medi Documentation',
+     u'Medi contributors', 'Medi', 'Awesome Python autocompletion library.',
      'Miscellaneous'),
 ]
 

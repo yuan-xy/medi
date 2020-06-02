@@ -2,7 +2,7 @@
 """
 Depends: ``objgraph`` (third party Python library)
 
-``wx._core`` is a very nice module to test Jedi's speed and memory performance
+``wx._core`` is a very nice module to test Medi's speed and memory performance
 on big Python modules. Its size is ~16kLOC (one file). It also seems to look
 like a typical big Python modules. A mix between a lot of different Python
 things.

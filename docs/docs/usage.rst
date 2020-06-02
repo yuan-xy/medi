@@ -1,6 +1,6 @@
 .. include:: ../global.rst
 
-Using Jedi
+Using Medi
 ==========
 
 |medi| is can be used with a variety of plugins and software. It is also possible
@@ -29,7 +29,7 @@ Visual Studio Code
 Emacs
 ~~~~~
 
-- Jedi.el_
+- Medi.el_
 - elpy_
 - anaconda-mode_
 
@@ -42,7 +42,7 @@ Sublime Text 2/3
 SynWrite
 ~~~~~~~~
 
-- SynJedi_
+- SynMedi_
 
 TextMate
 ~~~~~~~~
@@ -90,13 +90,13 @@ and many more!
 Tab Completion in the Python Shell
 ----------------------------------
 
-Jedi is a dependency of IPython. Autocompletion in IPython is therefore
+Medi is a dependency of IPython. Autocompletion in IPython is therefore
 possible without additional configuration.
 
 Here is an `example video <https://vimeo.com/122332037>`_ how REPL completion
 can look like in a different shell.
 
-There are two different options how you can use Jedi autocompletion in
+There are two different options how you can use Medi autocompletion in
 your ``python`` interpreter. One with your custom ``$HOME/.pythonrc.py`` file
 and one that uses ``PYTHONSTARTUP``.
 
@@ -239,12 +239,12 @@ In order to support the numpydoc format, you need to install the `numpydoc
 .. _medi-vim: https://github.com/davidhalter/medi-vim
 .. _youcompleteme: https://valloric.github.io/YouCompleteMe/
 .. _deoplete-medi: https://github.com/zchee/deoplete-medi
-.. _Jedi.el: https://github.com/tkf/emacs-medi
+.. _Medi.el: https://github.com/tkf/emacs-medi
 .. _elpy: https://github.com/jorgenschaefer/elpy
 .. _anaconda-mode: https://github.com/proofit404/anaconda-mode
 .. _sublimemedi: https://github.com/srusskih/SublimeJEDI
 .. _anaconda: https://github.com/DamnWidget/anaconda
-.. _SynJedi: http://uvviewsoft.com/synmedi/
+.. _SynMedi: http://uvviewsoft.com/synmedi/
 .. _wdb: https://github.com/Kozea/wdb
 .. _TextMate: https://github.com/lawrenceakka/python-medi.tmbundle
 .. _kate: https://kate-editor.org/

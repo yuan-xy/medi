@@ -11,7 +11,7 @@ Usage:
 Options:
   -h --help     Show this screen.
   -n <number>   Number of passes before profiling [default: 1].
-  -d --debug    Enable Jedi internal debugging.
+  -d --debug    Enable Medi internal debugging.
   -o --omit     Omit profiler, just do a normal run.
   -i --infer    Infer types instead of completions.
   -s <sort>     Sort the profile results, e.g. cum, name [default: time].

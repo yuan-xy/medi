@@ -1,6 +1,6 @@
 """
 We need to somehow work with the typing objects. Since the typing objects are
-pretty bare we need to add all the Jedi customizations to make them work as
+pretty bare we need to add all the Medi customizations to make them work as
 values.
 
 This file deals with all the typing.py cases.
@@ -106,7 +106,7 @@ class ProxyWithGenerics(BaseTypingClassWithGenerics):
         string_name = self._tree_name.value
 
         if string_name == 'Union':
-            # This is kind of a special case, because we have Unions (in Jedi
+            # This is kind of a special case, because we have Unions (in Medi
             # ValueSets).
             return self.gather_annotation_classes().execute_annotation()
         elif string_name == 'Optional':
@@ -153,7 +153,7 @@ class ProxyWithGenerics(BaseTypingClassWithGenerics):
 
         annotation_name = self.py__name__()
         if annotation_name == 'Optional':
-            # Optional[T] is equivalent to Union[T, None]. In Jedi unions
+            # Optional[T] is equivalent to Union[T, None]. In Medi unions
             # are represented by members within a ValueSet, so we extract
             # the T from the Optional[T] by removing the None value.
             none = builtin_from_name(self.inference_state, u'None')

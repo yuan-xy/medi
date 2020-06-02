@@ -1,3 +1,3 @@
 :orphan:
 
-.. |medi| replace:: Jedi
+.. |medi| replace:: Medi

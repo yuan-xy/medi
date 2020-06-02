@@ -3,7 +3,7 @@
 .. meta::
     :github_url: https://github.com/davidhalter/medi
 
-Jedi - an awesome autocompletion, static analysis and refactoring library for Python
+Medi - an awesome autocompletion, static analysis and refactoring library for Python
 ====================================================================================
 
 .. image:: https://img.shields.io/github/stars/davidhalter/medi.svg?style=social&label=Star&maxAge=2592000

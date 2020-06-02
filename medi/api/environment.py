@@ -55,7 +55,7 @@ def _get_info():
 
 class Environment(_BaseEnvironment):
     """
-    This class is supposed to be created by internal Jedi architecture. You
+    This class is supposed to be created by internal Medi architecture. You
     should not create it directly. Please use create_environment or the other
     functions instead. It is then returned by that function.
     """
@@ -213,7 +213,7 @@ def _try_get_same_env():
         # 3. In case we don't find it use an interpreter environment.
         #
         # The last option will always work, but leads to potential crashes of
-        # Jedi - which is ok, because it happens very rarely and even less,
+        # Medi - which is ok, because it happens very rarely and even less,
         # because the code below should work for most cases.
         if os.name == 'nt':
             # The first case would be a virtualenv and the second a normal
@@ -258,7 +258,7 @@ def _get_cached_default_environment():
         return get_default_environment()
     except InvalidPythonEnvironment:
         # It's possible that `sys.executable` is wrong. Typically happens
-        # when Jedi is used in an executable that embeds Python. For further
+        # when Medi is used in an executable that embeds Python. For further
         # information, have a look at:
         # https://github.com/davidhalter/medi/issues/1531
         return InterpreterEnvironment()
@@ -447,7 +447,7 @@ def _is_safe(executable_path):
         # Python files.
         # This still means that if the system Python is updated and the
         # virtualenv's Python is not (which is probably never going to get
-        # upgraded), it will not work with Jedi. IMO that's fine, because
+        # upgraded), it will not work with Medi. IMO that's fine, because
         # people should just be using venv. ~ dave
         if environment._sha256 == _calculate_sha256_for_file(real_path):
             return True
@@ -462,7 +462,7 @@ def _is_unix_safe_simple(real_path):
 
     uid = os.stat(real_path).st_uid
     # The interpreter needs to be owned by root. This means that it wasn't
-    # written by a user and therefore attacking Jedi is not as simple.
+    # written by a user and therefore attacking Medi is not as simple.
     # The attack could look like the following:
     # 1. A user clones a repository.
     # 2. The repository has an innocent looking folder called foobar. medi

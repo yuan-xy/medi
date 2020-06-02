@@ -124,7 +124,7 @@ def infer_node(context, element):
                         if len(name_dicts) * len(definitions) > 16:
                             debug.dbg('Too many options for if branch inference %s.', if_stmt)
                             # There's only a certain amount of branches
-                            # Jedi can infer, otherwise it will take to
+                            # Medi can infer, otherwise it will take to
                             # long.
                             name_dicts = [{}]
                             break
@@ -645,7 +645,7 @@ def _infer_comparison_part(inference_state, context, left, operator, right):
         return NO_VALUES
 
     def check(obj):
-        """Checks if a Jedi object is either a float or an int."""
+        """Checks if a Medi object is either a float or an int."""
         return isinstance(obj, TreeInstance) and \
             obj.name.string_name in ('int', 'float')
 

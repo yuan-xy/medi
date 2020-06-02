@@ -195,7 +195,7 @@ invalid
 
 class BrokenPartsOfClass():
     def foo(self):
-        # This construct contains two places where Jedi with Python 3 can fail.
+        # This construct contains two places where Medi with Python 3 can fail.
         # It should just ignore those constructs and still execute `bar`.
         pass
         if 2:

@@ -1,6 +1,6 @@
 """
 This is used for dynamic object completion.
-Jedi tries to guess param types with a backtracking approach.
+Medi tries to guess param types with a backtracking approach.
 """
 def func(a, default_arg=2):
     #? int()

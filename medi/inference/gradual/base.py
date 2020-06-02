@@ -333,7 +333,7 @@ class _PseudoTreeNameClass(Value):
 
     def py__class__(self):
         # This might not be 100% correct, but it is good enough. The details of
-        # the typing library are not really an issue for Jedi.
+        # the typing library are not really an issue for Medi.
         return builtin_from_name(self.inference_state, u'type')
 
     @property

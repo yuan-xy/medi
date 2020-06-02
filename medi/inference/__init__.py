@@ -1,8 +1,8 @@
 """
 Type inference of Python code in |medi| is based on three assumptions:
 
-* The code uses as least side effects as possible. Jedi understands certain
-  list/tuple/set modifications, but there's no guarantee that Jedi detects
+* The code uses as least side effects as possible. Medi understands certain
+  list/tuple/set modifications, but there's no guarantee that Medi detects
   everything (list.append in different modules for example).
 * No magic is being used:
 
@@ -54,7 +54,7 @@ easy. Python can obviously get way more complicated then this. To understand
 tuple assignments, list comprehensions and everything else, a lot more code had
 to be written.
 
-Jedi has been tested very well, so you can just start modifying code. It's best
+Medi has been tested very well, so you can just start modifying code. It's best
 to write your own test first for your "new" feature. Don't be scared of
 breaking stuff. As long as the tests pass, you're most likely to be fine.
 

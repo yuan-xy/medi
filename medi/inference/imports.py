@@ -181,7 +181,7 @@ class Importer(object):
             # `..lala.` It can then resolve to `foo.bar.lala`.
             # The else here is a heuristic for all other cases, if for example
             # in `foo` you search for `...bar`, it's obviously out of scope.
-            # However since Jedi tries to just do it's best, we help the user
+            # However since Medi tries to just do it's best, we help the user
             # here, because he might have specified something wrong in his
             # project.
             if level <= len(base):
@@ -467,7 +467,7 @@ def _load_builtin_module(inference_state, import_names=None, sys_path=None):
 def load_module_from_path(inference_state, file_io, import_names=None, is_package=None):
     """
     This should pretty much only be used for get_modules_containing_name. It's
-    here to ensure that a random path is still properly loaded into the Jedi
+    here to ensure that a random path is still properly loaded into the Medi
     module structure.
     """
     path = file_io.path

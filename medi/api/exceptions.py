@@ -1,24 +1,24 @@
-class _JediError(Exception):
+class _MediError(Exception):
     pass
 
 
-class InternalError(_JediError):
+class InternalError(_MediError):
     """
     This error might happen a subprocess is crashing. The reason for this is
     usually broken C code in third party libraries. This is not a very common
-    thing and it is safe to use Jedi again. However using the same calls might
+    thing and it is safe to use Medi again. However using the same calls might
     result in the same error again.
     """
 
 
-class WrongVersion(_JediError):
+class WrongVersion(_MediError):
     """
     This error is reserved for the future, shouldn't really be happening at the
     moment.
     """
 
 
-class RefactoringError(_JediError):
+class RefactoringError(_MediError):
     """
     Refactorings can fail for various reasons. So if you work with refactorings
     like :meth:`.Script.rename`, :meth:`.Script.inline`,
