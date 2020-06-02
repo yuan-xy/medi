@@ -8,8 +8,8 @@ import ast
 __AUTHOR__ = 'David Halter'
 __AUTHOR_EMAIL__ = 'davidhalter88@gmail.com'
 
-# Get the version from within jedi. It's defined in exactly one place now.
-with open('jedi/__init__.py') as f:
+# Get the version from within medi. It's defined in exactly one place now.
+with open('medi/__init__.py') as f:
     tree = ast.parse(f.read())
 version = tree.body[int(not hasattr(tree, 'docstring'))].value.s
 
@@ -17,12 +17,12 @@ readme = open('README.rst').read() + '\n\n' + open('CHANGELOG.rst').read()
 with open('requirements.txt') as f:
     install_requires = f.read().splitlines()
 
-assert os.path.isfile("jedi/third_party/typeshed/LICENSE"), \
+assert os.path.isfile("medi/third_party/typeshed/LICENSE"), \
     "Please download the typeshed submodule first (Hint: git submodule update --init)"
-assert os.path.isfile("jedi/third_party/django-stubs/LICENSE.txt"), \
+assert os.path.isfile("medi/third_party/django-stubs/LICENSE.txt"), \
     "Please download the django-stubs submodule first (Hint: git submodule update --init)"
 
-setup(name='jedi',
+setup(name='medi',
       version=version,
       description='An autocompletion tool for Python that can be used for text editors.',
       author=__AUTHOR__,
@@ -30,7 +30,7 @@ setup(name='jedi',
       include_package_data=True,
       maintainer=__AUTHOR__,
       maintainer_email=__AUTHOR_EMAIL__,
-      url='https://github.com/davidhalter/jedi',
+      url='https://github.com/davidhalter/medi',
       license='MIT',
       keywords='python completion refactoring vim',
       long_description=readme,
@@ -51,7 +51,7 @@ setup(name='jedi',
               'flake8==3.7.9',
           ],
       },
-      package_data={'jedi': ['*.pyi', 'third_party/typeshed/LICENSE',
+      package_data={'medi': ['*.pyi', 'third_party/typeshed/LICENSE',
                              'third_party/typeshed/README']},
       platforms=['any'],
       classifiers=[

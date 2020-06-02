@@ -29,7 +29,7 @@ Unreleased: 0.17.1 (2020-04-)
   means that on the class keyword it will now return the docstring of Python's
   builtin function ``help('class')``.
 - The API documentation is now way more readable and complete. Check it out
-  under https://jedi.readthedocs.io. A lot of it has been rewritten.
+  under https://medi.readthedocs.io. A lot of it has been rewritten.
 - Removed Python 3.4 support
 - Many bugfixes
 
@@ -52,13 +52,13 @@ will probably be Jedi 1.0.0.
 - Goto on a function/attribute in a class now goes to the definition in its
   super class.
 - Big **Script API Changes**:
-    - The line and column parameters of ``jedi.Script`` are now deprecated
+    - The line and column parameters of ``medi.Script`` are now deprecated
     - ``completions`` deprecated, use ``complete`` instead
     - ``goto_assignments`` deprecated, use ``goto`` instead
     - ``goto_definitions`` deprecated, use ``infer`` instead
     - ``call_signatures`` deprecated, use ``get_signatures`` instead
     - ``usages`` deprecated, use ``get_references`` instead
-    - ``jedi.names`` deprecated, use ``jedi.Script(...).get_names()``
+    - ``medi.names`` deprecated, use ``medi.Script(...).get_names()``
 - ``BaseName.goto_assignments`` renamed to ``BaseName.goto``
 - Add follow_imports to ``Name.goto``. Now its signature matches
   ``Script.goto``.
@@ -127,7 +127,7 @@ New APIs:
 0.13.3 (2019-02-24)
 +++++++++++++++++++
 
-- Fixed an issue with embedded Python, see https://github.com/davidhalter/jedi-vim/issues/870
+- Fixed an issue with embedded Python, see https://github.com/davidhalter/medi-vim/issues/870
 
 0.13.2 (2018-12-15)
 +++++++++++++++++++
@@ -217,7 +217,7 @@ New APIs:
 - With the new parser, the type inference also completely changed. It's now
   simpler and more readable.
 - Completely rewritten REPL completion.
-- Added ``jedi.names``, a command to do static analysis. Thanks to that
+- Added ``medi.names``, a command to do static analysis. Thanks to that
   sourcegraph guys for sponsoring this!
 - Alpha version of the linter.
 

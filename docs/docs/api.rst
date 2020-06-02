@@ -22,7 +22,7 @@ The API consists of a few different parts:
 The methods that you are most likely going to use to work with Jedi are the
 following ones:
 
-.. currentmodule:: jedi
+.. currentmodule:: medi
 
 .. autosummary::
    :nosignatures:
@@ -48,12 +48,12 @@ following ones:
 Script
 ------
 
-.. autoclass:: jedi.Script
+.. autoclass:: medi.Script
     :members:
 
 Interpreter
 -----------
-.. autoclass:: jedi.Interpreter
+.. autoclass:: medi.Interpreter
     :members:
 
 .. _projects:
@@ -61,10 +61,10 @@ Interpreter
 Projects
 --------
 
-.. automodule:: jedi.api.project
+.. automodule:: medi.api.project
 
-.. autofunction:: jedi.get_default_project
-.. autoclass:: jedi.Project
+.. autofunction:: medi.get_default_project
+.. autoclass:: medi.Project
     :members:
 
 .. _environments:
@@ -72,28 +72,28 @@ Projects
 Environments
 ------------
 
-.. automodule:: jedi.api.environment
+.. automodule:: medi.api.environment
 
-.. autofunction:: jedi.find_system_environments
-.. autofunction:: jedi.find_virtualenvs
-.. autofunction:: jedi.get_system_environment
-.. autofunction:: jedi.create_environment
-.. autofunction:: jedi.get_default_environment
-.. autoexception:: jedi.InvalidPythonEnvironment
-.. autoclass:: jedi.api.environment.Environment
+.. autofunction:: medi.find_system_environments
+.. autofunction:: medi.find_virtualenvs
+.. autofunction:: medi.get_system_environment
+.. autofunction:: medi.create_environment
+.. autofunction:: medi.get_default_environment
+.. autoexception:: medi.InvalidPythonEnvironment
+.. autoclass:: medi.api.environment.Environment
     :members:
 
 Helper Functions
 ----------------
 
-.. autofunction:: jedi.preload_module
-.. autofunction:: jedi.set_debug_function
+.. autofunction:: medi.preload_module
+.. autofunction:: medi.set_debug_function
 
 Errors
 ------
 
-.. autoexception:: jedi.InternalError
-.. autoexception:: jedi.RefactoringError
+.. autoexception:: medi.InternalError
+.. autoexception:: medi.RefactoringError
 
 Examples
 --------
@@ -103,9 +103,9 @@ Completions
 
 .. sourcecode:: python
 
-   >>> import jedi
+   >>> import medi
    >>> code = '''import json; json.l'''
-   >>> script = jedi.Script(code, path='example.py')
+   >>> script = medi.Script(code, path='example.py')
    >>> script
    <Script: 'example.py' <SameEnvironment: 3.5.2 in /usr>>
    >>> completions = script.complete(1, 19)
@@ -123,7 +123,7 @@ Type Inference / Goto
 
 .. sourcecode:: python
 
-    >>> import jedi
+    >>> import medi
     >>> code = '''\
     ... def my_func():
     ...     print 'called'
@@ -133,7 +133,7 @@ Type Inference / Goto
     ... inception = my_list[2]
     ... 
     ... inception()'''
-    >>> script = jedi.Script(code)
+    >>> script = medi.Script(code)
     >>>
     >>> script.goto(8, 1)
     [<Name full_name='__main__.inception', description='inception = my_list[2]'>]
@@ -146,14 +146,14 @@ References
 
 .. sourcecode:: python
 
-    >>> import jedi
+    >>> import medi
     >>> code = '''\
     ... x = 3
     ... if 1 == 2:
     ...     x = 4
     ... else:
     ...     del x'''
-    >>> script = jedi.Script(code)
+    >>> script = medi.Script(code)
     >>> rns = script.get_references(5, 8)
     >>> rns
     [<Name full_name='__main__.x', description='x = 3'>,

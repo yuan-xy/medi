@@ -24,7 +24,7 @@ from os.path import abspath, dirname
 import objgraph
 
 sys.path.insert(0, dirname(dirname(abspath(__file__))))
-import jedi
+import medi
 
 
 def process_memory():
@@ -45,7 +45,7 @@ def run():
     print('Process Memory before: %skB' % process_memory())
     # After this the module should be cached.
     # Need to invent a path so that it's really cached.
-    jedi.Script(wx_core, path='foobar.py').complete()
+    medi.Script(wx_core, path='foobar.py').complete()
 
     gc.collect()  # make sure that it's all fair and the gc did its job.
     print('Process Memory after: %skB' % process_memory())

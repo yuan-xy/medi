@@ -13,7 +13,7 @@ def test_error_correction_with(Script):
 
 
 def test_string_literals(Script):
-    """Simplified case of jedi-vim#377."""
+    """Simplified case of medi-vim#377."""
     source = dedent("""
     x = ur'''
 

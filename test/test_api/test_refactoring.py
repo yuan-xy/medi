@@ -4,7 +4,7 @@ from textwrap import dedent
 
 import pytest
 
-import jedi
+import medi
 
 
 @pytest.fixture(autouse=True)
@@ -24,7 +24,7 @@ def test_rename_mod(Script, dir_with_content):
     script = Script(
         'import modx; modx\n',
         path=os.path.join(dir_with_content, 'some_script.py'),
-        project=jedi.Project(dir_with_content),
+        project=medi.Project(dir_with_content),
     )
     refactoring = script.rename(line=1, new_name='modr')
     refactoring.apply()
@@ -59,7 +59,7 @@ def test_rename_mod(Script, dir_with_content):
 
 def test_rename_none_path(Script):
     refactoring = Script('foo', path=None).rename(new_name='bar')
-    with pytest.raises(jedi.RefactoringError, match='on a Script with path=None'):
+    with pytest.raises(medi.RefactoringError, match='on a Script with path=None'):
         refactoring.apply()
     assert refactoring
 

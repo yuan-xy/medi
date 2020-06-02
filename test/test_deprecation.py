@@ -3,7 +3,7 @@ import warnings
 
 import pytest
 
-from jedi._compatibility import u
+from medi._compatibility import u
 
 
 @pytest.fixture(autouse=True)

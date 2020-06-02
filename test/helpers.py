@@ -1,6 +1,6 @@
 """
 A helper module for testing, improves compatibility for testing (as
-``jedi._compatibility``) as well as introducing helper functions.
+``medi._compatibility``) as well as introducing helper functions.
 """
 
 import sys
@@ -16,7 +16,7 @@ import os
 import pytest
 from os.path import abspath, dirname, join
 from functools import partial, wraps
-from jedi import Project
+from medi import Project
 
 test_dir = dirname(abspath(__file__))
 test_dir_project = Project(test_dir)
@@ -40,7 +40,7 @@ def cwd_at(path):
     Decorator to run function at `path`.
 
     :type path: str
-    :arg  path: relative path from repository root (e.g., ``'jedi'``).
+    :arg  path: relative path from repository root (e.g., ``'medi'``).
     """
     def decorator(func):
         @wraps(func)

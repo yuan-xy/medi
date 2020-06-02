@@ -13,9 +13,9 @@ easy as::
     python3.8 -m pytest
 
 Tests are also run automatically on `Travis CI
-<https://travis-ci.org/davidhalter/jedi/>`_.
+<https://travis-ci.org/davidhalter/medi/>`_.
 
-You want to add a test for |jedi|? Great! We love that. Normally you should
+You want to add a test for |medi|? Great! We love that. Normally you should
 write your tests as :ref:`Blackbox Tests <blackbox>`. Most tests would
 fit right in there.
 

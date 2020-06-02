@@ -3,7 +3,7 @@ try:
 except ImportError:
     readline = False
 
-from jedi import utils
+from medi import utils
 
 from .helpers import unittest
 

@@ -13,7 +13,7 @@ import sys
 from marso import split_lines
 
 from functools import reduce
-import jedi
+import medi
 from .helpers import test_dir
 
 
@@ -46,8 +46,8 @@ class RefactoringCase(object):
         return f_name.replace('.py', '')
 
     def refactor(self, environment):
-        project = jedi.Project(os.path.join(test_dir, 'refactor'))
-        script = jedi.Script(self._code, path=self._path, project=project, environment=environment)
+        project = medi.Project(os.path.join(test_dir, 'refactor'))
+        script = medi.Script(self._code, path=self._path, project=project, environment=environment)
         refactor_func = getattr(script, self.refactor_type)
         return refactor_func(self._line_nr, self._index, **self._kwargs)
 

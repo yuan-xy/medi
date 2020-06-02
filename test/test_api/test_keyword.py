@@ -1,5 +1,5 @@
 """
-Test of keywords and ``jedi.keywords``
+Test of keywords and ``medi.keywords``
 """
 
 import pytest
@@ -15,7 +15,7 @@ def test_goto_keyword(Script):
 
 
 def test_keyword(Script, environment):
-    """ github jedi-vim issue #44 """
+    """ github medi-vim issue #44 """
     defs = Script("print").infer()
     if environment.version_info.major < 3:
         assert defs == []

@@ -39,7 +39,7 @@ return_unspecified()
 
 def return_none() -> None:
     """
-    Return type None means the same as no return type as far as jedi
+    Return type None means the same as no return type as far as medi
     is concerned
     """
     pass

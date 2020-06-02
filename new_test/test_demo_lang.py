@@ -1,13 +1,13 @@
-import jedi
+import medi
 
 def test_demo():
 	code = "first: abc + 'ss'\nsecond: a"
-	demo = jedi.Script(code, language="demo")
+	demo = medi.Script(code, language="demo")
 
 	project = demo._inference_state.project
 	project.save()
 	path = project._path
-	p2 = jedi.api.Project.load(path)
+	p2 = medi.api.Project.load(path)
 	assert project.language == p2.language
 	
 	arr = demo.complete()

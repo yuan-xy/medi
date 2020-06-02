@@ -4,8 +4,8 @@ import sys
 import pytest
 
 from . import helpers
-from jedi.common import indent_block
-from jedi import RefactoringError
+from medi.common import indent_block
+from medi import RefactoringError
 
 
 def assert_case_equal(case, actual, desired):
@@ -52,7 +52,7 @@ def test_completion(case, monkeypatch, environment, has_typing, has_django):
     if case.path.endswith('django.py'):
         pytest.skip('Needs django to be installed to run this test.')
     repo_root = helpers.root_dir
-    monkeypatch.chdir(os.path.join(repo_root, 'jedi'))
+    monkeypatch.chdir(os.path.join(repo_root, 'medi'))
     case.run(assert_case_equal, environment)
 
 

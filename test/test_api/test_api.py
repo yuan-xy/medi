@@ -1,5 +1,5 @@
 """
-Test all things related to the ``jedi.api`` module.
+Test all things related to the ``medi.api`` module.
 """
 
 import os
@@ -10,9 +10,9 @@ import pytest
 from pytest import raises
 from marso import cache
 
-from jedi._compatibility import unicode
-from jedi import preload_module
-from jedi.inference.gradual import typeshed
+from medi._compatibility import unicode
+from medi import preload_module
+from medi.inference.gradual import typeshed
 from test.helpers import test_dir, get_example_dir
 
 

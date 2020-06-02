@@ -37,7 +37,7 @@ Code Contributors
 - Sid Shanker (@squidarth) <sid.p.shanker@gmail.com>
 - Reinoud Elhorst (@reinhrst)
 - Guido van Rossum (@gvanrossum) <guido@python.org>
-- Dmytro Sadovnychyi (@sadovnychyi) <jedi@dmit.ro>
+- Dmytro Sadovnychyi (@sadovnychyi) <medi@dmit.ro>
 - Cristi Burcă (@scribu)
 - bstaint (@bstaint)
 - Mathias Rav (@Mortal) <rav@cs.au.dk>

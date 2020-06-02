@@ -4,8 +4,8 @@ import sys
 import pytest
 
 from ..helpers import get_example_dir, set_cwd, root_dir, test_dir
-from jedi import Interpreter
-from jedi.api import Project, get_default_project
+from medi import Interpreter
+from medi.api import Project, get_default_project
 
 
 

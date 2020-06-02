@@ -2,7 +2,7 @@ from os.path import join
 from itertools import chain
 from functools import partial
 
-import jedi
+import medi
 from ..helpers import test_dir
 
 
@@ -29,7 +29,7 @@ def test_follow_import_incomplete(Script, environment):
     assert datetime == ['module']
 
     # empty `from * import` parts
-    itert = jedi.Script("from itertools import ").complete()
+    itert = medi.Script("from itertools import ").complete()
     definitions = [d for d in itert if d.name == 'chain']
     assert len(definitions) == 1
     assert [d.type for d in definitions[0].infer()] == ['class']
@@ -50,7 +50,7 @@ def test_follow_import_incomplete(Script, environment):
 
 
 def test_follow_definition_nested_import(Script):
-    Script = partial(Script, project=jedi.Project(join(test_dir, 'completion', 'import_tree')))
+    Script = partial(Script, project=medi.Project(join(test_dir, 'completion', 'import_tree')))
     types = check_follow_definition_types(Script, "import pkg.mod1; pkg")
     assert types == ['module']
 

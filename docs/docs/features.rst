@@ -30,7 +30,7 @@ Basic Features
 Supported Python Features
 -------------------------
 
-|jedi| supports many of the widely used Python features:
+|medi| supports many of the widely used Python features:
 
 - builtins
 - returns, yields, yield from
@@ -77,12 +77,12 @@ Performance Issues
 
 Importing ``numpy`` can be quite slow sometimes, as well as loading the
 builtins the first time. If you want to speed things up, you could preload
-libriaries in |jedi|, with :func:`.preload_module`. However, once loaded, this
+libriaries in |medi|, with :func:`.preload_module`. However, once loaded, this
 should not be a problem anymore.  The same is true for huge modules like
 ``PySide``, ``wx``, ``tensorflow``, ``pandas``, etc.
 
 Jedi does not have a very good cache layer. This is probably the biggest and
-only architectural `issue <https://github.com/davidhalter/jedi/issues/1059>`_ in
+only architectural `issue <https://github.com/davidhalter/medi/issues/1059>`_ in
 Jedi. Unfortunately it is not easy to change that. Dave Halter is thinking
 about rewriting Jedi in Rust, but it has taken Jedi more than 8 years to reach
 version 1.0, a rewrite will probably also take years.
@@ -93,7 +93,7 @@ Security
 For :class:`.Script`
 ~~~~~~~~~~~~~~~~~~~~
 
-Security is an important topic for |jedi|. By default, no code is executed
+Security is an important topic for |medi|. By default, no code is executed
 within Jedi. As long as you write pure Python, everything is inferred
 statically. If you enable ``load_unsafe_extensions=True`` for your
 :class:`.Project` and you use builtin modules (``c_builtin``) Jedi will execute

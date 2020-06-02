@@ -329,7 +329,7 @@ exe2['c']
 
 exe3 = kwargs_func(**{k: v for k, v in [(a, 3), ('b', 4.0)]})
 
-# Should resolve to the same as 2 but jedi is not smart enough yet
+# Should resolve to the same as 2 but medi is not smart enough yet
 # Here to make sure it doesn't result in crash though
 #? 
 exe3['a']

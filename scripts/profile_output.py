@@ -27,7 +27,7 @@ except ImportError:
 import pstats
 
 from docopt import docopt
-import jedi
+import medi
 
 
 # Monkeypatch the time formatting function of profiling to make it easier to
@@ -43,7 +43,7 @@ def f8(x):
 
 def run(code, index, infer=False):
     start = time.time()
-    script = jedi.Script(code)
+    script = medi.Script(code)
     if infer:
         result = script.infer()
     else:
@@ -63,7 +63,7 @@ def main(args):
     if args['--precision']:
         pstats.f8 = f8
 
-    jedi.set_debug_function(notices=args['--debug'])
+    medi.set_debug_function(notices=args['--debug'])
     if args['--omit']:
         run(code, n, infer=infer)
     else:

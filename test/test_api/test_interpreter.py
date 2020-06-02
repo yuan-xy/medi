@@ -1,14 +1,14 @@
 """
-Tests of ``jedi.api.Interpreter``.
+Tests of ``medi.api.Interpreter``.
 """
 import sys
 import warnings
 
 import pytest
 
-import jedi
-from jedi._compatibility import is_py3, py_version
-from jedi.inference.compiled import mixed
+import medi
+from medi._compatibility import is_py3, py_version
+from medi.inference.compiled import mixed
 from importlib import import_module
 
 if py_version > 30:
@@ -30,7 +30,7 @@ class _GlobalNameSpace:
 
 
 def get_completion(source, namespace):
-    i = jedi.Interpreter(source, [namespace])
+    i = medi.Interpreter(source, [namespace])
     completions = i.complete()
     assert len(completions) == 1
     return completions[0]
@@ -115,7 +115,7 @@ def test_side_effect_completion():
 
 def _assert_interpreter_complete(source, namespace, completions,
                                  **kwds):
-    script = jedi.Interpreter(source, [namespace], **kwds)
+    script = medi.Interpreter(source, [namespace], **kwds)
     cs = script.complete()
     actual = [c.name for c in cs]
     assert sorted(actual) == sorted(completions)
@@ -234,7 +234,7 @@ def test__getattr__completions(allow_unsafe_getattr, class_is_findable):
 
 @pytest.fixture(params=[False, True])
 def allow_unsafe_getattr(request, monkeypatch):
-    monkeypatch.setattr(jedi.Interpreter, '_allow_descriptor_getattr_default', request.param)
+    monkeypatch.setattr(medi.Interpreter, '_allow_descriptor_getattr_default', request.param)
     return request.param
 
 
@@ -285,7 +285,7 @@ def test_property_content():
             return 1
 
     foo = Foo3()
-    def_, = jedi.Interpreter('foo.bar', [locals()]).infer()
+    def_, = medi.Interpreter('foo.bar', [locals()]).infer()
     assert def_.name == 'int'
 
 
@@ -311,7 +311,7 @@ def test_endless_yield():
 def test_completion_params():
     foo = lambda a, b=3: None
 
-    script = jedi.Interpreter('foo', [locals()])
+    script = medi.Interpreter('foo', [locals()])
     c, = script.complete()
     sig, = c.get_signatures()
     assert [p.name for p in sig.params] == ['a', 'b']
@@ -326,7 +326,7 @@ def test_completion_param_annotations():
     # clever and uses the Python code instead of the signature object.
     code = 'def foo(a: 1, b: str, c: int = 1.0) -> bytes: pass'
     exec_(code, locals())
-    script = jedi.Interpreter('foo', [locals()])
+    script = medi.Interpreter('foo', [locals()])
     c, = script.complete()
     sig, = c.get_signatures()
     a, b, c = sig.params
@@ -338,7 +338,7 @@ def test_completion_param_annotations():
     assert b.description == 'param b: str'
     assert c.description == 'param c: int=1.0'
 
-    d, = jedi.Interpreter('foo()', [locals()]).infer()
+    d, = medi.Interpreter('foo()', [locals()]).infer()
     assert d.name == 'bytes'
 
 
@@ -347,15 +347,15 @@ def test_keyword_argument():
     def f(some_keyword_argument):
         pass
 
-    c, = jedi.Interpreter("f(some_keyw", [{'f': f}]).complete()
+    c, = medi.Interpreter("f(some_keyw", [{'f': f}]).complete()
     assert c.name == 'some_keyword_argument='
     assert c.complete == 'ord_argument='
 
     # This needs inspect.signature to work.
     if is_py3:
-        # Make it impossible for jedi to find the source of the function.
+        # Make it impossible for medi to find the source of the function.
         f.__name__ = 'xSOMETHING'
-        c, = jedi.Interpreter("x(some_keyw", [{'x': f}]).complete()
+        c, = medi.Interpreter("x(some_keyw", [{'x': f}]).complete()
         assert c.name == 'some_keyword_argument='
 
 
@@ -368,12 +368,12 @@ def test_more_complex_instances():
         def wow(self):
             return Something()
 
-    script = jedi.Interpreter('Base().wow().foo', [locals()])
+    script = medi.Interpreter('Base().wow().foo', [locals()])
     c, = script.complete()
     assert c.name == 'foo'
 
     x = Base()
-    script = jedi.Interpreter('x.wow().foo', [locals()])
+    script = medi.Interpreter('x.wow().foo', [locals()])
     c, = script.complete()
     assert c.name == 'foo'
 
@@ -389,7 +389,7 @@ def test_repr_execution_issue():
 
     er = ErrorRepr()
 
-    script = jedi.Interpreter('er', [locals()])
+    script = medi.Interpreter('er', [locals()])
     d, = script.infer()
     assert d.name == 'ErrorRepr'
     assert d.type == 'instance'
@@ -411,7 +411,7 @@ def test_dir_magic_method(allow_unsafe_getattr):
                 names = dir(object())
             return ['foo', 'bar'] + names
 
-    itp = jedi.Interpreter("ca.", [{'ca': CompleteAttrs()}])
+    itp = medi.Interpreter("ca.", [{'ca': CompleteAttrs()}])
     completions = itp.complete()
     names = [c.name for c in completions]
     assert ('__dir__' in names) == is_py3
@@ -440,18 +440,18 @@ def test_name_not_findable():
 
     setattr(X, 'NOT_FINDABLE', X.hidden)
 
-    assert jedi.Interpreter("X.NOT_FINDA", [locals()]).complete()
+    assert medi.Interpreter("X.NOT_FINDA", [locals()]).complete()
 
 
 def test_stubs_working():
     from multiprocessing import cpu_count
-    defs = jedi.Interpreter("cpu_count()", [locals()]).infer()
+    defs = medi.Interpreter("cpu_count()", [locals()]).infer()
     assert [d.name for d in defs] == ['int']
 
 
 def test_sys_path_docstring():  # Was an issue in #1298
-    import jedi
-    s = jedi.Interpreter("from sys import path\npath", namespaces=[locals()])
+    import medi
+    s = medi.Interpreter("from sys import path\npath", namespaces=[locals()])
     s.complete(line=2, column=4)[0].docstring()
 
 
@@ -497,7 +497,7 @@ def test_simple_completions(code, completions):
     counter = collections.Counter(['asdf'])
     string = ''
 
-    defs = jedi.Interpreter(code, [locals()]).complete()
+    defs = medi.Interpreter(code, [locals()]).complete()
     assert [d.name for d in defs] == completions
 
 
@@ -509,7 +509,7 @@ def test__wrapped__():
     def syslogs_to_df():
         pass
 
-    c, = jedi.Interpreter('syslogs_to_df', [locals()]).complete()
+    c, = medi.Interpreter('syslogs_to_df', [locals()]).complete()
     # Apparently the function starts on the line where the decorator starts.
     assert c.line == syslogs_to_df.__wrapped__.__code__.co_firstlineno + 1
 
@@ -519,7 +519,7 @@ def test_illegal_class_instance():
     class X:
         __class__ = 1
     X.__name__ = 'asdf'
-    d, = jedi.Interpreter('foo', [{'foo': X()}]).infer()
+    d, = medi.Interpreter('foo', [{'foo': X()}]).infer()
     v, = d._name.infer()
     assert not v.is_instance()
 
@@ -528,7 +528,7 @@ def test_illegal_class_instance():
 @pytest.mark.parametrize('module_name', ['sys', 'time', 'unittest.mock'])
 def test_core_module_completes(module_name):
     module = import_module(module_name)
-    assert jedi.Interpreter('module.', [locals()]).complete()
+    assert medi.Interpreter('module.', [locals()]).complete()
 
 
 @pytest.mark.skipif(sys.version_info[0] == 2, reason="Ignore Python 2, because EOL")
@@ -551,7 +551,7 @@ def test_partial_signatures(code, expected, index):
     b = functools.partial(func, 1)
     c = functools.partial(func, 1, c=2)
 
-    sig, = jedi.Interpreter(code, [locals()]).get_signatures()
+    sig, = medi.Interpreter(code, [locals()]).get_signatures()
     assert sig.name == 'partial'
     assert [p.name for p in sig.params] == expected
     assert index == sig.index
@@ -562,7 +562,7 @@ def test_type_var():
     """This was an issue before, see Github #1369"""
     import typing
     x = typing.TypeVar('myvar')
-    def_, = jedi.Interpreter('x', [locals()]).infer()
+    def_, = medi.Interpreter('x', [locals()]).infer()
     assert def_.name == 'TypeVar'
 
 
@@ -576,7 +576,7 @@ def test_param_annotation_completion(class_is_findable):
         Foo.__name__ = 'asdf'
 
     code = 'def CallFoo(x: Foo):\n x.ba'
-    def_, = jedi.Interpreter(code, [locals()]).complete()
+    def_, = medi.Interpreter(code, [locals()]).complete()
     assert def_.name == 'bar'
 
 
@@ -601,7 +601,7 @@ def test_dict_completion(code, column, expected):
     mixed = {1: 2, 1.10: 4, None: 6, r'a\sdf': 8, b'foo': 9}
 
     namespaces = [locals(), {'implicit': {1000: 3}}]
-    comps = jedi.Interpreter(code, namespaces).complete(column=column)
+    comps = medi.Interpreter(code, namespaces).complete(column=column)
     if Ellipsis in expected:
         # This means that global completions are part of this, so filter all of
         # that out.
@@ -623,7 +623,7 @@ def test_dict_completion(code, column, expected):
 def test_dict_getitem(code, types):
     dct = {1: 2, "asdf": 1.0}
 
-    comps = jedi.Interpreter(code, [locals()]).infer()
+    comps = medi.Interpreter(code, [locals()]).infer()
     assert [c.name for c in comps] == types
 
 
@@ -679,5 +679,5 @@ def bar():
 def test_string_annotation(annotations, result, code):
     x = lambda foo: 1
     x.__annotations__ = annotations
-    defs = jedi.Interpreter(code or 'x()', [locals()]).infer()
+    defs = medi.Interpreter(code or 'x()', [locals()]).infer()
     assert [d.name for d in defs] == result

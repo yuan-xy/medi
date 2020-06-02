@@ -8,12 +8,12 @@ import pytest
 from . import helpers
 from . import run
 from . import refactor
-from jedi import InterpreterEnvironment, get_system_environment
-from jedi.inference.compiled.value import create_from_access_path
-from jedi.inference.imports import _load_python_module
-from jedi.file_io import KnownContentFileIO
-from jedi.inference.base_value import ValueSet
-from jedi.api.interpreter import MixedModuleContext
+from medi import InterpreterEnvironment, get_system_environment
+from medi.inference.compiled.value import create_from_access_path
+from medi.inference.imports import _load_python_module
+from medi.file_io import KnownContentFileIO
+from medi.inference.base_value import ValueSet
+from medi.api.interpreter import MixedModuleContext
 
 # For interpreter tests sometimes the path of this directory is in the sys
 # path, which we definitely don't want. So just remove it globally.
@@ -153,7 +153,7 @@ def same_process_inference_state(Script):
 
 @pytest.fixture
 def disable_typeshed(monkeypatch):
-    from jedi.inference.gradual import typeshed
+    from medi.inference.gradual import typeshed
     monkeypatch.setattr(typeshed, '_load_from_typeshed', lambda *args, **kwargs: None)
 
 

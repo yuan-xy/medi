@@ -1,4 +1,4 @@
-jedi/third_party/typeshed/
+medi/third_party/typeshed/
 *~
 *.sw?
 *.pyc
@@ -10,7 +10,7 @@ jedi/third_party/typeshed/
 /build/
 /docs/_build/
 /dist/
-jedi.egg-info/
+medi.egg-info/
 record.json
 /.cache/
 /.pytest_cache

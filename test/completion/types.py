@@ -152,12 +152,12 @@ dc = {v: 3 for v in ['a']}
 #? str()
 {**dc, "b": "b"}["b"]
 
-# Should resolve to int() but jedi is not smart enough yet
+# Should resolve to int() but medi is not smart enough yet
 # Here to make sure it doesn't result in crash though
 #? 
 {**d}["a"]
 
-# Should resolve to int() but jedi is not smart enough yet
+# Should resolve to int() but medi is not smart enough yet
 # Here to make sure it doesn't result in crash though
 #? 
 {**dc}["a"]
@@ -171,7 +171,7 @@ s = {1, 2, 3}
 {*s, 4, *s}
 
 s = {1, 2, 3}
-# Should resolve to int() but jedi is not smart enough yet
+# Should resolve to int() but medi is not smart enough yet
 # Here to make sure it doesn't result in crash though
 #? 
 {*s}.pop()
@@ -179,7 +179,7 @@ s = {1, 2, 3}
 #? int()
 {*s, 4}.pop()
 
-# Should resolve to int() but jedi is not smart enough yet
+# Should resolve to int() but medi is not smart enough yet
 # Here to make sure it doesn't result in crash though
 #? 
 [*s][0]

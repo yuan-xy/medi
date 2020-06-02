@@ -7,13 +7,13 @@ import time
 import functools
 
 from .helpers import get_example_dir
-import jedi
+import medi
 
 
 def _check_speed(time_per_run, number=4, run_warm=True):
     """ Speed checks should typically be very tolerant. Some machines are
     faster than others, but the tests should still pass. These tests are
-    here to assure that certain effects that kill jedi performance are not
+    here to assure that certain effects that kill medi performance are not
     reintroduced to Jedi."""
     def decorated(func):
         @functools.wraps(func)
@@ -70,4 +70,4 @@ def test_no_repr_computation(Script):
         def __repr__(self):
             time.sleep(0.2)
     test = SlowRepr()
-    jedi.Interpreter('test.som', [locals()]).complete()
+    medi.Interpreter('test.som', [locals()]).complete()

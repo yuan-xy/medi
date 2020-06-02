@@ -1,9 +1,9 @@
 import pytest
 
-from jedi import settings
-from jedi.inference.names import ValueName
-from jedi.inference.compiled import CompiledValueName
-from jedi.inference.gradual.typeshed import StubModuleValue
+from medi import settings
+from medi.inference.names import ValueName
+from medi.inference.compiled import CompiledValueName
+from medi.inference.gradual.typeshed import StubModuleValue
 
 
 @pytest.fixture()

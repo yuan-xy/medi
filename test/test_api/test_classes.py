@@ -1,4 +1,4 @@
-""" Test all things related to the ``jedi.api_classes`` module.
+""" Test all things related to the ``medi.api_classes`` module.
 """
 
 from textwrap import dedent
@@ -7,9 +7,9 @@ import os
 
 import pytest
 
-import jedi
-from jedi import __doc__ as jedi_doc
-from jedi.inference.compiled import CompiledValueName
+import medi
+from medi import __doc__ as medi_doc
+from medi.inference.compiled import CompiledValueName
 from ..helpers import get_example_dir
 
 
@@ -23,7 +23,7 @@ def test_basedefinition_type(Script, get_names):
         """
         Return a list of definitions for parametrized tests.
 
-        :rtype: [jedi.api_classes.BaseName]
+        :rtype: [medi.api_classes.BaseName]
         """
         source = dedent("""
         import sys
@@ -124,7 +124,7 @@ def test_position_none_if_builtin(Script):
     assert gotos[0].column is not None
 
 
-def test_completion_docstring(Script, jedi_path):
+def test_completion_docstring(Script, medi_path):
     """
     Jedi should follow imports in certain conditions
     """
@@ -132,11 +132,11 @@ def test_completion_docstring(Script, jedi_path):
         c = Script(src, project=project).complete()[0]
         assert c.docstring(raw=True, fast=False) == cleandoc(result)
 
-    project = jedi.Project('.', sys_path=[jedi_path])
-    c = Script('import jedi\njed', project=project).complete()[0]
-    assert c.docstring(fast=False) == cleandoc(jedi_doc)
+    project = medi.Project('.', sys_path=[medi_path])
+    c = Script('import medi\njed', project=project).complete()[0]
+    assert c.docstring(fast=False) == cleandoc(medi_doc)
 
-    docstr('import jedi\njedi.Scr', cleandoc(jedi.Script.__doc__))
+    docstr('import medi\nmedi.Scr', cleandoc(medi.Script.__doc__))
 
     docstr('abcd=3;abcd', '')
     docstr('"hello"\nabcd=3\nabcd', '')
@@ -375,7 +375,7 @@ def test_type_II(Script):
 
 
 """
-This tests the BaseName.goto function, not the jedi
+This tests the BaseName.goto function, not the medi
 function. They are not really different in functionality, but really
 different as an implementation.
 """

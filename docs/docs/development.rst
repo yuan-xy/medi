@@ -3,7 +3,7 @@
 Jedi Development
 ================
 
-.. currentmodule:: jedi
+.. currentmodule:: medi
 
 .. note:: This documentation is for Jedi developers who want to improve Jedi
     itself, but have no idea how Jedi works. If you want to use Jedi for 
@@ -16,13 +16,13 @@ Introduction
 ------------
 
 This page tries to address the fundamental demand for documentation of the
-|jedi| internals. Understanding a dynamic language is a complex task. Especially
-because type inference in Python can be a very recursive task. Therefore |jedi|
+|medi| internals. Understanding a dynamic language is a complex task. Especially
+because type inference in Python can be a very recursive task. Therefore |medi|
 couldn't get rid of complexity. I know that **simple is better than complex**,
 but unfortunately it sometimes requires complex solutions to understand complex
 systems.
 
-In six chapters I'm trying to describe the internals of |jedi|:
+In six chapters I'm trying to describe the internals of |medi|:
 
 - :ref:`The Jedi Core <core>`
 - :ref:`Core Extensions <core-extensions>`
@@ -48,7 +48,7 @@ The core of Jedi consists of three parts:
 
 Most people are probably interested in :ref:`type inference <inference>`,
 because that's where all the magic happens. I need to introduce the :ref:`parser
-<parser>` first, because :mod:`jedi.inference` uses it extensively.
+<parser>` first, because :mod:`medi.inference` uses it extensively.
 
 .. _parser:
 
@@ -58,7 +58,7 @@ Parser
 Jedi used to have its internal parser, however this is now a separate project
 and is called `marso <http://marso.readthedocs.io>`_.
 
-The parser creates a syntax tree that |jedi| analyses and tries to understand.
+The parser creates a syntax tree that |medi| analyses and tries to understand.
 The grammar that this parser uses is very similar to the official Python
 `grammar files <https://docs.python.org/3/reference/grammar.html>`_.
 
@@ -67,18 +67,18 @@ The grammar that this parser uses is very similar to the official Python
 Type inference of python code (inference/__init__.py)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: jedi.inference
+.. automodule:: medi.inference
 
 Inference Values (inference/base_value.py)
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. automodule:: jedi.inference.base_value
+.. automodule:: medi.inference.base_value
 
 .. inheritance-diagram::
-   jedi.inference.value.instance.TreeInstance
-   jedi.inference.value.klass.ClassValue
-   jedi.inference.value.function.FunctionValue
-   jedi.inference.value.function.FunctionExecutionContext
+   medi.inference.value.instance.TreeInstance
+   medi.inference.value.klass.ClassValue
+   medi.inference.value.function.FunctionValue
+   medi.inference.value.function.FunctionExecutionContext
    :parts: 1
 
 
@@ -87,7 +87,7 @@ Inference Values (inference/base_value.py)
 Name resolution (inference/finder.py)
 +++++++++++++++++++++++++++++++++++++
 
-.. automodule:: jedi.inference.finder
+.. automodule:: medi.inference.finder
 
 
 .. _dev-api:
@@ -123,10 +123,10 @@ without some features.
 Iterables & Dynamic Arrays (inference/value/iterable.py)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To understand Python on a deeper level, |jedi| needs to understand some of the
+To understand Python on a deeper level, |medi| needs to understand some of the
 dynamic features of Python like lists that are filled after creation:
 
-.. automodule:: jedi.inference.value.iterable
+.. automodule:: medi.inference.value.iterable
 
 
 .. _dynamic_params:
@@ -134,7 +134,7 @@ dynamic features of Python like lists that are filled after creation:
 Parameter completion (inference/dynamic_params.py)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: jedi.inference.dynamic_params
+.. automodule:: medi.inference.dynamic_params
 
 
 .. _docstrings:
@@ -142,14 +142,14 @@ Parameter completion (inference/dynamic_params.py)
 Docstrings (inference/docstrings.py)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: jedi.inference.docstrings
+.. automodule:: medi.inference.docstrings
 
 .. _refactoring:
 
 Refactoring (inference/api/refactoring.py)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: jedi.api.refactoring
+.. automodule:: medi.api.refactoring
 
 
 .. _imports-modules:
@@ -168,7 +168,7 @@ Imports & Modules
 Compiled Modules (inference/compiled.py)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: jedi.inference.compiled
+.. automodule:: medi.inference.compiled
 
 
 .. _imports:
@@ -176,14 +176,14 @@ Compiled Modules (inference/compiled.py)
 Imports (inference/imports.py)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: jedi.inference.imports
+.. automodule:: medi.inference.imports
 
 .. _stubs:
 
 Stubs & Annotations (inference/gradual)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: jedi.inference.gradual
+.. automodule:: medi.inference.gradual
 
 .. _caching-recursions:
 
@@ -199,14 +199,14 @@ Caching & Recursions
 Caching (cache.py)
 ~~~~~~~~~~~~~~~~~~
 
-.. automodule:: jedi.cache
+.. automodule:: medi.cache
 
 .. _recursion:
 
 Recursions (recursion.py)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: jedi.inference.recursion
+.. automodule:: medi.inference.recursion
 
 
 .. _dev-helpers:

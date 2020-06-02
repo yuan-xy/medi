@@ -1,5 +1,5 @@
 import pytest
-from jedi.inference.value import TreeInstance
+from medi.inference.value import TreeInstance
 
 
 def _infer_literal(Script, code, is_fstring=False):

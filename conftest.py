@@ -6,15 +6,15 @@ from functools import partial
 
 import pytest
 
-import jedi
-from jedi.api.environment import get_system_environment, InterpreterEnvironment
-from jedi._compatibility import py_version
+import medi
+from medi.api.environment import get_system_environment, InterpreterEnvironment
+from medi._compatibility import py_version
 from test.helpers import test_dir
 
 collect_ignore = [
     'setup.py',
-    'jedi/__main__.py',
-    'jedi/inference/compiled/subprocess/__main__.py',
+    'medi/__main__.py',
+    'medi/inference/compiled/subprocess/__main__.py',
     'build/',
     'test/examples',
 ]
@@ -24,21 +24,21 @@ if sys.version_info < (3, 6):
 
 
 # The following hooks (pytest_configure, pytest_unconfigure) are used
-# to modify `jedi.settings.cache_directory` because `clean_jedi_cache`
+# to modify `medi.settings.cache_directory` because `clean_medi_cache`
 # has no effect during doctests.  Without these hooks, doctests uses
-# user's cache (e.g., ~/.cache/jedi/).  We should remove this
+# user's cache (e.g., ~/.cache/medi/).  We should remove this
 # workaround once the problem is fixed in pytest.
 #
 # See:
-# - https://github.com/davidhalter/jedi/pull/168
+# - https://github.com/davidhalter/medi/pull/168
 # - https://bitbucket.org/hpk42/pytest/issue/275/
 
-jedi_cache_directory_orig = None
-jedi_cache_directory_temp = None
+medi_cache_directory_orig = None
+medi_cache_directory_temp = None
 
 
 def pytest_addoption(parser):
-    parser.addoption("--jedi-debug", "-D", action='store_true',
+    parser.addoption("--medi-debug", "-D", action='store_true',
                      help="Enables Jedi's debug output.")
 
     parser.addoption("--warning-is-error", action='store_true',
@@ -52,13 +52,13 @@ def pytest_addoption(parser):
 
 
 def pytest_configure(config):
-    global jedi_cache_directory_orig, jedi_cache_directory_temp
-    jedi_cache_directory_orig = jedi.settings.cache_directory
-    jedi_cache_directory_temp = tempfile.mkdtemp(prefix='jedi-test-')
-    jedi.settings.cache_directory = jedi_cache_directory_temp
+    global medi_cache_directory_orig, medi_cache_directory_temp
+    medi_cache_directory_orig = medi.settings.cache_directory
+    medi_cache_directory_temp = tempfile.mkdtemp(prefix='medi-test-')
+    medi.settings.cache_directory = medi_cache_directory_temp
 
-    if config.option.jedi_debug:
-        jedi.set_debug_function()
+    if config.option.medi_debug:
+        medi.set_debug_function()
 
     if config.option.warning_is_error:
         import warnings
@@ -66,15 +66,15 @@ def pytest_configure(config):
 
 
 def pytest_unconfigure(config):
-    global jedi_cache_directory_orig, jedi_cache_directory_temp
-    jedi.settings.cache_directory = jedi_cache_directory_orig
-    shutil.rmtree(jedi_cache_directory_temp)
+    global medi_cache_directory_orig, medi_cache_directory_temp
+    medi.settings.cache_directory = medi_cache_directory_orig
+    shutil.rmtree(medi_cache_directory_temp)
 
 
 @pytest.fixture(scope='session')
-def clean_jedi_cache(request):
+def clean_medi_cache(request):
     """
-    Set `jedi.settings.cache_directory` to a temporary directory during test.
+    Set `medi.settings.cache_directory` to a temporary directory during test.
 
     Note that you can't use built-in `tmpdir` and `monkeypatch`
     fixture here because their scope is 'function', which is not used
@@ -82,9 +82,9 @@ def clean_jedi_cache(request):
 
     This fixture is activated in ../pytest.ini.
     """
-    from jedi import settings
+    from medi import settings
     old = settings.cache_directory
-    tmp = tempfile.mkdtemp(prefix='jedi-test-')
+    tmp = tempfile.mkdtemp(prefix='medi-test-')
     settings.cache_directory = tmp
 
     @request.addfinalizer
@@ -107,13 +107,13 @@ def environment(request):
 
 @pytest.fixture(scope='session')
 def Script(environment):
-    return partial(jedi.Script, environment=environment)
+    return partial(medi.Script, environment=environment)
 
 
 @pytest.fixture(scope='session')
 def ScriptWithProject(Script):
-    project = jedi.Project(test_dir)
-    return partial(jedi.Script, project=project)
+    project = medi.Project(test_dir)
+    return partial(medi.Script, project=project)
 
 
 @pytest.fixture(scope='session')
@@ -143,7 +143,7 @@ def has_typing(environment):
         # they should for all Python versions.
         return True
 
-    script = jedi.Script('import typing', environment=environment)
+    script = medi.Script('import typing', environment=environment)
     return bool(script.infer())
 
 
@@ -153,7 +153,7 @@ def has_django(environment):
 
 
 @pytest.fixture(scope='session')
-def jedi_path():
+def medi_path():
     return os.path.dirname(__file__)
 
 

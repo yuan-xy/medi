@@ -1,5 +1,5 @@
 from os.path import join
-from jedi.file_io import FolderIO
+from medi.file_io import FolderIO
 from test.helpers import get_example_dir
 
 

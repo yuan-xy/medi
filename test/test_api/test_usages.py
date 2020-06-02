@@ -5,7 +5,7 @@ def test_import_references(Script):
 
 def test_exclude_builtin_modules(Script):
     def get(include):
-        from jedi.api.project import Project
+        from medi.api.project import Project
         script = Script(source, project=Project('', sys_path=[], smart_sys_path=False))
         references = script.get_references(column=8, include_builtins=include)
         return [(d.line, d.column) for d in references]

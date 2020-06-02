@@ -8,7 +8,7 @@ There are three kinds of test:
    the api definition instance is created.
 
 #. :class:`TestFullDefinedName` is to test combination of
-   ``obj.full_name`` and ``jedi.defined_names``.
+   ``obj.full_name`` and ``medi.defined_names``.
 
 #. Misc single-function tests.
 """
@@ -17,7 +17,7 @@ import textwrap
 
 import pytest
 
-import jedi
+import medi
 from ..helpers import TestCase
 
 
@@ -64,14 +64,14 @@ class TestFullNameWithCompletions(MixinTestFullName, TestCase):
 
 class TestFullDefinedName(TestCase):
     """
-    Test combination of ``obj.full_name`` and ``jedi.Script.get_names``.
+    Test combination of ``obj.full_name`` and ``medi.Script.get_names``.
     """
     @pytest.fixture(autouse=True)
     def init(self, environment):
         self.environment = environment
 
     def check(self, source, desired):
-        script = jedi.Script(textwrap.dedent(source), environment=self.environment)
+        script = medi.Script(textwrap.dedent(source), environment=self.environment)
         definitions = script.get_names()
         full_names = [d.full_name for d in definitions]
         self.assertEqual(full_names, desired)
@@ -91,17 +91,17 @@ class TestFullDefinedName(TestCase):
         """, ['os', 'os.path', 'os.path.join', 'os.path'])
 
 
-def test_sub_module(Script, jedi_path):
+def test_sub_module(Script, medi_path):
     """
     ``full_name needs to check sys.path to actually find it's real path module
     path.
     """
-    sys_path = [jedi_path]
-    project = jedi.Project('.', sys_path=sys_path)
-    defs = Script('from jedi.api import classes; classes', project=project).infer()
-    assert [d.full_name for d in defs] == ['jedi.api.classes']
-    defs = Script('import jedi.api; jedi.api', project=project).infer()
-    assert [d.full_name for d in defs] == ['jedi.api']
+    sys_path = [medi_path]
+    project = medi.Project('.', sys_path=sys_path)
+    defs = Script('from medi.api import classes; classes', project=project).infer()
+    assert [d.full_name for d in defs] == ['medi.api.classes']
+    defs = Script('import medi.api; medi.api', project=project).infer()
+    assert [d.full_name for d in defs] == ['medi.api']
 
 
 def test_os_path(Script):

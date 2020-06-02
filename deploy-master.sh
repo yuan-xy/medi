@@ -9,7 +9,7 @@ cd $BASE_DIR
 
 git fetch --tags
 
-PROJECT_NAME=jedi
+PROJECT_NAME=medi
 BRANCH=master
 BUILD_FOLDER=build
 

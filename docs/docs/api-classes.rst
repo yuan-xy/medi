@@ -7,47 +7,47 @@ API Return Classes
 
 Abstract Base Class
 ~~~~~~~~~~~~~~~~~~~
-.. autoclass:: jedi.api.classes.BaseName
+.. autoclass:: medi.api.classes.BaseName
     :members:
     :show-inheritance:
 
 Name
 ~~~~
-.. autoclass:: jedi.api.classes.Name
+.. autoclass:: medi.api.classes.Name
     :members:
     :show-inheritance:
 
 Completion
 ~~~~~~~~~~
-.. autoclass:: jedi.api.classes.Completion
+.. autoclass:: medi.api.classes.Completion
     :members:
     :show-inheritance:
 
 BaseSignature
 ~~~~~~~~~~~~~
-.. autoclass:: jedi.api.classes.BaseSignature
+.. autoclass:: medi.api.classes.BaseSignature
     :members:
     :show-inheritance:
 
 Signature
 ~~~~~~~~~
-.. autoclass:: jedi.api.classes.Signature
+.. autoclass:: medi.api.classes.Signature
     :members:
     :show-inheritance:
 
 ParamName
 ~~~~~~~~~
-.. autoclass:: jedi.api.classes.ParamName
+.. autoclass:: medi.api.classes.ParamName
     :members:
     :show-inheritance:
 
 Refactoring
 ~~~~~~~~~~~
 
-.. autoclass:: jedi.api.refactoring.Refactoring
+.. autoclass:: medi.api.refactoring.Refactoring
     :members:
     :show-inheritance:
 
-.. autoclass:: jedi.api.errors.SyntaxError
+.. autoclass:: medi.api.errors.SyntaxError
     :members:
     :show-inheritance:

@@ -6,8 +6,8 @@ from textwrap import dedent
 import pytest
 
 from ..helpers import root_dir
-from jedi.api.helpers import _start_match, _fuzzy_match
-from jedi._compatibility import scandir
+from medi.api.helpers import _start_match, _fuzzy_match
+from medi._compatibility import scandir
 
 
 def test_in_whitespace(Script):
@@ -73,7 +73,7 @@ def test_points_in_completion(Script):
 
 
 def test_loading_unicode_files_with_bad_global_charset(Script, monkeypatch, tmpdir):
-    dirname = str(tmpdir.mkdir('jedi-test'))
+    dirname = str(tmpdir.mkdir('medi-test'))
     filename1 = join(dirname, 'test1.py')
     filename2 = join(dirname, 'test2.py')
     if sys.version_info < (3, 0):
@@ -104,7 +104,7 @@ def test_fake_subnodes(Script):
     Test the number of subnodes of a fake object.
 
     There was a bug where the number of child nodes would grow on every
-    call to :func:``jedi.inference.compiled.fake.get_faked``.
+    call to :func:``medi.inference.compiled.fake.get_faked``.
 
     See Github PR#649 and isseu #591.
     """

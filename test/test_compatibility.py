@@ -1,5 +1,5 @@
 from collections import namedtuple
-from jedi._compatibility import highest_pickle_protocol
+from medi._compatibility import highest_pickle_protocol
 
 
 def test_highest_pickle_protocol():

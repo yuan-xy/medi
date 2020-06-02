@@ -53,7 +53,7 @@ import random
 import sys
 import traceback
 
-import jedi
+import medi
 
 
 class SourceFinder(object):
@@ -121,7 +121,7 @@ class TestCase(object):
     def run(self, debugger, record=None, print_result=False):
         try:
             with open(self.path) as f:
-                self.script = jedi.Script(f.read(), path=self.path)
+                self.script = medi.Script(f.read(), path=self.path)
             kwargs = {}
             if self.operation == 'goto':
                 kwargs['follow_imports'] = random.choice([False, True])
@@ -188,9 +188,9 @@ def main(arguments):
                'pudb' if arguments['--pudb'] else None
     record = arguments['--record']
 
-    jedi.settings.use_filesystem_cache = arguments['--fs-cache']
+    medi.settings.use_filesystem_cache = arguments['--fs-cache']
     if arguments['--debug']:
-        jedi.set_debug_function()
+        medi.set_debug_function()
 
     if arguments['redo'] or arguments['show']:
         t = TestCase.from_cache(record)

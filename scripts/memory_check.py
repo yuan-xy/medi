@@ -3,7 +3,7 @@
 This is a convenience script to test the speed and memory usage of Jedi with
 large libraries.
 
-Each library is preloaded by jedi, recording the time and memory consumed by
+Each library is preloaded by medi, recording the time and memory consumed by
 each operation.
 
 You can provide additional libraries via command line arguments.
@@ -15,7 +15,7 @@ import sys
 import os
 import psutil
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__) + '/..'))
-import jedi
+import medi
 
 
 def used_memory():
@@ -27,7 +27,7 @@ def profile_preload(mod):
     """Preload a module into Jedi, recording time and memory used."""
     base = used_memory()
     t0 = time.time()
-    jedi.preload_module(mod)
+    medi.preload_module(mod)
     elapsed = time.time() - t0
     used = used_memory() - base
     return elapsed, used

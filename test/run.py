@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
-|jedi| is mostly being tested by what I would call "integration tests". These
+|medi| is mostly being tested by what I would call "integration tests". These
 tests are testing type inference with the public API. This makes a
-lot of sense for |jedi|. Also, it is hard to write doctests/unittests for
+lot of sense for |medi|. Also, it is hard to write doctests/unittests for
 the internal data structures.
 
 There are different kinds of tests:
@@ -112,15 +112,15 @@ import marso
 from _pytest.outcomes import Skipped
 import pytest
 
-import jedi
-from jedi import debug
-from jedi._compatibility import unicode, is_py3
-from jedi.api.classes import Name
-from jedi.api.completion import get_user_context
-from jedi import parser_utils
-from jedi.api.environment import get_default_environment, get_system_environment
-from jedi.inference.gradual.conversion import convert_values
-from jedi.inference.analysis import Warning
+import medi
+from medi import debug
+from medi._compatibility import unicode, is_py3
+from medi.api.classes import Name
+from medi.api.completion import get_user_context
+from medi import parser_utils
+from medi.api.environment import get_default_environment, get_system_environment
+from medi.inference.gradual.conversion import convert_values
+from medi.inference.analysis import Warning
 
 
 TEST_COMPLETIONS = 0
@@ -188,7 +188,7 @@ class IntegrationTestCase(BaseTestCase):
                                    self.line_nr_test, self.line.rstrip())
 
     def script(self, environment):
-        return jedi.Script(self.source, path=self.path, environment=environment)
+        return medi.Script(self.source, path=self.path, environment=environment)
 
     def run(self, compare_cb, environment=None):
         testers = {
@@ -310,7 +310,7 @@ class StaticAnalysisCase(BaseTestCase):
         def typ_str(inst):
             return 'warning ' if isinstance(inst, Warning) else ''
 
-        analysis = jedi.Script(
+        analysis = medi.Script(
             self._source,
             path=self._path,
             environment=environment,
@@ -441,7 +441,7 @@ if __name__ == '__main__':
     t_start = time.time()
 
     if arguments['--debug']:
-        jedi.set_debug_function()
+        medi.set_debug_function()
 
     # get test list, that should be executed
     test_files = {}

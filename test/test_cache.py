@@ -1,5 +1,5 @@
 """
-Test all things related to the ``jedi.cache`` module.
+Test all things related to the ``medi.cache`` module.
 """
 
 

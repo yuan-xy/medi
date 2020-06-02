@@ -3,8 +3,8 @@
 Using Jedi
 ==========
 
-|jedi| is can be used with a variety of plugins and software. It is also possible
-to use |jedi| in the :ref:`Python shell or with IPython <repl-completion>`.
+|medi| is can be used with a variety of plugins and software. It is also possible
+to use |medi| in the :ref:`Python shell or with IPython <repl-completion>`.
 
 Below you can also find a list of :ref:`recipes for type hinting <recipes>`.
 
@@ -17,9 +17,9 @@ Editor Plugins
 Vim
 ~~~
 
-- jedi-vim_
+- medi-vim_
 - YouCompleteMe_
-- deoplete-jedi_
+- deoplete-medi_
 
 Visual Studio Code
 ~~~~~~~~~~~~~~~~~~
@@ -53,19 +53,19 @@ Kate
 ~~~~
 
 - Kate_ version 4.13+ `supports it natively
-  <https://projects.kde.org/projects/kde/applications/kate/repository/entry/addons/kate/pate/src/plugins/python_autocomplete_jedi.py?rev=KDE%2F4.13>`__,
+  <https://projects.kde.org/projects/kde/applications/kate/repository/entry/addons/kate/pate/src/plugins/python_autocomplete_medi.py?rev=KDE%2F4.13>`__,
   you have to enable it, though.
 
 Atom
 ~~~~
 
-- autocomplete-python-jedi_
+- autocomplete-python-medi_
 
 GNOME Builder
 ~~~~~~~~~~~~~
 
 - `GNOME Builder`_ `supports it natively
-  <https://git.gnome.org/browse/gnome-builder/tree/plugins/jedi>`__,
+  <https://git.gnome.org/browse/gnome-builder/tree/plugins/medi>`__,
   and is enabled by default.
 
 Gedit
@@ -103,19 +103,19 @@ and one that uses ``PYTHONSTARTUP``.
 Using ``PYTHONSTARTUP``
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: jedi.api.replstartup
+.. automodule:: medi.api.replstartup
 
 Using a Custom ``$HOME/.pythonrc.py``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. autofunction:: jedi.utils.setup_readline
+.. autofunction:: medi.utils.setup_readline
 
 .. _recipes:
 
 Recipes
 -------
 
-Here are some tips on how to use |jedi| efficiently.
+Here are some tips on how to use |medi| efficiently.
 
 
 .. _type-hinting:
@@ -123,7 +123,7 @@ Here are some tips on how to use |jedi| efficiently.
 Type Hinting
 ~~~~~~~~~~~~
 
-If |jedi| cannot detect the type of a function argument correctly (due to the
+If |medi| cannot detect the type of a function argument correctly (due to the
 dynamic nature of Python), you can help it by hinting the type using
 one of the docstring/annotation styles below. **Only gradual typing will
 always work**, all the docstring solutions are glorified hacks and more
@@ -236,19 +236,19 @@ In order to support the numpydoc format, you need to install the `numpydoc
         """
         var2.| # complete here
 
-.. _jedi-vim: https://github.com/davidhalter/jedi-vim
+.. _medi-vim: https://github.com/davidhalter/medi-vim
 .. _youcompleteme: https://valloric.github.io/YouCompleteMe/
-.. _deoplete-jedi: https://github.com/zchee/deoplete-jedi
-.. _Jedi.el: https://github.com/tkf/emacs-jedi
+.. _deoplete-medi: https://github.com/zchee/deoplete-medi
+.. _Jedi.el: https://github.com/tkf/emacs-medi
 .. _elpy: https://github.com/jorgenschaefer/elpy
 .. _anaconda-mode: https://github.com/proofit404/anaconda-mode
-.. _sublimejedi: https://github.com/srusskih/SublimeJEDI
+.. _sublimemedi: https://github.com/srusskih/SublimeJEDI
 .. _anaconda: https://github.com/DamnWidget/anaconda
-.. _SynJedi: http://uvviewsoft.com/synjedi/
+.. _SynJedi: http://uvviewsoft.com/synmedi/
 .. _wdb: https://github.com/Kozea/wdb
-.. _TextMate: https://github.com/lawrenceakka/python-jedi.tmbundle
+.. _TextMate: https://github.com/lawrenceakka/python-medi.tmbundle
 .. _kate: https://kate-editor.org/
-.. _autocomplete-python-jedi: https://atom.io/packages/autocomplete-python-jedi
+.. _autocomplete-python-medi: https://atom.io/packages/autocomplete-python-medi
 .. _GNOME Builder: https://wiki.gnome.org/Apps/Builder/
 .. _gedi: https://github.com/isamert/gedi
 .. _Eric IDE: https://eric-ide.python-projects.org

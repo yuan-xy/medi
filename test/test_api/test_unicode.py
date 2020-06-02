@@ -2,8 +2,8 @@
 """
 All character set and unicode related tests.
 """
-from jedi._compatibility import u, unicode
-from jedi import Project
+from medi._compatibility import u, unicode
+from medi import Project
 
 
 def test_unicode_script(Script):
@@ -25,7 +25,7 @@ def test_unicode_script(Script):
 
 
 def test_unicode_attribute(Script):
-    """ github jedi-vim issue #94 """
+    """ github medi-vim issue #94 """
     s1 = u('#-*- coding: utf-8 -*-\nclass Person():\n'
            '    name = "e"\n\nPerson().name.')
     completions1 = Script(s1).complete()
@@ -37,7 +37,7 @@ def test_unicode_attribute(Script):
 
 
 def test_multibyte_script(Script):
-    """ `jedi.Script` must accept multi-byte string source. """
+    """ `medi.Script` must accept multi-byte string source. """
     try:
         code = u("import datetime; datetime.d")
         comment = u("# multi-byte comment あいうえおä")

@@ -15,12 +15,12 @@ Options:
 import cProfile
 
 from docopt import docopt
-from jedi.parser.python import load_grammar
-from jedi.parser.diff import DiffParser
-from jedi.parser.python import ParserWithRecovery
-from jedi._compatibility import u
-from jedi.common import splitlines
-import jedi
+from medi.parser.python import load_grammar
+from medi.parser.diff import DiffParser
+from medi.parser.python import ParserWithRecovery
+from medi._compatibility import u
+from medi.common import splitlines
+import medi
 
 
 def run(parser, lines):
@@ -32,7 +32,7 @@ def run(parser, lines):
 
 def main(args):
     if args['--debug']:
-        jedi.set_debug_function(notices=True)
+        medi.set_debug_function(notices=True)
 
     with open(args['<file>']) as f:
         code = f.read()

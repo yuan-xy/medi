@@ -5,9 +5,9 @@ import inspect
 import pytest
 
 from ..helpers import TestCase
-from jedi import cache
-from jedi.parser_utils import get_signature
-from jedi import Interpreter
+from medi import cache
+from medi.parser_utils import get_signature
+from medi import Interpreter
 
 
 def assert_signature(Script, source, expected_name, expected_index=0, line=None, column=None):
@@ -83,19 +83,19 @@ class TestSignatures(TestCase):
         run("import time; abc = time; abc.sleep(", 'sleep', 0)
 
     def test_issue_57(self):
-        # jedi #57
+        # medi #57
         s = "def func(alpha, beta): pass\n" \
             "func(alpha='101',"
         self._run_simple(s, 'func', 0, column=13, line=2)
 
     def test_for(self):
-        # jedi-vim #11
+        # medi-vim #11
         self._run_simple("for sorted(", 'sorted', 0)
         self._run_simple("for s in sorted(", 'sorted', 0)
 
 
 def test_with(Script):
-    # jedi-vim #9
+    # medi-vim #9
     sigs = Script("with open(").get_signatures()
     assert sigs
     assert all(sig.name == 'open' for sig in sigs)
@@ -248,11 +248,11 @@ def test_complex(Script, environment):
         assert get_signature(func2.tree_node) \
             == 'compile(pattern: Pattern[AnyStr], flags: _FlagsType = ...) ->\nPattern[AnyStr]'
 
-    # jedi-vim #70
+    # medi-vim #70
     s = """def foo("""
     assert Script(s).get_signatures() == []
 
-    # jedi-vim #116
+    # medi-vim #116
     s = """import itertools; test = getattr(itertools, 'chain'); test("""
     assert_signature(Script, s, 'chain', 0)
 
