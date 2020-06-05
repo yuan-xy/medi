@@ -12,7 +12,6 @@ from medi import settings
 from medi.api import classes
 from medi.api import helpers
 from medi.api import keywords
-from medi.api.file_name import complete_file_name
 from medi.inference import imports
 from medi.inference.base_value import ValueSet
 from medi.inference.helpers import infer_call_of_leaf, parse_dotted_names
@@ -148,14 +147,7 @@ class Completion:
         string, start_leaf, quote = _extract_string_while_in_string(leaf, self._original_position)
 
         prefixed_completions = []
-        
-        if string is not None:
-            prefixed_completions = list(complete_file_name(
-                self._inference_state, self._module_context, start_leaf, quote, string,
-                self._like_name, self._signatures_callback,
-                self._code_lines, self._original_position,
-                self._fuzzy
-            ))
+
         if string is not None:
             if not prefixed_completions and '\n' in string:
                 # Complete only multi line strings
