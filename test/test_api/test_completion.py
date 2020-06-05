@@ -378,36 +378,6 @@ _dict_keys_completion_tests = [
 ]
 
 
-@pytest.mark.skipif(sys.version_info[0] == 2, reason="Ignore Python 2, because EOL")
-@pytest.mark.parametrize(
-    'added_code, column, expected', _dict_keys_completion_tests
-)
-def test_dict_keys_completions(Script, added_code, column, expected, skip_pre_python36):
-    code = dedent(r'''
-        ints = {1: ''}
-        ints[50] = 3.0
-        strs = {'asdf': 1, u"""foo""": 2, r'fbar': 3}
-        mixed = {1: 2, 1.10: 4, None: 6, r'a\sdf': 8, b'foo': 9}
-        casted = dict(strs, f3=4, r'\\xyz')
-        casted_mod = dict(casted)
-        casted_mod["fuuu"] = 8
-        casted_mod["full"] = 8
-        keywords = {None: 1, False: 2, "a": 3}
-        ''')
-    comps = Script(code + added_code).complete(column=column)
-    if Ellipsis in expected:
-        # This means that global completions are part of this, so filter all of
-        # that out.
-        comps = [c for c in comps if not c._name.is_value_name and not c.is_keyword]
-        expected = [e for e in expected if e is not Ellipsis]
-
-    assert [c.complete for c in comps] == expected
-
-
-@pytest.mark.skipif(sys.version_info[0] == 2, reason="Ignore Python 2, because EOL")
-def test_dict_keys_in_weird_case(Script, skip_pre_python36):
-    assert Script('a[\n# foo\nx]').complete(line=2, column=0)
-
 
 def test_start_match():
     assert _start_match('Condition', 'C')

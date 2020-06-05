@@ -12,7 +12,6 @@ from medi import settings
 from medi.api import classes
 from medi.api import helpers
 from medi.api import keywords
-from medi.api.strings import complete_dict
 from medi.api.file_name import complete_file_name
 from medi.inference import imports
 from medi.inference.base_value import ValueSet
@@ -148,16 +147,9 @@ class Completion:
         )
         string, start_leaf, quote = _extract_string_while_in_string(leaf, self._original_position)
 
-        prefixed_completions = complete_dict(
-            self._module_context,
-            self._code_lines,
-            start_leaf or leaf,
-            self._original_position,
-            None if string is None else quote + string,
-            fuzzy=self._fuzzy,
-        )
-
-        if string is not None and not prefixed_completions:
+        prefixed_completions = []
+        
+        if string is not None:
             prefixed_completions = list(complete_file_name(
                 self._inference_state, self._module_context, start_leaf, quote, string,
                 self._like_name, self._signatures_callback,
