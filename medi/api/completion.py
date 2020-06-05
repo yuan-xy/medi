@@ -93,11 +93,6 @@ def filter_names(inference_state, completion_names, stack, like_name, fuzzy, cac
                 yield new
 
 
-def _remove_duplicates(completions, other_completions):
-    names = {d.name for d in other_completions}
-    return [c for c in completions if c.name not in names]
-
-
 def get_user_context(module_context, position):
     """
     Returns the scope in which the user resides. This includes flows.
@@ -144,15 +139,6 @@ class Completion:
             self._original_position,
             include_prefixes=True
         )
-        string, start_leaf, quote = _extract_string_while_in_string(leaf, self._original_position)
-
-        prefixed_completions = []
-
-        if string is not None:
-            if not prefixed_completions and '\n' in string:
-                # Complete only multi line strings
-                prefixed_completions = self._complete_in_string(start_leaf, string)
-            return prefixed_completions
 
         if self.grammar.language == "demo":
             cached_name, completion_names = self._complete_demo(leaf)
@@ -164,14 +150,9 @@ class Completion:
                                         self.stack, self._like_name,
                                         self._fuzzy, cached_name=cached_name))
 
-        return (
-            # Removing duplicates mostly to remove False/True/None duplicates.
-            _remove_duplicates(prefixed_completions, completions)
-            + sorted(completions, key=lambda x: (x.name.startswith('__'),
+        return sorted(completions, key=lambda x: (x.name.startswith('__'),
                                                  x.name.startswith('_'),
                                                  x.name.lower()))
-        )
-
 
     def _complete_demo(self, leaf):
         self.stack = stack = None
@@ -460,56 +441,6 @@ class Completion:
                 if (name.api_type == 'function') == is_function:
                     yield name
 
-    def _complete_in_string(self, start_leaf, string):
-        """
-        To make it possible for people to have completions in doctests or
-        generally in "Python" code in docstrings, we use the following
-        heuristic:
-
-        - Having an indented block of code
-        - Having some doctest code that starts with `>>>`
-        - Having backticks that doesn't have whitespace inside it
-        """
-        def iter_relevant_lines(lines):
-            include_next_line = False
-            for l in code_lines:
-                if include_next_line or l.startswith('>>>') or l.startswith(' '):
-                    yield re.sub(r'^( *>>> ?| +)', '', l)
-                else:
-                    yield None
-
-                include_next_line = bool(re.match(' *>>>', l))
-
-        string = dedent(string)
-        code_lines = split_lines(string, keepends=True)
-        relevant_code_lines = list(iter_relevant_lines(code_lines))
-        if relevant_code_lines[-1] is not None:
-            # Some code lines might be None, therefore get rid of that.
-            relevant_code_lines = [c or '\n' for c in relevant_code_lines]
-            return self._complete_code_lines(relevant_code_lines)
-        match = re.search(r'`([^`\s]+)', code_lines[-1])
-        if match:
-            return self._complete_code_lines([match.group(1)])
-        return []
-
-    def _complete_code_lines(self, code_lines):
-        module_node = self._inference_state.grammar.parse(''.join(code_lines))
-        module_value = ModuleValue(
-            self._inference_state,
-            module_node,
-            code_lines=code_lines,
-        )
-        module_value.parent_context = self._module_context
-        return Completion(
-            self._inference_state,
-            module_value.as_context(),
-            code_lines=code_lines,
-            position=module_node.end_pos,
-            signatures_callback=lambda *args, **kwargs: [],
-            fuzzy=self._fuzzy,
-            grammar = self.grammar
-        ).complete()
-
 
 def _gather_nodes(stack):
     nodes = []
@@ -522,54 +453,6 @@ def _gather_nodes(stack):
 
 
 _string_start = re.compile(r'^\w*(\'{3}|"{3}|\'|")')
-
-
-def _extract_string_while_in_string(leaf, position):
-    def return_part_of_leaf(leaf):
-        kwargs = {}
-        if leaf.line == position[0]:
-            kwargs['endpos'] = position[1] - leaf.column
-        match = _string_start.match(leaf.value, **kwargs)
-        if not match:
-            return None, None, None
-        start = match.group(0)
-        if leaf.line == position[0] and position[1] < leaf.column + match.end():
-            return None, None, None
-        return cut_value_at_position(leaf, position)[match.end():], leaf, start
-
-    if position < leaf.start_pos:
-        return None, None, None
-
-    if leaf.type == 'string':
-        return return_part_of_leaf(leaf)
-
-    leaves = []
-    while leaf is not None:
-        if leaf.type == 'error_leaf' and ('"' in leaf.value or "'" in leaf.value):
-            if len(leaf.value) > 1:
-                return return_part_of_leaf(leaf)
-            prefix_leaf = None
-            if not leaf.prefix:
-                prefix_leaf = leaf.get_previous_leaf()
-                if prefix_leaf is None or prefix_leaf.type != 'name' \
-                        or not all(c in 'rubf' for c in prefix_leaf.value.lower()):
-                    prefix_leaf = None
-
-            return (
-                ''.join(cut_value_at_position(l, position) for l in leaves),
-                prefix_leaf or leaf,
-                ('' if prefix_leaf is None else prefix_leaf.value)
-                + cut_value_at_position(leaf, position),
-            )
-        if leaf.line != position[0]:
-            # Multi line strings are always simple error leaves and contain the
-            # whole string, single line error leaves are atherefore important
-            # now and since the line is different, it's not really a single
-            # line string anymore.
-            break
-        leaves.insert(0, leaf)
-        leaf = leaf.get_previous_leaf()
-    return None, None, None
 
 
 def complete_trailer(user_context, values):

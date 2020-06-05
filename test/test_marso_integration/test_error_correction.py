@@ -12,19 +12,6 @@ def test_error_correction_with(Script):
     assert [1 for c in comps if c.name == 'closed']
 
 
-def test_string_literals(Script):
-    """Simplified case of medi-vim#377."""
-    source = dedent("""
-    x = ur'''
-
-    def foo():
-        pass
-    """)
-
-    script = Script(dedent(source))
-    assert script._get_module_context().tree_node.end_pos == (6, 0)
-    assert not script.complete()
-
 
 def test_incomplete_function(Script):
     source = '''return ImportErr'''
