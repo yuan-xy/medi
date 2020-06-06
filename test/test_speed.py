@@ -30,12 +30,6 @@ def _check_speed(time_per_run, number=4, run_warm=True):
     return decorated
 
 
-@_check_speed(0.5)
-def test_os_path_join(Script):
-    s = "from posixpath import join; join('', '')."
-    assert len(Script(s).complete()) > 10  # is a str completion
-
-
 @_check_speed(0.15)
 def test_scipy_speed(Script):
     s = 'import scipy.weave; scipy.weave.inline('

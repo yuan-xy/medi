@@ -25,7 +25,6 @@ class SomeClass:
         ('Some', [], dict(all_scopes=True)),
         ('os', ['module os'], {}),
         ('sys', ['module sys'], {}),
-        ('sys.path', ['statement sys.path'], {}),
         ('sys.exit', ['function sys.exit'], {}),
         ('something', [], {}),
         ('something', ['statement SomeClass.SomeClass.twice.something'], dict(all_scopes=True)),
@@ -45,21 +44,6 @@ class SomeClass:
         ('class Smelss', ['class SomeClass'], dict(complete=True, fuzzy=True)),
         ('class Smelss', ['class SomeClass', 'class SomeClass.SomeClass'],
          dict(complete=True, fuzzy=True, all_scopes=True)),
-
-        # Nested
-        ('SomeClass.SomeClass', ['class SomeClass.SomeClass'],
-         dict(all_scopes=True)),
-        ('SomeClass.SomeClass.twice', ['function SomeClass.SomeClass.twice'],
-         dict(all_scopes=True)),
-        ('SomeClass.SomeClass.twice.__call__', ['function types.FunctionType.__call__'],
-         dict(all_scopes=True)),
-        ('SomeClass.SomeClass.twice.something', [], dict(all_scopes=True)),
-        ('SomeClass.twice', ['function SomeClass.twice', 'function SomeClass.SomeClass.twice'],
-         dict(all_scopes=True)),
-
-        # Nested completions
-        ('SomeClass.twi', ['function SomeClass.twice', 'function SomeClass.SomeClass.twice'],
-         dict(all_scopes=True, complete=True)),
 
         # Fuzzy unfortunately doesn't work
         ('SomeCl.twice', [], dict(all_scopes=True, complete=True, fuzzy=True)),

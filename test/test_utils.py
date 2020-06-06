@@ -45,46 +45,9 @@ class TestSetupReadline(unittest.TestCase):
         assert self.complete('list.__getitem__') == ['list.__getitem__']
         assert self.complete('list().__getitem__') == ['list().__getitem__']
 
-    def test_modules(self):
-        import sys
-        import os
-        self.namespace.sys = sys
-        self.namespace.os = os
-
-        try:
-            assert self.complete('os.path.join') == ['os.path.join']
-            string = 'os.path.join("a").upper'
-            assert self.complete(string) == [string]
-
-            c = {'os.' + d for d in dir(os) if d.startswith('ch')}
-            assert set(self.complete('os.ch')) == set(c)
-        finally:
-            del self.namespace.sys
-            del self.namespace.os
-
     def test_calls(self):
         s = 'str(bytes'
         assert self.complete(s) == [s, 'str(BytesWarning']
-
-    def test_import(self):
-        s = 'from os.path import a'
-        assert set(self.complete(s)) == {s + 'ltsep', s + 'bspath'}
-        assert self.complete('import keyword') == ['import keyword']
-
-        import os
-        s = 'from os import '
-        goal = {s + el for el in dir(os)}
-        # There are minor differences, e.g. the dir doesn't include deleted
-        # items as well as items that are not only available on linux.
-        difference = set(self.complete(s)).symmetric_difference(goal)
-        difference = {
-            x for x in difference
-            if all(not x.startswith('from os import ' + s)
-                   for s in ['_', 'O_', 'EX_', 'MFD_', 'SF_', 'ST_'])
-        }
-        # There are quite a few differences, because both Windows and Linux
-        # (posix and nt) librariesare included.
-        assert len(difference) < 22
 
     def test_local_import(self):
         s = 'import test.test_utils'

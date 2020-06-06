@@ -35,24 +35,10 @@ class MixinTestFullName(object):
         for d in definitions:
             self.assertEqual(d.full_name, desired)
 
-    def test_os_path_join(self):
-        self.check('import os; os.path.join', 'os.path.join')
-
-    def test_builtin(self):
-        self.check('TypeError', 'builtins.TypeError')
 
 
 class TestFullNameWithGotoDefinitions(MixinTestFullName, TestCase):
     operation = 'infer'
-
-    def test_tuple_mapping(self):
-        if self.environment.version_info.major == 2:
-            pytest.skip('Python 2 also yields None.')
-
-        self.check("""
-        import re
-        any_re = re.compile('.*')
-        any_re""", 'typing.Pattern')
 
     def test_from_import(self):
         self.check('from os import path', 'os.path')
@@ -102,19 +88,6 @@ def test_sub_module(Script, medi_path):
     assert [d.full_name for d in defs] == ['medi.api.classes']
     defs = Script('import medi.api; medi.api', project=project).infer()
     assert [d.full_name for d in defs] == ['medi.api']
-
-
-def test_os_path(Script):
-    d, = Script('from os.path import join').complete()
-    assert d.full_name == 'os.path.join'
-    d, = Script('import os.p').complete()
-    assert d.full_name == 'os.path'
-
-
-def test_os_issues(Script):
-    """Issue #873"""
-    # nt is not found, because it's deleted
-    assert [c.name for c in Script('import os\nos.nt''').complete()] == []
 
 
 def test_param_name(Script):

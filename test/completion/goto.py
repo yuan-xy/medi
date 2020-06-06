@@ -20,15 +20,6 @@ cd = c
 #! 0 ['cd = e']
 cd = e
 
-#! ['module math']
-import math
-#! ['module math']
-math
-
-#! ['module math']
-b = math
-#! ['b = math']
-b
 
 #! 18 ['foo = 10']
 foo = 10;print(foo)
@@ -39,8 +30,6 @@ foo = 10;print(foo)
 class C(object):
     x = 3
     def b(self):
-        #! ['b = math']
-        b
         #! ['def b']
         self.b
         #! 14 ['def b']
@@ -57,9 +46,6 @@ class C(object):
 
     #! ['def b']
     b
-
-#! ['b = math']
-b
 
 #! ['def b']
 C.b
@@ -174,8 +160,6 @@ mod1.a
 #! ['a = 1.0']
 from import_tree.pkg.mod1 import a
 
-#! ['module os']
-from .imports import os
 
 #! ['some_variable = 1']
 from . import some_variable

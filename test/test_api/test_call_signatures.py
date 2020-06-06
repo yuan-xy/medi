@@ -56,31 +56,6 @@ class TestSignatures(TestCase):
         run(s3, None, column=5)
         run(s3, None)
 
-    def test_more_complicated(self):
-        run = self._run_simple
-
-        s4 = 'abs(bool(), , set,'
-        run(s4, None, column=3)
-        run(s4, 'abs', 0, 4)
-        run(s4, 'bool', 0, 9)
-        run(s4, 'abs', 0, 10)
-        run(s4, 'abs', None, 11)
-
-        s5 = "sorted(1,\nif 2:\n def a():"
-        run(s5, 'sorted', 0, 7)
-        run(s5, 'sorted', 1, 9)
-
-        s6 = "bool().__eq__("
-        run(s6, '__eq__', 0)
-        run(s6, 'bool', 0, 5)
-
-        s7 = "str().upper().center("
-        s8 = "bool(int[abs("
-        run(s7, 'center', 0)
-        run(s8, 'abs', 0)
-        run(s8, 'bool', 0, 10)
-
-        run("import time; abc = time; abc.sleep(", 'sleep', 0)
 
     def test_issue_57(self):
         # medi #57
@@ -216,61 +191,11 @@ def test_find_signature_on_module(Script):
     assert Script(s).get_signatures() == []
 
 
-def test_complex(Script, environment):
-    s = """
-            def abc(a,b):
-                pass
-
-            def a(self):
-                abc(
-
-            if 1:
-                pass
-        """
-    assert_signature(Script, s, 'abc', 0, line=6, column=20)
-    s = """
-            import re
-            def huhu(it):
-                re.compile(
-                return it * 2
-        """
-    sig1, sig2 = sorted(Script(s).get_signatures(line=4, column=27), key=lambda s: s.line)
-    assert sig1.name == sig2.name == 'compile'
-    assert sig1.index == sig2.index == 0
-    func1, = sig1._name.infer()
-    func2, = sig2._name.infer()
-
-    if environment.version_info.major == 3:
-        # Do these checks just for Python 3, I'm too lazy to deal with this
-        # legacy stuff. ~ dave.
-        assert get_signature(func1.tree_node) \
-            == 'compile(pattern: AnyStr, flags: _FlagsType = ...) -> Pattern[AnyStr]'
-        assert get_signature(func2.tree_node) \
-            == 'compile(pattern: Pattern[AnyStr], flags: _FlagsType = ...) ->\nPattern[AnyStr]'
-
-    # medi-vim #70
-    s = """def foo("""
-    assert Script(s).get_signatures() == []
-
-    # medi-vim #116
-    s = """import itertools; test = getattr(itertools, 'chain'); test("""
-    assert_signature(Script, s, 'chain', 0)
-
 
 def _params(Script, source, line=None, column=None):
     signatures = Script(source, line, column).get_signatures()
     assert len(signatures) == 1
     return signatures[0].params
-
-
-def test_int_params(Script):
-    sig1, sig2 = Script('int(').get_signatures()
-    # int is defined as: `int(x[, base])`
-    assert len(sig1.params) == 1
-    assert sig1.params[0].name == 'x'
-    assert len(sig2.params) == 2
-    assert sig2.params[0].name == 'x'
-    assert sig2.params[1].name == 'base'
 
 
 def test_pow_params(Script):

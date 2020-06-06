@@ -76,52 +76,6 @@ def _check_number(Script, source, result='float'):
     assert completions[0].parent().name == result
 
 
-def test_completion_on_number_literals(Script):
-    # No completions on an int literal (is a float).
-    assert [c.name for c in Script('1. ').complete()] \
-        == ['and', 'if', 'in', 'is', 'not', 'or']
-
-    # Multiple points after an int literal basically mean that there's a float
-    # and a call after that.
-    _check_number(Script, '1..')
-    _check_number(Script, '1.0.')
-
-    # power notation
-    _check_number(Script, '1.e14.')
-    _check_number(Script, '1.e-3.')
-    _check_number(Script, '9e3.')
-    assert Script('1.e3..').complete() == []
-    assert Script('1.e-13..').complete() == []
-
-
-def test_completion_on_hex_literals(Script):
-    assert Script('0x1..').complete() == []
-    _check_number(Script, '0x1.', 'int')  # hexdecimal
-    # Completing binary literals doesn't work if they are not actually binary
-    # (invalid statements).
-    assert Script('0b2.b').complete() == []
-    _check_number(Script, '0b1.', 'int')  # binary
-
-    _check_number(Script, '0x2e.', 'int')
-    _check_number(Script, '0xE7.', 'int')
-    _check_number(Script, '0xEa.', 'int')
-    # theoretically, but people can just check for syntax errors:
-    assert Script('0x.').complete() == []
-
-
-def test_completion_on_complex_literals(Script):
-    assert Script('1j..').complete() == []
-    _check_number(Script, '1j.', 'complex')
-    _check_number(Script, '44.j.', 'complex')
-    _check_number(Script, '4.0j.', 'complex')
-    # No dot no completion - I thought, but 4j is actually a literal after
-    # which a keyword like or is allowed. Good times, haha!
-    # However this has been disabled again, because it apparently annoyed
-    # users. So no completion after j without a space :)
-    assert not Script('4j').complete()
-    assert ({c.name for c in Script('4j ').complete()} ==
-            {'if', 'and', 'in', 'is', 'not', 'or'})
-
 
 def test_goto_non_name(Script, environment):
     assert Script('for').goto() == []
@@ -134,60 +88,9 @@ def test_infer_on_non_name(Script):
     assert Script('import x').infer(column=0) == []
 
 
-def test_infer_on_generator(Script):
-    def_, = Script('def x(): yield 1\ny=x()\ny').infer()
-    assert def_.name == 'Generator'
-
-
-def test_goto_definition_not_multiple(Script):
-    """
-    There should be only one result if it leads back to the same
-    origin (e.g. instance method)
-    """
-
-    s = dedent('''\
-            import random
-            class A():
-                def __init__(self, a):
-                    self.a = 3
-
-                def foo(self):
-                    pass
-
-            if random.randint(0, 1):
-                a = A(2)
-            else:
-                a = A(1)
-            a''')
-    assert len(Script(s).infer()) == 1
-
-
 def test_reference_description(Script):
     descs = [u.description for u in Script("foo = ''; foo").get_references()]
     assert set(descs) == {"foo = ''", 'foo'}
-
-
-def test_get_line_code(Script):
-    def get_line_code(source, line=None, **kwargs):
-        return Script(source).complete(line=line)[0].get_line_code(**kwargs)
-
-    # On builtin
-    assert get_line_code('abs') == 'def abs(__n: SupportsAbs[_T]) -> _T: ...\n'
-
-    # On custom code
-    first_line = 'def foo():\n'
-    line = '    foo'
-    code = first_line + line
-    assert get_line_code(code) == first_line
-
-    # With before/after
-    code = code + '\nother_line'
-    assert get_line_code(code, line=2) == first_line
-    assert get_line_code(code, line=2, after=1) == first_line + line + '\n'
-    assert get_line_code(code, line=2, after=2, before=1) == code
-    # Should just be the whole thing, since there are no more lines on both
-    # sides.
-    assert get_line_code(code, line=2, after=3, before=3) == code
 
 
 def test_get_line_code_on_builtin(Script, disable_typeshed):
@@ -305,14 +208,6 @@ def test_backslash_continuation_and_bracket(Script):
     column = lines[-1].index('(')
     def_, = Script(code).infer(line=len(lines), column=column)
     assert def_.name == 'int'
-
-
-def test_goto_follow_builtin_imports(Script):
-    s = Script('import sys; sys')
-    d, = s.goto(follow_imports=True)
-    assert d.in_builtin_module() is True
-    d, = s.goto(follow_imports=True, follow_builtin_imports=True)
-    assert d.in_builtin_module() is True
 
 
 def test_docstrings_for_completions(Script):

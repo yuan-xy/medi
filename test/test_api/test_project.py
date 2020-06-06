@@ -56,12 +56,6 @@ def test_load_save_project(tmpdir):
 
         ('sample_int', ['helpers.sample_int'], {}),
         ('sample_int', ['helpers.sample_int'], dict(all_scopes=True)),
-        ('sample_int.real', ['stub:builtins.int.real'], {}),
-
-        ('class sample_int.real', [], {}),
-        ('foo sample_int.real', [], {}),
-        ('def sample_int.real', ['stub:builtins.int.real'], {}),
-        ('function sample_int.real', ['stub:builtins.int.real'], {}),
 
         # With modules
         ('test_project.test_search', ['test_api.test_project.test_search'], {}),
@@ -117,7 +111,6 @@ def test_load_save_project(tmpdir):
           'completion.stub_folder.with_stub_folder.nested_with_stub'], {}),
 
         # On sys path
-        ('sys.path', ['stub:sys.path'], {}),
         ('json.dumps', ['json.dumps'], {}),  # stdlib + stub
         ('multiprocessing', ['multiprocessing'], {}),
         ('multiprocessin', ['multiprocessing'], dict(complete=True)),

@@ -117,12 +117,6 @@ def test_class_signature(Script):
     assert doc == "Foo(x, y=1, z='a')"
 
 
-def test_position_none_if_builtin(Script):
-    gotos = Script('import sys; sys.path').goto()
-    assert gotos[0].in_builtin_module()
-    assert gotos[0].line is not None
-    assert gotos[0].column is not None
-
 
 def test_completion_docstring(Script, medi_path):
     """
@@ -188,15 +182,6 @@ def test_functions_should_have_params(Script):
             else:
                 assert c.get_signatures()
 
-
-def test_hashlib_params(Script, environment):
-    if environment.version_info < (3,):
-        pytest.skip()
-
-    script = Script('from hashlib import sha256')
-    c, = script.complete()
-    sig, = c.get_signatures()
-    assert [p.name for p in sig.params] == ['arg']
 
 
 def test_signature_params(Script):
@@ -350,20 +335,6 @@ def test_parent_on_comprehension(Script):
     assert ns[1].parent().type == 'function'
 
 
-def test_type(Script):
-    for c in Script('a = [str()]; a[0].').complete():
-        if c.name == '__class__' and False:  # TODO fix.
-            assert c.type == 'class'
-        else:
-            assert c.type in ('function', 'statement')
-
-    for c in Script('list.').complete():
-        assert c.type
-
-    # Github issue #397, type should never raise an error.
-    for c in Script('import os; os.path.').complete():
-        assert c.type
-
 
 def test_type_II(Script):
     """
@@ -441,17 +412,6 @@ def test_import(get_names):
     nms = nms[2].goto()
     assert nms
     assert all(n.type == 'module' for n in nms)
-    assert 'posixpath' in {n.name for n in nms}
-
-    nms = get_names('import os.path', references=True)
-    n = nms[0].goto()[0]
-    assert n.name == 'os'
-    assert n.type == 'module'
-    n = nms[1].goto()[0]
-    # This is very special, normally the name doesn't change, but since
-    # os.path is a sys.modules hack, it does.
-    assert n.name in ('macpath', 'ntpath', 'posixpath', 'os2emxpath')
-    assert n.type == 'module'
 
 
 def test_import_alias(get_names):
@@ -561,48 +521,6 @@ def test_definition_goto_follow_imports(Script):
     assert follow.module_name == 'json'
 
 
-@pytest.mark.parametrize(
-    'code, expected', [
-        ('1', 'int'),
-        ('x = None; x', 'None'),
-        ('n: Optional[str]; n', 'Optional[str]'),
-        ('n = None if xxxxx else ""; n', 'Optional[str]'),
-        ('n = None if xxxxx else str(); n', 'Optional[str]'),
-        ('n = None if xxxxx else str; n', 'Optional[Type[str]]'),
-        ('class Foo: pass\nFoo', 'Type[Foo]'),
-        ('class Foo: pass\nFoo()', 'Foo'),
-
-        ('n: Type[List[int]]; n', 'Type[List[int]]'),
-        ('n: Type[List]; n', 'Type[list]'),
-        ('n: List; n', 'list'),
-        ('n: List[int]; n', 'List[int]'),
-        ('n: Iterable[int]; n', 'Iterable[int]'),
-
-        ('n = [1]; n', 'List[int]'),
-        ('n = [1, ""]; n', 'List[Union[int, str]]'),
-        ('n = [1, str(), None]; n', 'List[Optional[Union[int, str]]]'),
-        ('n = {1, str()}; n', 'Set[Union[int, str]]'),
-        ('n = (1,); n', 'Tuple[int]'),
-        ('n = {1: ""}; n', 'Dict[int, str]'),
-        ('n = {1: "", 1.0: b""}; n', 'Dict[Union[float, int], Union[bytes, str]]'),
-
-        ('n = next; n', 'Union[next(__i: Iterator[_T]) -> _T, '
-         'next(__i: Iterator[_T], default: _VT) -> Union[_T, _VT]]'),
-        ('abs', 'abs(__n: SupportsAbs[_T]) -> _T'),
-        ('def foo(x, y): return x if xxxx else y\nfoo(str(), 1)\nfoo',
-         'foo(x: str, y: int) -> Union[int, str]'),
-        ('def foo(x, y = None): return x if xxxx else y\nfoo(str(), 1)\nfoo',
-         'foo(x: str, y: int=None) -> Union[int, str]'),
-    ]
-)
-def test_get_type_hint(Script, code, expected, skip_pre_python36):
-    code = 'from typing import *\n' + code
-    d, = Script(code).goto()
-    assert d.get_type_hint() == expected
-
-
-def test_pseudotreenameclass_type(Script):
-    assert Script('from typing import Any\n').get_names()[0].type == 'class'
 
 
 cls_code = '''\

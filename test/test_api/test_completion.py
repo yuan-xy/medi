@@ -17,14 +17,6 @@ def test_in_whitespace(Script):
     assert len(Script(code).complete(column=2)) > 20
 
 
-def test_empty_init(Script):
-    """This was actually an issue."""
-    code = dedent('''\
-    class X(object): pass
-    X(''')
-    assert not Script(code).complete()
-
-
 def test_in_empty_space(Script):
     code = dedent('''\
     class X(object):
@@ -57,11 +49,6 @@ def test_keyword_value(Script):
     assert 'elif' in names
 
 
-def test_os_nowait(Script):
-    """ github issue #45 """
-    s = Script("import os; os.P_").complete()
-    assert 'P_NOWAIT' in [i.name for i in s]
-
 
 def test_points_in_completion(Script):
     """At some point, points were inserted into the completions, this
@@ -85,40 +72,6 @@ def test_loading_unicode_files_with_bad_global_charset(Script, monkeypatch, tmpd
         f.write(data)
     s = Script("from test1 import foo\nfoo.", path=filename2)
     s.complete(line=2, column=4)
-
-
-def test_fake_subnodes(Script):
-    """
-    Test the number of subnodes of a fake object.
-
-    There was a bug where the number of child nodes would grow on every
-    call to :func:``medi.inference.compiled.fake.get_faked``.
-
-    See Github PR#649 and isseu #591.
-    """
-    def get_str_completion(values):
-        for c in values:
-            if c.name == 'str':
-                return c
-    limit = None
-    for i in range(2):
-        completions = Script('').complete()
-        c = get_str_completion(completions)
-        str_value, = c._name.infer()
-        n = len(str_value.tree_node.children[-1].children)
-        if i == 0:
-            limit = n
-        else:
-            assert n == limit
-
-
-def test_generator(Script):
-    # Did have some problems with the usage of generator completions this
-    # way.
-    s = "def abc():\n" \
-        "    yield 1\n" \
-        "abc()."
-    assert Script(s).complete()
 
 
 def test_in_comment(Script):
@@ -145,22 +98,6 @@ def test_async(Script, environment):
     assert 'foo' in names
     assert 'hey' in names
 
-
-def test_method_doc_with_signature(Script):
-    code = 'f = open("")\nf.writelin'
-    c, = Script(code).complete()
-    assert c.name == 'writelines'
-    assert c.docstring() == 'writelines(lines: Iterable[AnyStr]) -> None'
-
-
-def test_method_doc_with_signature2(Script):
-    code = 'f = open("")\nf.writelines'
-    d, = Script(code).goto()
-    assert d.docstring() == 'writelines(lines: Iterable[AnyStr]) -> None'
-
-
-def test_with_stmt_error_recovery(Script):
-    assert Script('with open('') as foo: foo.\na').complete(line=1)
 
 
 def test_function_param_usage(Script):
@@ -244,10 +181,3 @@ def test_completion_cache(Script, module_injector):
     assert cls.type == 'class'
     assert cls.docstring() == 'foo()\n\ndoc2'
 
-
-@pytest.mark.parametrize('module', ['typing', 'os'])
-def test_module_completions(Script, module):
-    for c in Script('import {module}; {module}.'.format(module=module)).complete():
-        # Just make sure that there are no errors
-        c.type
-        c.docstring()

@@ -239,6 +239,7 @@ def _try_to_load_stub(inference_state, import_names, python_value_set,
 
 
 def _load_from_typeshed(inference_state, python_value_set, parent_module_value, import_names):
+    return None
     import_name = import_names[-1]
     map_ = None
     if len(import_names) == 1:
