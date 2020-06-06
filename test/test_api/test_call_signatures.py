@@ -198,13 +198,6 @@ def _params(Script, source, line=None, column=None):
     return signatures[0].params
 
 
-def test_pow_params(Script):
-    # See Github #1357.
-    for sig in Script('pow(').get_signatures():
-        param_names = [p.name for p in sig.params]
-        assert param_names in (['x', 'y'], ['x', 'y', 'z'])
-
-
 def test_param_name(Script):
     sigs = Script('open(something,').get_signatures()
     for sig in sigs:

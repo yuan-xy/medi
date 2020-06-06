@@ -23,9 +23,6 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Set up submodule
-      run: |
-        cd medi/third_party/ && git clone --depth=1 https://github.com/davidhalter/typeshed.git
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
