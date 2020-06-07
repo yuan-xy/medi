@@ -8,11 +8,6 @@ include conftest.py
 include pytest.ini
 include tox.ini
 include requirements.txt
-include medi/parser/python/grammar*.txt
-recursive-include medi/third_party *.pyi
-include medi/third_party/typeshed/LICENSE
-include medi/third_party/django-stubs/LICENSE.txt
-include medi/third_party/typeshed/README
 recursive-include test *
 recursive-include docs *
 recursive-exclude * *.pyc

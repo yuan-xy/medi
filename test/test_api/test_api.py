@@ -12,36 +12,7 @@ from marso import cache
 
 from medi._compatibility import unicode
 from medi import preload_module
-from medi.inference.gradual import typeshed
 from test.helpers import test_dir, get_example_dir
-
-
-@pytest.mark.skipif(sys.version_info[0] == 2, reason="Ignore Python 2, EoL")
-def test_preload_modules():
-    def check_loaded(*modules):
-        for grammar_cache in cache.parser_cache.values():
-            if None in grammar_cache:
-                break
-        # Filter the typeshed parser cache.
-        typeshed_cache_count = sum(
-            1 for path in grammar_cache
-            if path is not None and path.startswith(typeshed.TYPESHED_PATH)
-        )
-        # +1 for None module (currently used)
-        assert len(grammar_cache) - typeshed_cache_count == len(modules) + 1
-        for i in modules:
-            assert [i in k for k in grammar_cache.keys() if k is not None]
-
-    old_cache = cache.parser_cache.copy()
-    cache.parser_cache.clear()
-
-    try:
-        preload_module('sys')
-        check_loaded()  # compiled (c_builtin) modules shouldn't be in the cache.
-        preload_module('types', 'token')
-        check_loaded('types', 'token')
-    finally:
-        cache.parser_cache.update(old_cache)
 
 
 def test_empty_script(Script):
