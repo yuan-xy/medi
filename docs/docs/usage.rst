@@ -85,28 +85,6 @@ Web Debugger
 
 and many more!
 
-.. _repl-completion:
-
-Tab Completion in the Python Shell
-----------------------------------
-
-Medi is a dependency of IPython. Autocompletion in IPython is therefore
-possible without additional configuration.
-
-Here is an `example video <https://vimeo.com/122332037>`_ how REPL completion
-can look like in a different shell.
-
-There are two different options how you can use Medi autocompletion in
-your ``python`` interpreter. One with your custom ``$HOME/.pythonrc.py`` file
-and one that uses ``PYTHONSTARTUP``.
-
-Using ``PYTHONSTARTUP``
-~~~~~~~~~~~~~~~~~~~~~~~
-
-.. automodule:: medi.api.replstartup
-
-Using a Custom ``$HOME/.pythonrc.py``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. autofunction:: medi.utils.setup_readline
 
@@ -116,58 +94,6 @@ Recipes
 -------
 
 Here are some tips on how to use |medi| efficiently.
-
-
-.. _type-hinting:
-
-Type Hinting
-~~~~~~~~~~~~
-
-If |medi| cannot detect the type of a function argument correctly (due to the
-dynamic nature of Python), you can help it by hinting the type using
-one of the docstring/annotation styles below. **Only gradual typing will
-always work**, all the docstring solutions are glorified hacks and more
-complicated cases will probably not work.
-
-Official Gradual Typing (Recommended)
-+++++++++++++++++++++++++++++++++++++
-
-You can read a lot about Python's gradual typing system in the corresponding
-PEPs like:
-
-- `PEP 484 <https://www.python.org/dev/peps/pep-0484/>`_ as an introduction
-- `PEP 526 <https://www.python.org/dev/peps/pep-0526/>`_ for variable annotations
-- `PEP 589 <https://www.python.org/dev/peps/pep-0589/>`_ for ``TypeDict``
-- There are probably more :)
-
-Below you can find a few examples how you can use this feature.
-
-Function annotations::
-
-    def myfunction(node: ProgramNode, foo: str) -> None:
-        """Do something with a ``node``.
-
-        """
-        node.| # complete here
-
-
-Assignment, for-loop and with-statement type hints::
-
-    import typing
-    x: int = foo()
-    y: typing.Optional[int] = 3
-
-    key: str
-    value: Employee
-    for key, value in foo.items():
-        pass
-
-    f: Union[int, float]
-    with foo() as f:
-        print(f + 3)
-
-PEP-0484 should be supported in its entirety. Feel free to open issues if that
-is not the case. You can also use stub files.
 
 
 Sphinx style
