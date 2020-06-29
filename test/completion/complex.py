@@ -9,9 +9,6 @@ class Foo(object):
 def asdfy():
     return Foo
 
-xorz = getattr(asdfy()(), 'asdf')
-#? time
-xorz
 
 
 
