@@ -27,8 +27,7 @@ load
 
 __version__ = '0.17.1'
 
-from medi.api import Script, Interpreter, set_debug_function, \
-    preload_module, names
+from medi.api import Script, set_debug_function, preload_module, names
 from medi import settings
 from medi.api.environment import find_virtualenvs, find_system_environments, \
     get_default_environment, InvalidPythonEnvironment, create_environment, \

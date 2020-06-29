@@ -99,12 +99,3 @@ statically. If you enable ``load_unsafe_extensions=True`` for your
 :class:`.Project` and you use builtin modules (``c_builtin``) Medi will execute
 those modules. If you don't trust a code base, please do not enable that
 option. It might lead to arbitrary code execution.
-
-For :class:`.Interpreter`
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you want security for :class:`.Interpreter`, ``do not`` use it. Medi does
-execute properties and in general is not very careful to avoid code execution.
-This is intentional: Most people trust the code bases they have imported,
-because at that point a malicious code base would have had code execution
-already.

@@ -7,7 +7,6 @@ import pytest
 from ..helpers import TestCase
 from medi import cache
 from medi.parser_utils import get_signature
-from medi import Interpreter
 
 
 def assert_signature(Script, source, expected_name, expected_index=0, line=None, column=None):
@@ -459,16 +458,6 @@ def test_arg_defaults(Script, environment, code):
     executed_locals = dict()
     exec(src, None, executed_locals)
     locals_ = locals()
-
-    def iter_scripts():
-        yield Interpreter(code + '(', namespaces=[locals_])
-        yield Script(src + code + "2(")
-        yield Interpreter(code + '2(', namespaces=[executed_locals])
-
-    for script in iter_scripts():
-        signatures = script.get_signatures()
-        assert signatures[0].params[0].description in ('param arg="bla"', "param arg='bla'")
-        assert signatures[0].params[1].description == 'param arg1=1'
 
 
 def test_bracket_start(Script):

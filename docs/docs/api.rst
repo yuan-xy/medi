@@ -10,9 +10,7 @@ API Overview
 
 The API consists of a few different parts:
 
-- The main starting points for complete/goto: :class:`.Script` and
-  :class:`.Interpreter`. If you work with Medi you want to understand these
-  classes first.
+- The main starting points for complete/goto: :class:`.Script`.
 - :ref:`API Result Classes <api-classes>`
 - :ref:`Python Versions/Virtualenv Support <environments>` with functions like
   :func:`.find_system_environments` and :func:`.find_virtualenvs`
@@ -51,10 +49,6 @@ Script
 .. autoclass:: medi.Script
     :members:
 
-Interpreter
------------
-.. autoclass:: medi.Interpreter
-    :members:
 
 .. _projects:
 

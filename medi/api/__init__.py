@@ -27,7 +27,6 @@ from medi.api import helpers
 from medi.api.helpers import validate_line_column
 from medi.api.completion import Completion, search_in_module
 from medi.api.keywords import KeywordName
-from medi.api.environment import InterpreterEnvironment
 from medi.api.project import get_default_project, Project
 from medi.api.errors import marso_to_medi_errors
 from medi.api import refactoring
@@ -66,9 +65,7 @@ def _no_python2_support(func):
 class Script(object):
     """
     A Script is the base for completions, goto or whatever you want to do with
-    Medi. The counter part of this class is :class:`Interpreter`, which works
-    with actual dictionaries and can work with a REPL. This class
-    should be used when a user edits code in an editor.
+    Medi. This class should be used when a user edits code in an editor.
 
     You can either use the ``code`` parameter or ``path`` to read a file.
     Usually you're going to want to use both of them (in an editor).
@@ -816,63 +813,6 @@ class Script(object):
         """
         names = [d._name for d in self.get_references(line, column, include_builtins=True)]
         return refactoring.inline(self._inference_state, names)
-
-
-class Interpreter(Script):
-    """
-    Medi's API for Python REPLs.
-
-    Implements all of the methods that are present in :class:`.Script` as well.
-
-    In addition to completions that normal REPL completion does like
-    ``str.upper``, Medi also supports code completion based on static code
-    analysis. For example Medi will complete ``str().upper``.
-
-    >>> from os.path import join
-    >>> namespace = locals()
-    >>> script = Interpreter('join("").up', [namespace])
-    >>> print(script.complete()[0].name)
-    upper
-
-    All keyword arguments are same as the arguments for :class:`.Script`.
-
-    :param str code: Code to parse.
-    :type namespaces: typing.List[dict]
-    :param namespaces: A list of namespace dictionaries such as the one
-        returned by :func:`globals` and :func:`locals`.
-    """
-    _allow_descriptor_getattr_default = True
-
-    def __init__(self, code, namespaces, **kwds):
-        try:
-            namespaces = [dict(n) for n in namespaces]
-        except Exception:
-            raise TypeError("namespaces must be a non-empty list of dicts.")
-
-        environment = kwds.get('environment', None)
-        if environment is None:
-            environment = InterpreterEnvironment()
-        else:
-            if not isinstance(environment, InterpreterEnvironment):
-                raise TypeError("The environment needs to be an InterpreterEnvironment subclass.")
-
-        super(Interpreter, self).__init__(code, environment=environment,
-                                          project=Project(os.getcwd()), **kwds)
-        self.namespaces = namespaces
-        self._inference_state.allow_descriptor_getattr = self._allow_descriptor_getattr_default
-
-    @cache.memoize_method
-    def _get_module_context(self):
-        tree_module_value = ModuleValue(
-            self._inference_state, self._module_node,
-            file_io=KnownContentFileIO(self.path, self._code),
-            string_names=('__main__',),
-            code_lines=self._code_lines,
-        )
-        return interpreter.MixedModuleContext(
-            tree_module_value,
-            self.namespaces,
-        )
 
 
 def names(source=None, path=None, encoding='utf-8', all_scopes=False,

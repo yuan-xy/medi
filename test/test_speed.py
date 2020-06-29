@@ -47,21 +47,3 @@ def test_precedence_slowdown(Script):
     with open(path) as f:
         line = len(f.read().splitlines())
     assert Script(path=path).infer(line=line)
-
-
-@_check_speed(0.1)
-def test_no_repr_computation(Script):
-    """
-    For Interpreter completion aquisition of sourcefile can trigger
-    unwanted computation of repr(). Exemple : big pandas data.
-    See issue #919.
-    """
-    class SlowRepr:
-        "class to test what happens if __repr__ is very slow."
-        def some_method(self):
-            pass
-
-        def __repr__(self):
-            time.sleep(0.2)
-    test = SlowRepr()
-    medi.Interpreter('test.som', [locals()]).complete()

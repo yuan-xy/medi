@@ -4,7 +4,6 @@ import sys
 import pytest
 
 from ..helpers import get_example_dir, set_cwd, root_dir, test_dir
-from medi import Interpreter
 from medi.api import Project, get_default_project
 
 
@@ -14,14 +13,6 @@ def test_demo_default_project_of_file(Script):
     project = get_default_project("demo", __file__)
     d = os.path.dirname
     assert project._path == d(d(d(__file__)))
-
-
-def test_interpreter_project_path():
-    # Run from anywhere it should be the cwd.
-    dir = os.path.join(root_dir, 'test')
-    with set_cwd(dir):
-        project = Interpreter('', [locals()])._inference_state.project
-        assert project._path == dir
 
 
 def test_added_sys_path(inference_state):
