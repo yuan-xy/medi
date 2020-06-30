@@ -59,21 +59,6 @@ def test_points_in_completion(Script):
     assert c[0].complete == 'or'
 
 
-def test_loading_unicode_files_with_bad_global_charset(Script, monkeypatch, tmpdir):
-    dirname = str(tmpdir.mkdir('medi-test'))
-    filename1 = join(dirname, 'test1.py')
-    filename2 = join(dirname, 'test2.py')
-    if sys.version_info < (3, 0):
-        data = "# coding: latin-1\nfoo = 'm\xf6p'\n"
-    else:
-        data = "# coding: latin-1\nfoo = 'm\xf6p'\n".encode("latin-1")
-
-    with open(filename1, "wb") as f:
-        f.write(data)
-    s = Script("from test1 import foo\nfoo.", path=filename2)
-    s.complete(line=2, column=4)
-
-
 def test_in_comment(Script):
     assert Script(" # Comment").complete()
     # TODO this is a bit ugly, that the behaviors in comments are different.

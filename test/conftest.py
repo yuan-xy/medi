@@ -38,9 +38,6 @@ def pytest_addoption(parser):
             "Specify test files using FILE_NAME[:LINE[,LINE[,...]]]. "
             "For example: -T generators.py:10,13,19. "
             "Note that you can use -m to specify the test case by id."))
-    parser.addoption(
-        "--thirdparty", action='store_true',
-        help="Include integration tests that requires third party modules.")
 
 
 def parse_test_files_option(opt):
@@ -66,11 +63,7 @@ def pytest_generate_tests(metafunc):
                           metafunc.config.option.test_files))
     if 'case' in metafunc.fixturenames:
         base_dir = metafunc.config.option.integration_case_dir
-        thirdparty = metafunc.config.option.thirdparty
         cases = list(run.collect_dir_tests(base_dir, test_files))
-        if thirdparty:
-            cases.extend(run.collect_dir_tests(
-                os.path.join(base_dir, 'thirdparty'), test_files, True))
         ids = ["%s:%s" % (c.module_name, c.line_nr_test) for c in cases]
         metafunc.parametrize('case', cases, ids=ids)
 

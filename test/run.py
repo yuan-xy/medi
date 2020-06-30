@@ -26,9 +26,6 @@ and each test case starts with one of these comments:
 - ``#!`` (goto)
 - ``#<`` (references)
 
-There is also support for third party libraries. In a normal test run they are
-not being executed, you have to provide a ``--thirdparty`` option.
-
 In addition to pytest's ``-k`` and ``-m`` options, you can use the
 ``-T`` (``--test-files`) option to specify which test cases should run.
 It takes the format of ``FILE_NAME[:LINE[,LINE[,...]]]`` where
@@ -384,21 +381,12 @@ def collect_file_tests(path, lines, lines_to_execute):
                         correct = None
 
 
-def collect_dir_tests(base_dir, test_files, check_thirdparty=False):
+def collect_dir_tests(base_dir, test_files):
     for f_name in os.listdir(base_dir):
         files_to_execute = [a for a in test_files.items() if f_name.startswith(a[0])]
         lines_to_execute = reduce(lambda x, y: x + y[1], files_to_execute, [])
         if f_name.endswith(".py") and (not test_files or files_to_execute):
             skip = None
-            if check_thirdparty:
-                lib = f_name.replace('_.py', '')
-                try:
-                    # there is always an underline at the end.
-                    # It looks like: completion/thirdparty/pylab_.py
-                    __import__(lib)
-                except ImportError:
-                    skip = 'Thirdparty-Library %s not found.' % lib
-
             path = os.path.join(base_dir, f_name)
 
             if is_py3:
@@ -423,14 +411,13 @@ An alternative testing format, which is much more hacky, but very nice to
 work with.
 
 Usage:
-    run.py [--pdb] [--debug] [--thirdparty] [--env <dotted>] [<rest>...]
+    run.py [--pdb] [--debug] [--env <dotted>] [<rest>...]
     run.py --help
 
 Options:
     -h --help       Show this screen.
     --pdb           Enable pdb debugging on fail.
     -d, --debug     Enable text output debugging (please install ``colorama``).
-    --thirdparty    Also run thirdparty tests (in ``completion/thirdparty``).
     --env <dotted>  A Python version, like 2.7, 3.8, etc.
 """
 if __name__ == '__main__':
@@ -467,9 +454,6 @@ if __name__ == '__main__':
 
     # execute tests
     cases = list(collect_dir_tests(completion_test_dir, test_files))
-    if test_files or arguments['--thirdparty']:
-        completion_test_dir += '/thirdparty'
-        cases += collect_dir_tests(completion_test_dir, test_files, True)
 
     def file_change(current, tests, fails):
         if current is None:

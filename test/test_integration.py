@@ -36,29 +36,16 @@ unspecified = %s
 """ % (case, sorted(d - a), sorted(a - d))
 
 
-def test_completion(case, monkeypatch, environment, has_typing, has_django):
-    if 'MEDI_SKIP_I' in os.environ:
-        pytest.skip()
+def test_completion(case, environment):
     skip_reason = case.get_skip_reason(environment)
     if skip_reason is not None:
         pytest.skip(skip_reason)
 
-    if 'pep0484_typing' in case.path and sys.version_info[0] == 2:
-        pytest.skip('ditch python 2 finally')
-
-    _CONTAINS_TYPING = ('pep0484_typing', 'pep0484_comments', 'pep0526_variables')
-    if not has_typing and any(x in case.path for x in _CONTAINS_TYPING):
-        pytest.skip('Needs the typing module installed to run this test.')
-    if case.path.endswith('django.py'):
-        pytest.skip('Needs django to be installed to run this test.')
     repo_root = helpers.root_dir
-    monkeypatch.chdir(os.path.join(repo_root, 'medi'))
     case.run(assert_case_equal, environment)
 
 
 def test_static_analysis(static_analysis_case, environment):
-    if 'MEDI_SKIP_I' in os.environ:
-        pytest.skip()
     skip_reason = static_analysis_case.get_skip_reason(environment)
     if skip_reason is not None:
         pytest.skip(skip_reason)
@@ -72,9 +59,6 @@ def test_refactor(refactor_case, skip_pre_python36, environment):
 
     :type refactor_case: :class:`.refactor.RefactoringCase`
     """
-    if 'MEDI_SKIP_I' in os.environ:
-        pytest.skip()
-
     desired_result = refactor_case.get_desired_result()
     if refactor_case.type == 'error':
         with pytest.raises(RefactoringError) as e:
